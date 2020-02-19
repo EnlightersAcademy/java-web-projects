@@ -6,7 +6,7 @@
 <head>
 
     <!-- Title Page-->
-    <title>Book My Game - Register</title>
+    <title>Book My Game</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -52,26 +52,20 @@
                         <div class="login-form">
                             <form action="" method="post">
                                 <div class="form-group">
-                                    <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email"
-                                        placeholder="Email">
+                                    <label>Admin User ID</label>
+                                    <input class="au-input au-input--full" type="text" name="UserId"
+                                        placeholder="User ID">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password"
                                         placeholder="Password">
                                 </div>
-                                <div class="form-group">
-                                    <label>Phone Number</label>
-                                    <input class="au-input au-input--full" type="text" name="phone" placeholder="Phone">
-                                </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20"
-                                    type="submit">register</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
                             </form>
                             <div class="register-link">
-                                <p>
-                                    Already have account?
-                                    <a href="index.jsp">Sign In</a>
+                                <p style="border-top: solid #CFD8DC; padding-top:5px;">
+                                    <a href="index.jsp">HOME</a>
                                 </p>
                             </div>
                         </div>

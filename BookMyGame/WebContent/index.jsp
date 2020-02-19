@@ -45,7 +45,7 @@
                 <div class="login-wrap">
                     <div class="login-content">
                         <div class="login-logo">
-                            <a href="#">
+                            <a href="index.jsp">
                                 <img src="images/icon/logo.png" alt="CoolAdmin">
                             </a>
                         </div>
@@ -67,6 +67,11 @@
                                 <p>
                                     Don't you have account?
                                     <a href="register.jsp">Sign Up Here</a>
+                                </p>
+                            </div>
+                            <div class="register-link">
+                                <p style="border-top: solid #CFD8DC; padding-top:5px;">
+                                    <a href="adminLogin.jsp">Admin Login</a>
                                 </p>
                             </div>
                         </div>
