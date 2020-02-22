@@ -9,6 +9,10 @@ public class Customer {
 	private String sex;
 	private String address;
 	private long phoneNo;
+	private String emailId;
+	private Location location;
+	private String identificationId;
+	
 	
 	public String getName() {
 		return name;
@@ -39,6 +43,24 @@ public class Customer {
 	}
 	public void setPhoneNo(long phoneNo) {
 		this.phoneNo = phoneNo;
+	}
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+	public Location getLocation() {
+		return location;
+	}
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	public String getIdentificationId() {
+		return identificationId;
+	}
+	public void setIdentificationId(String identificationId) {
+		this.identificationId = identificationId;
 	}
 
 

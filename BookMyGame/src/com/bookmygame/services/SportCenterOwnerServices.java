@@ -2,7 +2,6 @@ package com.bookmygame.services;
 
 import java.util.List;
 
-import com.bookmygame.pojo.Announcement;
 import com.bookmygame.pojo.Customer;
 import com.bookmygame.pojo.GameBooking;
 import com.bookmygame.pojo.SportCenter;
