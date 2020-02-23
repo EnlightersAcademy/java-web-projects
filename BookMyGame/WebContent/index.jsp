@@ -70,8 +70,9 @@
                                 </p>
                             </div>
                             <div class="register-link">
-                                <p style="border-top: solid #CFD8DC; padding-top:5px;">
-                                    <a href="adminLogin.jsp">Admin Login</a>
+                                <p style="border-top: solid #CFD8DC; padding-top:5px; padding-bottom:30px;">
+                                    <a href="adminLogin.jsp" style="float: left;">Admin Login</a>
+                                    <a href="centerLogin.jsp" style="float: right;">Center Login</a>
                                 </p>
                             </div>
                         </div>

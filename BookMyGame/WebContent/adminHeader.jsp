@@ -44,116 +44,100 @@
             <div class="section__content section__content--p35">
                 <div class="header3-wrap">
                     <div class="header__logo">
-                        <a href="#">
+                        <a href="adminHome.jsp">
                             <img src="images/icon/logo.png" alt="BookMyGame" />
                         </a>
                     </div>
                     <div class="header__navbar">
                         <ul class="list-unstyled">
+                        	<li>
+                                <a href="adminHome.jsp">
+                                    <i class="fas fa-home"></i>
+                                    <span class="bot-line"></span>Home</a>
+                            </li>
                             <li class="has-sub">
                                 <a href="#">
-                                    <i class="fas fa-tachometer-alt"></i>Dashboard
+                                    <i class="fas fa-users"></i>Members
                                     <span class="bot-line"></span>
                                 </a>
                                 <ul class="header3-sub-list list-unstyled">
                                     <li>
-                                        <a href="index.html">Dashboard 1</a>
+                                        <a href="adminAllMembers.jsp">View All Members</a>
                                     </li>
                                     <li>
-                                        <a href="index2.html">Dashboard 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="index3.html">Dashboard 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="index4.html">Dashboard 4</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fas fa-shopping-basket"></i>
-                                    <span class="bot-line"></span>eCommerce</a>
-                            </li>
-                            <li>
-                                <a href="table.html">
-                                    <i class="fas fa-trophy"></i>
-                                    <span class="bot-line"></span>Features</a>
-                            </li>
-                            <li class="has-sub">
-                                <a href="#">
-                                    <i class="fas fa-copy"></i>
-                                    <span class="bot-line"></span>Pages</a>
-                                <ul class="header3-sub-list list-unstyled">
-                                    <li>
-                                        <a href="login.html">Login</a>
-                                    </li>
-                                    <li>
-                                        <a href="register.html">Register</a>
-                                    </li>
-                                    <li>
-                                        <a href="forget-pass.html">Forget Password</a>
+                                        <a href="adminBlockMember.jsp">Block A Member</a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="has-sub">
                                 <a href="#">
-                                    <i class="fas fa-desktop"></i>
-                                    <span class="bot-line"></span>UI Elements</a>
+                                    <i class="fas fa-university"></i>Sports Centers
+                                    <span class="bot-line"></span>
+                                </a>
                                 <ul class="header3-sub-list list-unstyled">
-                                    <li>
-                                        <a href="button.html">Button</a>
+                                	<li>
+                                        <a href="adminCenterRequests.jsp">New Center Requests</a>
                                     </li>
                                     <li>
-                                        <a href="badge.html">Badges</a>
+                                        <a href="adminAllCenters.jsp">View All Centers</a>
                                     </li>
                                     <li>
-                                        <a href="tab.html">Tabs</a>
+                                        <a href="adminBlockCenter.jsp">Block A Center</a>
                                     </li>
                                     <li>
-                                        <a href="card.html">Cards</a>
-                                    </li>
-                                    <li>
-                                        <a href="alert.html">Alerts</a>
-                                    </li>
-                                    <li>
-                                        <a href="progress-bar.html">Progress Bars</a>
-                                    </li>
-                                    <li>
-                                        <a href="modal.html">Modals</a>
-                                    </li>
-                                    <li>
-                                        <a href="switch.html">Switchs</a>
-                                    </li>
-                                    <li>
-                                        <a href="grid.html">Grids</a>
-                                    </li>
-                                    <li>
-                                        <a href="fontawesome.html">FontAwesome</a>
-                                    </li>
-                                    <li>
-                                        <a href="typo.html">Typography</a>
+                                        <a href="adminRejectedCenters.jsp">View Rejected Centers</a>
                                     </li>
                                 </ul>
                             </li>
+                            <li class="has-sub">
+                                <a href="#">
+                                    <i class="fas fa-book"></i>Bookings
+                                    <span class="bot-line"></span>
+                                </a>
+                                <ul class="header3-sub-list list-unstyled">
+                                	<li>
+                                        <a href="adminCustomerBookings.jsp">View Member Wise</a>
+                                    </li>
+                                    <li>
+                                        <a href="adminCenterBookings.jsp">View Center Wise</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a href="#">
+                                    <i class="fas fa-futbol-o"></i>Games
+                                    <span class="bot-line"></span>
+                                </a>
+                                <ul class="header3-sub-list list-unstyled">
+                                	<li>
+                                        <a href="adminAddNewGame.jsp">Add New Game</a>
+                                    </li>
+                                    <li>
+                                        <a href="adminViewAllGames.jsp">View All Games</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a href="#">
+                                    <i class="fas fa-bullhorn"></i>Announcements
+                                    <span class="bot-line"></span>
+                                </a>
+                                <ul class="header3-sub-list list-unstyled">
+                                	<li>
+                                        <a href="adminMemberAnnouncement.jsp">New Announcement - Members</a>
+                                    </li>
+                                    <li>
+                                        <a href="adminCenterAnnouncement.jsp">New Announcement - Centers</a>
+                                    </li>
+                                    <li>
+                                        <a href="adminAllAnnouncements.jsp">View All Announcements</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
                         </ul>
                     </div>
                     <div class="header__tool">
-                        <div class="header-button-item js-item-menu" style="padding-right:80px;">
-                            <i class="zmdi zmdi-volume-up"></i>
-                            <div class="setting-dropdown js-dropdown">
-                                <div class="account-dropdown__body">
-                                    <div class="account-dropdown__item">
-                                        <a href="#">
-                                            <i class="zmdi zmdi-comment-text-alt"></i>New Announcement</a>
-                                    </div>
-                                    <div class="account-dropdown__item">
-                                        <a href="#">
-                                            <i class="zmdi zmdi-comments"></i>View All Announcements</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="account-wrap">
                             <div class="account-item account-item--style2 clearfix js-item-menu">
                                 <div class="image">
