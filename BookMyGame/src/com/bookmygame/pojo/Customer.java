@@ -2,8 +2,14 @@ package com.bookmygame.pojo;
 
 import java.util.Calendar;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Customer {
 	
+	@Id
+	private int customerId;
 	private String name;
 	private Calendar dob;
 	private String sex;
