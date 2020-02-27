@@ -12,11 +12,14 @@ private static final SessionFactory sessionFactory = buildSessionFactory();
     private static SessionFactory buildSessionFactory() {
         try {        	
         	 Configuration configuration = new Configuration().configure(HibernateUtil.class.getResource("/hibernate.cfg.xml"));
+        	 configuration.addAnnotatedClass(com.bookmygame.pojo.Customer.class);
              StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
              serviceRegistryBuilder.applySettings(configuration.getProperties());
              ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
              
-             return configuration.buildSessionFactory(serviceRegistry);
+          //   return configuration.buildSessionFactory(serviceRegistry);
+             
+            return new Configuration().configure().buildSessionFactory();
         }
         catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
