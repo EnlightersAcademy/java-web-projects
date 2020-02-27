@@ -328,7 +328,7 @@ section {
 }
 
 .page-content--bgf7 {
-    background: #f7f7f7;
+    /*background: #f7f7f7;*/
 }
 
 
@@ -4261,8 +4261,7 @@ section {
 }
 
 .table-earning tbody tr:hover td {
-    color: #555;
-    cursor: pointer;
+    color: #494949;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {

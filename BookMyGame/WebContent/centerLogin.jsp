@@ -50,11 +50,11 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="adminHome.jsp" method="post">
+                            <form action="" method="post">
                                 <div class="form-group">
-                                    <label>Admin User ID</label>
-                                    <input class="au-input au-input--full" type="text" name="UserId"
-                                        placeholder="User ID">
+                                    <label>Sports Center Email Address</label>
+                                    <input class="au-input au-input--full" type="email" name="email"
+                                        placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
@@ -63,6 +63,12 @@
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
                             </form>
+                            <div class="register-link">
+                                <p>
+                                    New Sports Center?
+                                    <a href="centerRegister.jsp">Sign Up Here</a>
+                                </p>
+                            </div>
                             <div class="register-link">
                                 <p style="border-top: solid #CFD8DC; padding-top:5px;">
                                     <a href="index.jsp">HOME</a>

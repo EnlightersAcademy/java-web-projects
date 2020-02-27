@@ -26,8 +26,6 @@ public class SportCenter {
 	
 	private String OwnerName;
 	
-	private String age;
-	
 	private String phoneNo;
 	
 	private String ownerEmailId;
@@ -96,14 +94,6 @@ public class SportCenter {
 
 	public void setOwnerName(String ownerName) {
 		OwnerName = ownerName;
-	}
-
-	public String getAge() {
-		return age;
-	}
-
-	public void setAge(String age) {
-		this.age = age;
 	}
 
 	public String getPhoneNo() {

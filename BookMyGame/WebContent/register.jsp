@@ -51,6 +51,30 @@
                         </div>
                         <div class="login-form">
                             <form action="" method="post">
+                            	<div class="form-group">
+                                    <label>Name</label>
+                                    <input class="au-input au-input--full" type="text" name="name" placeholder="Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date of Birth</label>
+                                    <input class="au-input au-input--full" type="date" name="dob">
+                                </div>
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <div class="form-check form-check-inline" style="margin-left: 10px;">
+									  <input class="form-check-input" type="radio" name="gender" value="Male">
+									  <label class="form-check-label" for="gender">Male</label>
+									</div>
+									<div class="form-check form-check-inline">
+									  <input class="form-check-input" type="radio" name="gender" value="Female">
+									  <label class="form-check-label" for="gender">Female</label>
+									</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" placeholder="Complete Address">
+                                    </textarea>
+                                </div>
                                 <div class="form-group">
                                     <label>Email Address</label>
                                     <input class="au-input au-input--full" type="email" name="email"
@@ -63,7 +87,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Phone Number</label>
-                                    <input class="au-input au-input--full" type="text" name="phone" placeholder="Phone">
+                                    <input class="au-input au-input--full" type="text" name="phone" maxlength="10" placeholder="Phone">
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20"
                                     type="submit">register</button>
