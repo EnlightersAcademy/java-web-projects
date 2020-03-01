@@ -1,26 +1,39 @@
 package com.bookmygame.pojo;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class SportCenter {
 
 	@Id
-	private int id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int sport_center_id;
 	
+	@Column(name="name")
 	private String name;
 	
+	@Column(name="address")
 	private String address;
 	
+	@Embedded
 	private Location location;
 	
+	@Column(name="sport_center_phno")
 	private long sportCenterPhNo;
 	
+	@Column(name="sport_center_emailid")
 	private String sportCenterEmailId;
 	
+	@Column(name="two_wheeler_parking_availability")
 	private String twoWheelerparkingAvailability;
 	
+	@Column(name="four_wheeler_parking_availability")
 	private String fourWheelerParkingAvailability;
 	
 	

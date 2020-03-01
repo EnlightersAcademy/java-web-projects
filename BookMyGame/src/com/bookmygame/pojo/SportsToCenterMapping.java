@@ -1,29 +1,44 @@
 package com.bookmygame.pojo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="sports_to_center_mapping")
 public class SportsToCenterMapping {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
 	
-	private int sportId;
+	@ManyToOne
+	@JoinColumn(name="sport_id")
+	private Sport sport;
 	
-	private int sportCenterId;
+
+	public SportCenter getSportCenter() {
+		return sportCenter;
+	}
+
+	public void setSportCenter(SportCenter sportCenter) {
+		this.sportCenter = sportCenter;
+	}
+
+	@ManyToOne
+	@JoinColumn(name="sport_center_id")
+	private SportCenter sportCenter;
 	
+	@Column(name="board_or_court_name")
 	private String boardOrCourtName;
 
-	public int getSportId() {
-		return sportId;
-	}
 
-	public void setSportId(int sportId) {
-		this.sportId = sportId;
-	}
 
-	public int getSportCenterId() {
-		return sportCenterId;
-	}
-
-	public void setSportCenterId(int sportCenterId) {
-		this.sportCenterId = sportCenterId;
-	}
 
 	public String getBoardOrCourtName() {
 		return boardOrCourtName;
@@ -31,6 +46,14 @@ public class SportsToCenterMapping {
 
 	public void setBoardOrCourtName(String boardOrCourtName) {
 		this.boardOrCourtName = boardOrCourtName;
+	}
+
+	public Sport getSport() {
+		return sport;
+	}
+
+	public void setSport(Sport sport) {
+		this.sport = sport;
 	}
 	
 }

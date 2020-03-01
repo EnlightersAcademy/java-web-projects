@@ -2,45 +2,46 @@ package com.bookmygame.pojo;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="game_booking")
 public class GameBooking {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int bookingId;
 	
-	private int sportCenterId;
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="sport_center_id")
+	private SportCenter sportCenter;
 	
-	private int customerId;
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name="customer_id")
+	private Customer customer;
 	
-	private int locationId;
+    @Embedded
+	private Location location;
 	
+	@Column(name="court_or_board_name")
 	private String courtOrBoardName;
 	
+	@Column(name="time_slot")
 	private String timeSlot;
 	
+	@Column(name="date_of_booking")
 	private Date dateOfBooking;
 
-	public int getSportCenterId() {
-		return sportCenterId;
-	}
 
-	public void setSportCenterId(int sportCenterId) {
-		this.sportCenterId = sportCenterId;
-	}
-
-	public int getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-
-	public int getLocationId() {
-		return locationId;
-	}
-
-	public void setLocationId(int locationId) {
-		this.locationId = locationId;
-	}
 
 	public String getCourtOrBoardName() {
 		return courtOrBoardName;
@@ -64,5 +65,29 @@ public class GameBooking {
 
 	public void setDateOfBooking(Date dateOfBooking) {
 		this.dateOfBooking = dateOfBooking;
+	}
+
+	public SportCenter getSportCenter() {
+		return sportCenter;
+	}
+
+	public void setSportCenter(SportCenter sportCenter) {
+		this.sportCenter = sportCenter;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 }
