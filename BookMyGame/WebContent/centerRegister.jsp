@@ -6,7 +6,7 @@
 <head>
 
     <!-- Title Page-->
-    <title>Book My Game</title>
+    <title>Book My Game - Register</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -50,28 +50,69 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="centerHome.jsp" method="post">
+                            <form action="" method="post">
+                            	<div class="form-group">
+                                    <label>Sports Center Name</label>
+                                    <input class="au-input au-input--full" type="text" name="name" placeholder="Name">
+                                </div>
                                 <div class="form-group">
-                                    <label>Sports Center Email Address</label>
+                                    <label>Location</label>
+                                    <input class="au-input au-input--full" type="text" name="location" placeholder="Location">
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" placeholder="Complete Address">
+                                    </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Center Email ID</label>
                                     <input class="au-input au-input--full" type="email" name="email"
                                         placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <label>Password</label>
+                                    <label>Login Password</label>
                                     <input class="au-input au-input--full" type="password" name="password"
                                         placeholder="Password">
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
+                                <div class="form-group">
+                                    <label>Center Phone Number</label>
+                                    <input class="au-input au-input--full" type="text" name="phone" maxlength="10" placeholder="Phone">
+                                </div>                                
+                                <div class="form-inline form-group">
+                                    <label for="twowheeleravailable">Two Wheeler Parking Available?</label> &nbsp;&nbsp;
+                                    <input type="checkbox" name="twowheeleravailable" id="twowheeleravailable">
+                                </div>
+                                <div class="form-inline form-group">
+                                    <label for="fourwheeleravailable">Four Wheeler Parking Available?</label> &nbsp;&nbsp;
+                                    <input type="checkbox" name="fourwheeleravailable" id="fourwheeleravailable">
+                                </div>
+                                
+                                <hr/>
+                                
+                                <div class="form-group">
+                                    <label>Owner's Name</label>
+                                    <input class="au-input au-input--full" type="text" name="ownername" placeholder="Owner's Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Owner's Email ID</label>
+                                    <input class="au-input au-input--full" type="email" name="owneremail"
+                                        placeholder="Owner's Email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Owner's Phone Number</label>
+                                    <input class="au-input au-input--full" type="text" name="ownerphone" maxlength="10" placeholder="Owner's Phone">
+                                </div>
+                                <div class="form-group">
+                                    <label>Owner's ID Number</label>
+                                    <input class="au-input au-input--full" type="text" name="ownerid" placeholder="Owner's ID Number">
+                                </div>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20"
+                                    type="submit">register</button>
                             </form>
                             <div class="register-link">
                                 <p>
-                                    New Sports Center?
-                                    <a href="centerRegister.jsp">Sign Up Here</a>
-                                </p>
-                            </div>
-                            <div class="register-link">
-                                <p style="border-top: solid #CFD8DC; padding-top:5px;">
-                                    <a href="index.jsp">HOME</a>
+                                    Already have account?
+                                    <a href="centerLogin.jsp">Sign In</a>
                                 </p>
                             </div>
                         </div>
