@@ -80,11 +80,19 @@
                                 </div>                                
                                 <div class="form-inline form-group">
                                     <label for="twowheeleravailable">Two Wheeler Parking Available?</label> &nbsp;&nbsp;
-                                    <input type="checkbox" name="twowheeleravailable" id="twowheeleravailable">
+                                    <label class="switch switch-3d switch-primary mr-3">
+				                      <input type="checkbox" class="switch-input" name="twowheeleravailable" id="twowheeleravailable">
+				                      <span class="switch-label"></span>
+				                      <span class="switch-handle"></span>
+				                    </label>
                                 </div>
                                 <div class="form-inline form-group">
                                     <label for="fourwheeleravailable">Four Wheeler Parking Available?</label> &nbsp;&nbsp;
-                                    <input type="checkbox" name="fourwheeleravailable" id="fourwheeleravailable">
+                                    <label class="switch switch-3d switch-primary mr-3">
+				                      <input type="checkbox" class="switch-input" name="fourwheeleravailable" id="fourwheeleravailable">
+				                      <span class="switch-label"></span>
+				                      <span class="switch-handle"></span>
+				                    </label>
                                 </div>
                                 
                                 <hr/>
