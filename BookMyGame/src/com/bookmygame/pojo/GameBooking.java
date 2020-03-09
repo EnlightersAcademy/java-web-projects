@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,8 +28,6 @@ public class GameBooking {
 	@JoinColumn(name="customer_id")
 	private Customer customer;
 	
-    @Embedded
-	private Location location;
 	
 	@Column(name="court_or_board_name")
 	private String courtOrBoardName;
@@ -82,12 +79,5 @@ public class GameBooking {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
-	public Location getLocation() {
-		return location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
-	}
+	
 }
