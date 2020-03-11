@@ -21,14 +21,8 @@
                       </select>
                   </div>
                   <div class="form-group">
-                      <label>Number of Courts/Boards/Lanes Available</label>
-                      <select class="custom-select au-input au-input--full" name="NoOfCourts">
-                      	<option value="1">1</option>
-                      	<option value="2">2</option>
-                      	<option value="3">3</option>
-                      	<option value="4">4</option>
-                      	<option value="5">5</option>
-                      </select>
+                      <label>Names of Courts/Boards/Lanes Available (Separate using comma)</label>
+                      <input type="text" name="NoOfCourts"  class="au-input au-input--full" placeholder="Names of Courts/Boards/Lanes">
                   </div>
                   <br/>
 				  <button type="submit" class="au-btn au-btn--block au-btn--green m-b-20">Add Game</button>

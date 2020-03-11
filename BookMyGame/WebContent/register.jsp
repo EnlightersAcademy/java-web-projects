@@ -89,6 +89,10 @@
                                     <label>Phone Number</label>
                                     <input class="au-input au-input--full" type="text" name="phone" maxlength="10" placeholder="Phone">
                                 </div>
+                                <div class="form-group">
+                                    <label>ID Number (Any Govt. Issued ID Card)</label>
+                                    <input class="au-input au-input--full" type="text" name="identityNumber" placeholder="ID Number">
+                                </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20"
                                     type="submit">register</button>
                             </form>

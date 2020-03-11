@@ -18,7 +18,7 @@
                         	<th>Game ID</th>
                             <th>Image</th>
                             <th>Game Title</th>
-                            <th>No. of Courts/Boards/Lanes</th>
+                            <th>Available Courts/Boards/Lanes</th>
                         </tr>
                     </thead>
                     <tbody>
