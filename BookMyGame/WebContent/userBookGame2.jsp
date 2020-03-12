@@ -1,5 +1,11 @@
 <jsp:include page="userHeader.jsp" />
 
+<%
+	int selectedCenterId = 1234;
+	String selectedGame = "Badminton";
+	String selectedCourt = "Court1";
+%>
+
 <!-- PAGE CONTENT-->
 <div class="page-content--bgf7" style="height: 100%">
 
@@ -12,11 +18,16 @@
 		<form action="" method="post">
 			<div class="form-group">
 				<label>Sports Center Name</label> <input type="text"
-					name="centerName" class="au-input au-input--full" readonly>
+					name="centerName" class="au-input au-input--full" readonly value="<%=selectedCenterId %>">
 			</div>
 			<div class="form-group">
 				<label>Game</label> <input type="text"
-					name="selectedGame" class="au-input au-input--full" readonly>
+					name="selectedGame" class="au-input au-input--full" readonly value="<%=selectedGame %>">
+			</div>
+			<div class="form-group">
+				<label>Court/Board/Lane</label> 
+				<input type="text"
+					name="selectedCourt" class="au-input au-input--full" readonly value="<%=selectedCourt %>">
 			</div>
 			<div class="form-group">
 				<label>Select Date</label> <input class="au-input au-input--full"
@@ -41,17 +52,7 @@
 					<option value="10:00PM-11:00PM">10:00PM-11:00PM</option>
 				</select>
 			</div>
-			<div class="form-group">
-				<label>Court/Board/Lane</label> 
-				
-				<!-- Populate the courts for this Center for the selected Game -->
-				<select
-					class="form-control au-input au-input--full" name="selectedCourt">
-					<option value="Court1">Court1</option>
-					<option value="Court2">Court2</option>
-					<option value="Court3">Court3</option>
-				</select>
-			</div>
+			
 			<br />
 			<button type="submit"
 				class="au-btn au-btn--block au-btn--green m-b-20">Book Game</button>

@@ -109,11 +109,8 @@
                                     <span class="bot-line"></span>
                                 </a>
                                 <ul class="header3-sub-list list-unstyled">
-                                	<li>
-                                        <a href="adminAddNewGame.jsp">Add New Game</a>
-                                    </li>
                                     <li>
-                                        <a href="adminViewAllGames.jsp">View All Games</a>
+                                        <a href="adminViewAllGames.jsp">View All Available Games</a>
                                     </li>
                                 </ul>
                             </li>
