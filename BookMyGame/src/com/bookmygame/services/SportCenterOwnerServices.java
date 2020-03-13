@@ -12,12 +12,8 @@ public interface SportCenterOwnerServices {
 	
 	public SportCenter loginSportCenter(String userName, String password);
 	
-	public void updateCustomerDetails(Customer customer) throws Exception;
+	public void updateSportCenterDetails(SportCenter center) throws Exception;
 	
-	public List<GameBooking> getAllBookings(int customerId);
-	
-	public void bookMyGame(GameBooking booking) throws Exception;
-	
-	public void cancelBooking(GameBooking booking) throws Exception;
-	
+	public List<GameBooking> getAllBookings(int sportCenterId);
+		
 }

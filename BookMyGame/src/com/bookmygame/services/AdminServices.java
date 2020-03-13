@@ -18,15 +18,17 @@ public interface AdminServices {
 	
 	public List<GameBooking> getAllBookingsOnCustomer(int customerId);
 	
-	public List<GameBooking> getAllBookingsOnSortCenter(int sportCenter);
+	public List<GameBooking> getAllBookingsOnSportCenter(int sportCenter);
 	
 	public void addNewSportCategories(String sportName);
 	
 	public void addNewLocation(String location);
 	
-	public SportCenter approveOrRejectCenterApplication(SportCenter center, boolean rejectedOnly);
+	public SportCenter approveOrRejectCenterApplication(int sportCenterId, boolean rejectedOnly);
 	
-	public List<SportCenter> getAllSportCenters();
+	public List<SportCenter> getAllActiveSportCenters();
+	
+	public List<SportCenter> getAllSportCentersToApprove();
 	
 	public void blockSportCenter(int sportCenterId) throws Exception;
 

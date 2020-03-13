@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,11 +21,11 @@ public class GameBooking {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int bookingId;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
 	@JoinColumn(name="sport_center_id")
 	private SportCenter sportCenter;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
 	@JoinColumn(name="customer_id")
 	private Customer customer;
 	

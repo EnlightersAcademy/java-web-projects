@@ -32,7 +32,7 @@ public class SportCenter {
 	@Column(name = "address")
 	private String address;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH })
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH },fetch=FetchType.EAGER)
 	@JoinColumn(name = "location_id")
 	private Location location;
 
@@ -46,6 +46,9 @@ public class SportCenter {
 
 	@Column(name = "sport_center_emailid")
 	private String sportCenterEmailId;
+	
+	@Column(name = "password")
+	private String password;
 
 	@Column(name = "two_wheeler_parking_availability")
 	private String twoWheelerparkingAvailability;
@@ -53,13 +56,23 @@ public class SportCenter {
 	@Column(name = "four_wheeler_parking_availability")
 	private String fourWheelerParkingAvailability;
 
+	@Column(name="owner_name")
 	private String OwnerName;
 
+	@Column(name="phone_no")
 	private String phoneNo;
 
+	@Column(name="owner_email_id")
 	private String ownerEmailId;
 
+	@Column(name="identification_id")
 	private String identificationId;
+	
+	@Column(name="is_active")
+	private int isActive;
+	
+	@Column(name="is_approved")
+	private int isApproved;
 
 	public String getName() {
 		return name;
@@ -155,6 +168,22 @@ public class SportCenter {
 
 	public void setSports(Set<Sport> sports) {
 		this.sports = sports;
+	}
+
+	public int getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(int isActive) {
+		this.isActive = isActive;
+	}
+
+	public int getIsApproved() {
+		return isApproved;
+	}
+
+	public void setIsApproved(int isApproved) {
+		this.isApproved = isApproved;
 	}
 
 }

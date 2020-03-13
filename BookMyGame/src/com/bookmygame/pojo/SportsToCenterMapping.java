@@ -2,6 +2,7 @@ package com.bookmygame.pojo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +18,7 @@ public class SportsToCenterMapping {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="sport_id")
 	private Sport sport;
 	
@@ -30,7 +31,7 @@ public class SportsToCenterMapping {
 		this.sportCenter = sportCenter;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="sport_center_id")
 	private SportCenter sportCenter;
 	

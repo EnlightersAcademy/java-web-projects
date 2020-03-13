@@ -45,6 +45,9 @@ public class Customer {
 	@Column(name="identification_id",unique=true)
 	private String identificationId;
 	
+	@Column(name="is_active")
+	private int isActive;
+	
 	
 	public String getName() {
 		return name;
@@ -99,6 +102,12 @@ public class Customer {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public int getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(int isActive) {
+		this.isActive = isActive;
 	}
 
 
