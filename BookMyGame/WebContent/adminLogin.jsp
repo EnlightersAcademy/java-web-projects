@@ -35,6 +35,14 @@
             background-size: cover;
         }
     </style>
+    <%
+    	String result = request.getParameter("result");
+    	if(result != null) {
+    		if("fail".equals(result)) {
+				out.println("<script>alert('Invalid login credentials. Please try again')</script>");
+			} 
+    	}
+    %>
 
 </head>
 
@@ -50,7 +58,7 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="customer/register" method="post">
+                            <form action="admin/login" method="post">
                                 <div class="form-group">
                                     <label>Admin User ID</label>
                                     <input class="au-input au-input--full" type="text" name="UserId"

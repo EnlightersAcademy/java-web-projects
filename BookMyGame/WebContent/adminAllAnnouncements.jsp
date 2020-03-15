@@ -30,7 +30,7 @@
                     	for(Announcement ann : announcements) {
                     %>
                         <tr>
-                            <td><%=ann.getMessageDate().toString() %></td>
+                            <td><%=ann.getMessageDate() %></td>
                             <td><%=ann.getAnnouncementType().getTypeName() %></td>
                             <td style="text-align: left;"><%= ann.getMessage() %></td>
                         </tr>

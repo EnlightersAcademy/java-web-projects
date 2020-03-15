@@ -109,6 +109,12 @@ public class Customer {
 	public void setIsActive(int isActive) {
 		this.isActive = isActive;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 
 
 }

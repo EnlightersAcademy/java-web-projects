@@ -74,6 +74,14 @@ public class SportCenter {
 	@Column(name="is_approved")
 	private int isApproved;
 
+	public int getSportCenterId() {
+		return sportCenterId;
+	}
+
+	public void setSportCenterId(int sportCenterId) {
+		this.sportCenterId = sportCenterId;
+	}
+
 	public String getName() {
 		return name;
 	}

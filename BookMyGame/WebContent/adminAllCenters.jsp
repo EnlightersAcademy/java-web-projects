@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.stream.Collectors"%>
+<%@page import="java.util.stream.Collector"%>
 <%@page import="java.util.List"%>
 <%@page import="com.bookmygame.pojo.SportCenter"%>
 <%@page import="com.bookmygame.services.impl.AdminServicesImpl"%>
@@ -9,8 +12,7 @@
 <!-- PAGE CONTENT-->
 <div class="page-content--bgf7" style="height: 100%">
 
-	<br />
-	<br />
+	<br /> <br />
 
 	<!-- DATA TABLE-->
 	<div class="table-responsive m-b-40" style="width: 95%; margin: auto;">
@@ -23,23 +25,40 @@
 					<th>Center Email Id</th>
 					<th>Center Phone No</th>
 					<th>Available Sports</th>
+					<th>Center Address</th>
+					<th>Active status</th>
 				</tr>
 			</thead>
 			<%
 			AdminServices services = new AdminServicesImpl();
-			List<SportCenter> sportCenters = services.getAllActiveSportCenters();
+			List<SportCenter> sportCenters = services.getAllSportCenters();
 			for(SportCenter sp: sportCenters) {
 		%>
 			<tbody>
 
 				<!-- TWO ROWS ARE FOR ONE CENTER DATA -->
-				<tr data-toggle="collapse" data-target="#<%=1234 %>"
-					class="clickable">
-					<td>1234</td>
-					<td>Flying Feathers</td>
-					<td>Electronic City</td>
-					<td>sample@gmail.com</td>
-					<td>9882020205</td>
+				<tr data-toggle="collapse"
+					data-target="#<%=sp.getSportCenterId() %>" class="clickable">
+					<td><%=sp.getSportCenterId() %></td>
+					<td><%=sp.getName() %></td>
+					<td><%=sp.getLocation().getLocationName() %></td>
+					<td><%=sp.getSportCenterEmailId() %></td>
+					<td><%=sp.getSportCenterPhNo() %></td>
+					<%
+					List<String> names = new ArrayList<String>();
+						if(sp.getSports() != null && !sp.getSports().isEmpty()) {
+						names = sp.getSports().stream().map(sport -> sport.getName()).collect(Collectors.toList());
+						}
+					%>
+					<td><%=names.toString() %></td>
+					<td><%=sp.getAddress() %></td>
+					
+					<%if(sp.getIsActive() == 0) { %>
+					<!-- Use class="denied" for making it GREEN -->
+					<td class="denied">Disabled</td>
+					<% } else {%>
+					<td class="process">Active</td>
+					<% } %>
 					<td>
 						<button class="btn btn-default btn-sm">
 							<i class="fa fa-arrow-down"></i> More Details
@@ -48,113 +67,34 @@
 				</tr>
 				<tr>
 					<td colspan="6">
-						<div id="<%=1234 %>" class="collapse">
+						<div id="<%=sp.getSportCenterId() %>" class="collapse">
 							<table class="table">
 
 								<tr>
 									<th>Owner Name</th>
 									<th>Owner's Phone</th>
 									<th>Owner's Email</th>
-									<th>ID Type</th>
-									<th>ID Number</th>
+									<th>Identification Number</th>
+									<th>Two Wheeler parking</th>
+									<th>Four Wheeler parking</th>
 								</tr>
 								<tr>
-									<td>Raj</td>
-									<td>9039393939</td>
-									<td>raj@gmail.com</td>
-									<td>PAN</td>
-									<td>BHSD6767A</td>
+									<td><%=sp.getOwnerName() %></td>
+									<td><%=sp.getPhoneNo() %></td>
+									<td><%=sp.getOwnerEmailId() %></td>
+									<td><%= sp.getIdentificationId() %></td>
+									<td><%= sp.getTwoWheelerparkingAvailability() %></td>
+									<td><%= sp.getFourWheelerParkingAvailability() %></td>
+
 								</tr>
 							</table>
 						</div>
 					</td>
 				</tr>
-				<!-- CENTER DATA ENDS HERE -->
-
-				<!-- TWO ROWS ARE FOR ONE CENTER DATA -->
-				<tr data-toggle="collapse" data-target="#<%=1235 %>"
-					class="clickable">
-					<td>1235</td>
-					<td>Flying Feathers</td>
-					<td>Electronic City</td>
-					<td>sample@gmail.com</td>
-					<td>9882020205</td>
-					<td>
-						<button class="btn btn-default btn-sm">
-							<i class="fa fa-arrow-down"></i> More Details
-						</button>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="6">
-						<div id="<%=1235 %>" class="collapse">
-							<table class="table">
-
-								<tr>
-									<th>Owner Name</th>
-									<th>Owner's Phone</th>
-									<th>Owner's Email</th>
-									<th>ID Type</th>
-									<th>ID Number</th>
-								</tr>
-								<tr>
-									<td>Raj</td>
-									<td>9039393939</td>
-									<td>raj@gmail.com</td>
-									<td>PAN</td>
-									<td>BHSD6767A</td>
-								</tr>
-							</table>
-						</div>
-					</td>
-				</tr>
-				<!-- CENTER DATA ENDS HERE -->
-
-				<!-- TWO ROWS ARE FOR ONE CENTER DATA -->
-				<tr data-toggle="collapse" data-target="#<%=1236 %>"
-					class="clickable">
-					<td>1236</td>
-					<td>Flying Feathers</td>
-					<td>Electronic City</td>
-					<td>sample@gmail.com</td>
-					<td>9882020205</td>
-					<td>
-						<button class="btn btn-default btn-sm">
-							<i class="fa fa-arrow-down"></i> More Details
-						</button>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="6">
-						<div id="<%=1236 %>" class="collapse">
-							<table class="table">
-
-								<tr>
-									<th>Owner Name</th>
-									<th>Owner's Phone</th>
-									<th>Owner's Email</th>
-									<th>ID Type</th>
-									<th>ID Number</th>
-								</tr>
-								<tr>
-									<td>Raj</td>
-									<td>9039393939</td>
-									<td>raj@gmail.com</td>
-									<td>PAN</td>
-									<td>BHSD6767A</td>
-								</tr>
-							</table>
-						</div>
-					</td>
-				</tr>
-				<!-- CENTER DATA ENDS HERE -->
 			</tbody>
 		</table>
 	</div>
 	<!-- END DATA TABLE-->
 	<%} %>
-	<br />
-	<br /> <br />
-	<br /> <br />
-	<br />
+	<br /> <br /> <br /> <br /> <br /> <br />
 </div>

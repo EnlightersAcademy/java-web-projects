@@ -41,6 +41,14 @@ public class GameBooking {
 
 
 
+	public int getBookingId() {
+		return bookingId;
+	}
+
+	public void setBookingId(int bookingId) {
+		this.bookingId = bookingId;
+	}
+
 	public String getCourtOrBoardName() {
 		return courtOrBoardName;
 	}

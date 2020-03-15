@@ -1,7 +1,9 @@
 package com.bookmygame.services.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -41,8 +43,7 @@ public class AdminServicesImpl implements AdminServices {
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
 
-			TypedQuery<Customer> query = em.createNamedQuery("select cus from Customer cus where cus.isActive = 1",
-					Customer.class);
+			TypedQuery<Customer> query = em.createNamedQuery("select cus from Customer cus", Customer.class);
 			customers = query.getResultList();
 
 		} catch (Exception exe) {
@@ -64,6 +65,7 @@ public class AdminServicesImpl implements AdminServices {
 		} catch (Exception exe) {
 			exe.printStackTrace();
 			em.getTransaction().rollback();
+			throw exe;
 		} finally {
 			em.close();
 		}
@@ -127,7 +129,7 @@ public class AdminServicesImpl implements AdminServices {
 		}
 	}
 
-	public SportCenter approveOrRejectCenterApplication(int sportCenterId, boolean rejectedOnly) {
+	public SportCenter approveOrRejectCenterApplication(int sportCenterId, boolean rejectedOnly) throws Exception {
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		em.getTransaction().begin();
 		SportCenter spCenter = em.find(SportCenter.class, sportCenterId);
@@ -135,7 +137,7 @@ public class AdminServicesImpl implements AdminServices {
 			if (!rejectedOnly) {
 				spCenter.setIsApproved(1);
 			} else {
-				spCenter.setIsApproved(0);
+				spCenter.setIsApproved(2);
 
 			}
 			em.persist(spCenter);
@@ -144,6 +146,7 @@ public class AdminServicesImpl implements AdminServices {
 		} catch (Exception exe) {
 			exe.printStackTrace();
 			em.getTransaction().rollback();
+			throw exe;
 		} finally {
 			em.close();
 		}
@@ -159,6 +162,21 @@ public class AdminServicesImpl implements AdminServices {
 					SportCenter.class);
 			query.setParameter("approved", 1);
 			query.setParameter("active", 1);
+			sportCenters = query.getResultList();
+
+		} catch (Exception exe) {
+			exe.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return sportCenters;
+	}
+
+	public List<SportCenter> getAllSportCenters() {
+		List<SportCenter> sportCenters = new ArrayList<>();
+		EntityManager em = JPAUtil.getEMF().createEntityManager();
+		try {
+			TypedQuery<SportCenter> query = em.createNamedQuery("select sc from SportCenter sc", SportCenter.class);
 			sportCenters = query.getResultList();
 
 		} catch (Exception exe) {
@@ -198,9 +216,57 @@ public class AdminServicesImpl implements AdminServices {
 		} catch (Exception exe) {
 			exe.printStackTrace();
 			em.getTransaction().rollback();
+			throw exe;
+
 		} finally {
 			em.close();
 		}
 	}
+
+	public Map<String, Integer> getProvisionToActiveCountMap() {
+		Map<String, Integer> provToCountMap = new HashMap<>();
+
+		EntityManager em = JPAUtil.getEMF().createEntityManager();
+		try {
+			TypedQuery<Integer> query = em.createNamedQuery(
+					"select count(sc) from SportCenter sc where sc.isApproved =: approved and sc.isActive =: active",
+					Integer.class);
+			query.setParameter("approved", 1);
+			query.setParameter("active", 1);
+			provToCountMap.put("sportCenter", query.getSingleResult());
+
+			query = em.createNamedQuery("select count(cus) from Customer cus where cus.isActive =: active",
+					Integer.class);
+			query.setParameter("active", 1);
+			provToCountMap.put("customer", query.getSingleResult());
+
+			query = em.createNamedQuery("select count(booking) from GameBooking booking", Integer.class);
+			provToCountMap.put("booking", query.getSingleResult());
+
+		} catch (Exception exe) {
+			exe.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return provToCountMap;
+	}
+	
+	public List<SportCenter> getAllRejectedSportCenters() {
+		List<SportCenter> sportCenters = new ArrayList<>();
+		EntityManager em = JPAUtil.getEMF().createEntityManager();
+		try {
+			TypedQuery<SportCenter> query = em.createNamedQuery(
+					"select sc from SportCenter sc where sc.isApproved =: approved", SportCenter.class);
+			query.setParameter("approved", 2);
+			sportCenters = query.getResultList();
+
+		} catch (Exception exe) {
+			exe.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return sportCenters;
+	}
+
 
 }

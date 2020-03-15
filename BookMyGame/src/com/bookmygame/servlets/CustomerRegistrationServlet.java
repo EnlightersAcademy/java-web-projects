@@ -31,26 +31,26 @@ public class CustomerRegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if ("/BookMyGame/customer/register".equals(request.getRequestURI())) {
-
-			Customer customer = new Customer();
-			customer.setName(request.getParameter("name"));
-			customer.setPassword("aditya");
-			customer.setEmailId("aditya@gmail.com");
-			
-			CustomerServices services = new CustomerServicesImpl();
-			services.registerCustomer(customer);
-			
-			customer = services.loginCustomer("aditya@gmail.com", "aditya");
-			if(customer != null) {
-				logger.info("Customer name is "+ customer.getName());
-				System.out.println("customer name is " + customer.getName());
-			}
-			
-		} else if ("/BookMyGame/customer/login".equals(request.getRequestURI())) {
-			String username = request.getParameter("name");
-			String password = request.getParameter("pass");
-		}
+//		if ("/BookMyGame/customer/register".equals(request.getRequestURI())) {
+//
+//			Customer customer = new Customer();
+//			customer.setName(request.getParameter("name"));
+//			customer.setPassword("aditya");
+//			customer.setEmailId("aditya@gmail.com");
+//			
+//			CustomerServices services = new CustomerServicesImpl();
+//			services.registerCustomer(customer);
+//			
+//			customer = services.loginCustomer("aditya@gmail.com", "aditya");
+//			if(customer != null) {
+//				logger.info("Customer name is "+ customer.getName());
+//				System.out.println("customer name is " + customer.getName());
+//			}
+//			
+//		} else if ("/BookMyGame/customer/login".equals(request.getRequestURI())) {
+//			String username = request.getParameter("name");
+//			String password = request.getParameter("pass");
+//		}
 
 	}
 

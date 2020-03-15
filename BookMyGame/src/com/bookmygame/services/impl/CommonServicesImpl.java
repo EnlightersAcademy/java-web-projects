@@ -23,7 +23,7 @@ public class CommonServicesImpl implements CommonServices {
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
 
-			Query query = em.createQuery("select an from Announcement an");
+			Query query = em.createQuery("select an from Announcement an ORDER BY an.messageDate DESC");
 			announcements = (List<Announcement>) query.getResultList();
 
 		} catch (Exception exe) {
