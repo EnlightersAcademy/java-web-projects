@@ -21,24 +21,24 @@
 
 <br/><br/>
 
-<%
-	//Populate from which page it was redirected here.
-	//As this page is being reused.
-	String redirectedFromWhichPage = "userHome.jsp";
-%>
-			
-
 			<section class="statistic">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                    	<a href="<%= redirectedFromWhichPage %>" class="btn btn-warning btn-sm" style="float: right;">
+                    	<a href="userSearchResults.jsp" class="btn btn-warning btn-sm" style="float: right;">
                                             BACK &nbsp; <i class="fa fa-reply"></i></a>
                                             
                                             
                     	<h2 class="title-3 m-b-30" style="color: #4272d7; font-size: 30px;">
-                                        <i class="zmdi zmdi-account"></i><%= "Hrithik R" %></h2>	<!-- Populate the Name here -->
+                                        <i class="zmdi zmdi-account"></i><%= "Hrithik R" %>&nbsp;&nbsp;	<!-- Populate the Name here -->
+                                        </h2>
                                         
-                    	<br/>
+	           			<form action="" method="post">
+	                            	<input type="hidden" value="<%= 1234 %>">	<!-- Populate the User ID here for submission -->
+	                             <button type="submit" class="btn btn-outline-danger btn-sm">
+	                                 <i class="fa fa-heart"></i> Add to Shortlist</button>
+	                            </form>
+                       	<br/>
+                       	
                         <div class="row">
                         
                             <div class="col-md-12 col-lg-12">
@@ -110,7 +110,7 @@
 		                                    <span class="desc" style="color: #37474F;">
 		                                    	<b class="detailsLabel">Hobbies :</b> <%= "Photography, Reading" %><br/>
 		                                    	<b class="detailsLabel">Drink ? :</b> <%= "Ocassional" %><br/>
-		                                    	<b class="detailsLabel">Smoke :</b> <%= "Never" %><br/>
+		                                    	<b class="detailsLabel">Smoke ? :</b> <%= "Never" %><br/>
 		                                    </span>
 	                                	</div>
                                 </div>

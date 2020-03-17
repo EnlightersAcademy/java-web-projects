@@ -18,8 +18,23 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                     	<h2 class="title-3 m-b-30">
-                                        <i class="zmdi zmdi-star"></i>Shortlisted Profiles</h2>
+                                        <i class="zmdi zmdi-search"></i>Search Results</h2>
                     	<br/>
+                    	
+                    	<%
+                    		int searchResultsCount = 4;	//Get the count of search results here.
+                    	
+                    		if(searchResultsCount==0)
+                    		{
+                    	%>
+                    		<div class="row">
+                    			<p class="card-text" style="margin: auto;">No Matching Results Found!</p>
+                    		</div>
+                    	<%
+                    		}
+                    		else
+                    		{
+                    	%>
                         <div class="row">
                             
                             <!-- Populate the short-listed profiles here -->
@@ -41,7 +56,7 @@
 	                                	</div>
                                 	</div>
                                 	<!-- Populate the User ID in the href -->
-                                	<a class="btn btn-success btn-sm detailsButton" style="color: white;" href="userViewProfileShortlisted.jsp?id<%=123%>">Details</a>	
+                                	<a class="btn btn-success btn-sm detailsButton" style="color: white;" href="userViewProfileSearched.jsp?id<%=123%>">Details</a>	
                                 </div>
                             </div>
                             
@@ -62,11 +77,14 @@
 	                                	</div>
                                 	</div>
                                 	<!-- Populate the User ID in the href -->
-                                	<a class="btn btn-success btn-sm detailsButton" style="color: white;" href="userViewProfileShortlisted.jsp?id<%=123%>">Details</a>	
+                                	<a class="btn btn-success btn-sm detailsButton" style="color: white;" href="userViewProfileSearched.jsp?id<%=123%>">Details</a>	
                                 </div>
                             </div>
                             
                         </div>
+                        <%
+                    		}
+                        %>
                     </div>
                 </div>
             </section>
