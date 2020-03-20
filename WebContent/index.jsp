@@ -105,11 +105,11 @@
                 </div>
             </div>
             
-            <!-- <div class="register-link footer">
+            <div class="register-link footer">
                 <p>
-                    <a href="#" style="color: white;">Admin Login</a>
+                    &#9679; &nbsp; <a href="contact.jsp" style="color: white;">Contact Us</a> &nbsp; &#9679; &nbsp; <a href="about.jsp" style="color: white;">About Us</a> &nbsp; &#9679;
                 </p>
-            </div> -->
+            </div>
         </div>
 
     </div>

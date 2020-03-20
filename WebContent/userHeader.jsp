@@ -138,7 +138,7 @@
                                             <p>Offers from Match Makers</p>
                                         </div>
                                         
-                                        <!-- Populate all Admin Offers Here -->
+                                        <!-- Populate all Admin Offers Here. Better to populate only LATEST TWO. -->
                                         <div class="notifi__item">
                                             <div class="bg-c3 img-cir img-40">
                                                 <i class="zmdi zmdi-notifications"></i>
@@ -167,10 +167,10 @@
 		                                        <a href="userChangePassword.jsp">
 		                                            <i class="zmdi zmdi-account"></i>Change Password</a>
 		                                    </div>
-		                                    <!-- <div class="account-dropdown__item">
-		                                        <a href="userBilling.jsp">
-		                                            <i class="zmdi zmdi-money-box"></i>Billing Info</a>
-		                                    </div> -->
+		                                    <div class="account-dropdown__item">
+		                                        <a href="userChangeProfile.jsp">
+		                                            <i class="zmdi zmdi-widgets"></i>Change Profile Status</a>
+		                                    </div>
 		                                </div>
                                     </div>
                                 </div>

@@ -12,7 +12,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Match Makers - Admin Login</title>
+    <title>Match Makers</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -53,6 +53,12 @@
 		   color: white;
 		   text-align: center;
 		}
+		
+		.titleColor{
+			  background: -webkit-linear-gradient(#85929E, #283747);
+			  -webkit-background-clip: text;
+			  -webkit-text-fill-color: transparent;
+		}
     </style>
 
 </head>
@@ -63,41 +69,39 @@
             <div class="container">
                 <div class="login-wrap" style="width: 400px;">
                     <div class="login-content">
-                        <div class="login-logo">
+                        <div class="login-logo" style="padding-bottom: 20px;">
                             <a href="index.jsp">
-                                <img src="images/icon/logo.png" alt="MatchMakers" style="height: 90px;">
+                                <img src="images/icon/logo-blue.png" alt="MatchMakers">
                             </a>
                         </div>
-                        <div class="register-link" style="padding-bottom: 20px;">
-                                <h4 style="color: #757575;">Admin Login</h4>
+                        <br/>
+                        <div style="text-align: center;">                            
+                            	<b>Call Toll Free Number :</b> 1800-572-5483 <br/><br/>
+                            	<b>Mail Us at :</b> contact@match-makers.com <br/><br/>
+                            	<b>Registered Address :</b> <br/>
+                            	Shop No. 101, MG Road, Bengaluru, Karnataka - 560 003
                         </div>
-                        <div class="login-form">
-                            <form action="adminHome.jsp" method="post">
-                                <div class="form-group">
-                                    <label>User ID</label>
-                                    <input class="au-input au-input--full" type="text" name="userid" placeholder="User ID">
-                                </div>
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
-                                </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
-                            </form>
-                            <div class="register-link signupBox" style="padding-bottom: 20px;">
-                                <p>
-                                    <a href="index.jsp">HOME</a>
-                                </p>
-                            </div>
-                        </div>
+                        <hr>
+                         <div style="text-align: center;">
+                             <a href="#">
+                                 <i class="fa fa-heart"></i>
+                             </a>
+                             <a href="#">
+                                 <i class="fa fa-heart"></i>
+                             </a>
+                             <a href="#">
+                                 <i class="fa fa-heart"></i>
+                             </a>
+                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- <div class="register-link footer">
+            <div class="register-link footer">
                 <p>
-                    <a href="#" style="color: white;">Admin Login</a>
+                    &#9679; &nbsp; <a href="index.jsp" style="color: white;">Home</a> &nbsp; &#9679; &nbsp; <a href="about.jsp" style="color: white;">About Us</a> &nbsp; &#9679;
                 </p>
-            </div> -->
+            </div>
         </div>
 
     </div>
