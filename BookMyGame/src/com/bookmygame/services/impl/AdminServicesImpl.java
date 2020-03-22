@@ -18,25 +18,6 @@ import com.bookmygame.services.AdminServices;
 
 public class AdminServicesImpl implements AdminServices {
 
-	public Customer loginCustomer(String userName, String password) {
-		Customer customer = null;
-		EntityManager em = JPAUtil.getEMF().createEntityManager();
-		try {
-			TypedQuery<Customer> query = em.createNamedQuery(
-					"select * from Customer as cus where cus.name=: name and cus.password =: password and cus.isActive = 1",
-					Customer.class);
-			query.setParameter("name", userName);
-			query.setParameter("password", password);
-			customer = query.getSingleResult();
-
-		} catch (Exception exe) {
-			exe.printStackTrace();
-		} finally {
-			em.close();
-		}
-		return customer;
-	}
-
 	public List<Customer> getAllCustomerDetails() {
 
 		List<Customer> customers = new ArrayList<>();

@@ -22,7 +22,7 @@ public class Customer {
 	private String name;
 	
 	@Column(name="dob")
-	private Calendar dob;
+	private String dob;
 	
 	@Column(name="sex")
 	private String sex;
@@ -55,10 +55,10 @@ public class Customer {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Calendar getDob() {
+	public String getDob() {
 		return dob;
 	}
-	public void setDob(Calendar dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 	public String getSex() {

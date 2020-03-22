@@ -11,7 +11,7 @@
 	            <div class="login-form">
 	            
 	            	<!-- All the Data should be populated in these fields. Few fields we can keep readonly.  -->
-	                            <form action="" method="post">
+	                            <form action="customer/update" method="post">
 	                            	<div class="form-group">
 	                                    <label>Name</label>
 	                                    <input class="au-input au-input--full" type="text" name="name" readonly>
@@ -26,7 +26,7 @@
 	                                </div>
 	                                <div class="form-group">
 	                                    <label>Address</label>
-	                                    <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" placeholder="Complete Address"></textarea>
+	                                    <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" required placeholder="Complete Address"></textarea>
 	                                </div>
 	                                <div class="form-group">
 	                                    <label>Email Address</label>
@@ -35,18 +35,18 @@
 	                                <div class="form-group">
 	                                    <label>Password</label>
 	                                    <input class="au-input au-input--full" type="password" name="password"
-	                                        placeholder="Password">
+	                                        required placeholder="Password">
 	                                </div>
 	                                <div class="form-group">
 	                                    <label>Phone Number</label>
-	                                    <input class="au-input au-input--full" type="text" name="phone" maxlength="10" placeholder="Phone">
+	                                    <input class="au-input au-input--full" type="text" name="phone" maxlength="10" required placeholder="Phone">
 	                                </div>
 	                                <div class="form-group">
 	                                    <label>ID Number (Any Govt. Issued ID Card)</label>
-	                                    <input class="au-input au-input--full" type="text" name="identityNumber" placeholder="ID Number">
+	                                    <input class="au-input au-input--full" type="text" name="identityNumber" required placeholder="ID Number">
                                 	</div>
 	                                <button class="au-btn au-btn--block au-btn--green m-b-20"
-	                                    type="submit">register</button>
+	                                    type="submit">Update</button>
 	                            </form>
                    </div>
             </div>

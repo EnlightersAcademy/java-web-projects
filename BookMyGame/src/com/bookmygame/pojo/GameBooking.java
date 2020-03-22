@@ -1,7 +1,5 @@
 package com.bookmygame.pojo;
 
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,14 +19,22 @@ public class GameBooking {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int bookingId;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
-	@JoinColumn(name="sport_center_id")
+	@ManyToOne(targetEntity=SportCenter.class, cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@JoinColumn(name="sport_center_id", insertable=false, updatable=false)
 	private SportCenter sportCenter;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
-	@JoinColumn(name="customer_id")
+	@Column(name="sport_center_id")
+	private int sportCenterId;
+	
+	@ManyToOne(targetEntity=Customer.class , cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@JoinColumn(name="customer_id", insertable=false, updatable=false)
 	private Customer customer;
 	
+	@Column(name="customer_id")
+	private int customerId;
+	
+	@Column(name="sport_name")
+	private String sportName;
 	
 	@Column(name="court_or_board_name")
 	private String courtOrBoardName;
@@ -37,7 +43,7 @@ public class GameBooking {
 	private String timeSlot;
 	
 	@Column(name="date_of_booking")
-	private Date dateOfBooking;
+	private String dateOfBooking;
 
 
 
@@ -65,11 +71,11 @@ public class GameBooking {
 		this.timeSlot = timeSlot;
 	}
 
-	public Date getDateOfBooking() {
+	public String getDateOfBooking() {
 		return dateOfBooking;
 	}
 
-	public void setDateOfBooking(Date dateOfBooking) {
+	public void setDateOfBooking(String dateOfBooking) {
 		this.dateOfBooking = dateOfBooking;
 	}
 
@@ -87,6 +93,30 @@ public class GameBooking {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public String getSportName() {
+		return sportName;
+	}
+
+	public void setSportName(String sportName) {
+		this.sportName = sportName;
+	}
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+
+	public int getSportCenterId() {
+		return sportCenterId;
+	}
+
+	public void setSportCenterId(int sportCenterId) {
+		this.sportCenterId = sportCenterId;
 	}
 	
 }

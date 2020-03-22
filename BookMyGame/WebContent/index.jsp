@@ -35,7 +35,29 @@
             background-size: cover;
         }
     </style>
+<%
+String result = request.getParameter("request");
+if(request != null) {
+	if("fail".equals(result)) {
+		out.println("<script>alert('Login Failed due to invalid credentials. Please try again')</script>");
+	} 
+}
 
+String regRequest = request.getParameter("regRequest");
+if(request != null) {
+	if("fail".equals(result)) {
+		out.println("<script>alert('Customer registration Failed. Please try again')</script>");
+	} else {
+		out.println("<script>alert('Customer registered successfully!')</script>");
+	}
+}
+if(request.getParameter("sessionExpired") != null) {
+	out.println("<script>alert('User Session expired. Please login again')</script>");
+}
+if(request.getSession() != null && request.getSession().getAttribute("customerId") != null) {
+	request.getSession().removeAttribute("customerId");
+}
+%>
 </head>
 
 <body class="animsition">
@@ -50,7 +72,7 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="userHome.jsp" method="post">
+                            <form action="customer/login" method="post">
                                 <div class="form-group">
                                     <label>Email Address</label>
                                     <input class="au-input au-input--full" type="email" name="email"

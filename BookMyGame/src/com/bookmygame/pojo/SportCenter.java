@@ -33,7 +33,7 @@ public class SportCenter {
 	private String address;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH },fetch=FetchType.EAGER)
-	@JoinColumn(name = "location_id")
+	@JoinColumn(name = "location_id", referencedColumnName="location_name")
 	private Location location;
 
 	@Column(name = "sport_center_phno")

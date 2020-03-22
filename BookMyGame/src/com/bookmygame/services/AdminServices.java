@@ -9,9 +9,7 @@ import com.bookmygame.pojo.SportCenter;
 
 public interface AdminServices {
 
-	
-	public Customer loginCustomer(String userName, String password);
-		
+			
 	public List<Customer> getAllCustomerDetails();
 	
 	public void blockCustomer(int customerId) throws Exception;

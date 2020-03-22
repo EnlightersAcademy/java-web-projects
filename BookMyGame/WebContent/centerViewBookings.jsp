@@ -1,10 +1,22 @@
+<%@page import="java.util.List"%>
+<%@page import="com.bookmygame.pojo.GameBooking"%>
+<%@page import="com.bookmygame.services.AdminServices"%>
+<%@page import="com.bookmygame.services.impl.AdminServicesImpl"%>
 <jsp:include page="centerHeader.jsp"/>
 
         <!-- PAGE CONTENT-->
         <div class="page-content--bgf7" style="height: 100%">
         
         	<br/>
+			<%
+			int sportCenterId = request.getSession().getAttribute("centerId") != null ? (Integer)request.getSession().getAttribute("centerId"): -1;
+			if(sportCenterId < 0 ){
+				response.sendRedirect("centerLogin.jsp?sessionExpired=true");
+			}
+				AdminServices services = new AdminServicesImpl();
+				List<GameBooking> bookings = services.getAllBookingsOnSportCenter(sportCenterId);
 			
+			%>
 			<!-- DATA TABLE-->
             <div class="table-responsive m-b-40" style="width: 95%; margin: auto;">
             
@@ -22,37 +34,26 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <%
+                    	if(bookings != null) {
+                   
+                    		
+                    	for(GameBooking booking : bookings) {
+                    %>
                         <tr>
-                            <td>1234</td>
-                            <td>565</td>
-                            <td>Raj</td>
-                            <td>raj@gmail.com</td>
-                            <td>Badminton</td>
-                            <td>20-03-2020</td>
-                            <td>20:00 - 21:00</td>
-                            <td>3</td>
+                            <td><%=booking.getBookingId() %></td>
+                            <td><%=booking.getCustomer().getId() %></td>
+                            <td><%=booking.getCustomer().getName() %></td>
+                            <td><%=booking.getCustomer().getEmailId() %></td>
+                            <td><%=booking.getCustomer().getPhoneNo() %></td>
+                            <td><%=booking.getSportName() %></td>
+                            <td><%=booking.getTimeSlot() %></td>
+                            <td><%=booking.getCourtOrBoardName() %></td>
                         </tr>
-                        <tr>
-                            <td>1234</td>
-                            <td>565</td>
-                            <td>Raj</td>
-                            <td>raj@gmail.com</td>
-                            <td>Badminton</td>
-                            <td>20-03-2020</td>
-                            <td>20:00 - 21:00</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <td>1234</td>
-                            <td>565</td>
-                            <td>Raj</td>
-                            <td>raj@gmail.com</td>
-                            <td>Badminton</td>
-                            <td>20-03-2020</td>
-                            <td>20:00 - 21:00</td>
-                            <td>3</td>
-                        </tr>
+                        
+                        <%} }%>
                     </tbody>
+                    
                 </table>
                 
             </div>

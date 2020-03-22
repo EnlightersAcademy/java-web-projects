@@ -7,6 +7,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +28,7 @@ public class Sport {
 	@Column(name="image")
 	private String image;
 	
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="sport_facility_names_mapping",
 	joinColumns= {@JoinColumn(name="sport_id")})
 	@Column(name="court_or_board_names")
@@ -47,6 +48,22 @@ public class Sport {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Collection<String> getCourtOrBoardNames() {
+		return courtOrBoardNames;
+	}
+
+	public void setCourtOrBoardNames(Collection<String> courtOrBoardNames) {
+		this.courtOrBoardNames = courtOrBoardNames;
 	}
 
 }

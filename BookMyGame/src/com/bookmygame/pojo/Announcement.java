@@ -1,7 +1,5 @@
 package com.bookmygame.pojo;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +24,7 @@ public class Announcement {
 	private AnnouncementType announcementType;
 	
 	@Column(name="message_date")
-	private Date messageDate;
+	private String messageDate;
 
 	public String getMessage() {
 		return message;
@@ -44,11 +42,11 @@ public class Announcement {
 		this.announcementType = announcementType;
 	}
 
-	public Date getMessageDate() {
+	public String getMessageDate() {
 		return messageDate;
 	}
 
-	public void setMessageDate(Date messageDate) {
+	public void setMessageDate(String messageDate) {
 		this.messageDate = messageDate;
 	}
 	

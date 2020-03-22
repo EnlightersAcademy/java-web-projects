@@ -51,7 +51,7 @@ public class AdminServlet extends HttpServlet {
 			Announcement anno = new Announcement();
 			anno.setAnnouncementType(AnnouncementType.values()[type]);
 			anno.setMessage(message);
-			anno.setMessageDate(new Date(System.currentTimeMillis()));
+			anno.setMessageDate(new Date(System.currentTimeMillis()).toString());
 			services.raiseAnnouncement(anno);
 		}
 	}

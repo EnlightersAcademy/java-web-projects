@@ -50,33 +50,33 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="" method="post">
+                            <form action="center/register" method="post">
                             	<div class="form-group">
                                     <label>Sports Center Name</label>
-                                    <input class="au-input au-input--full" type="text" name="name" placeholder="Name">
+                                    <input class="au-input au-input--full" type="text" name="name" required placeholder="Name">
                                 </div>
                                 <div class="form-group">
                                     <label>Location</label>
-                                    <input class="au-input au-input--full" type="text" name="location" placeholder="Location">
+                                    <input class="au-input au-input--full" type="text" name="location" required placeholder="Location">
                                 </div>
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" placeholder="Complete Address">
+                                    <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" required placeholder="Complete Address">
                                     </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Center Email ID</label>
-                                    <input class="au-input au-input--full" type="email" name="email"
+                                    <input class="au-input au-input--full" type="email" required name="email"
                                         placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <label>Login Password</label>
                                     <input class="au-input au-input--full" type="password" name="password"
-                                        placeholder="Password">
+                                        required placeholder="Password">
                                 </div>
                                 <div class="form-group">
                                     <label>Center Phone Number</label>
-                                    <input class="au-input au-input--full" type="text" name="phone" maxlength="10" placeholder="Phone">
+                                    <input class="au-input au-input--full" type="text" name="phone" maxlength="10" required placeholder="Phone">
                                 </div>                                
                                 <div class="form-inline form-group">
                                     <label for="twowheeleravailable">Two Wheeler Parking Available?</label> &nbsp;&nbsp;
@@ -99,20 +99,20 @@
                                 
                                 <div class="form-group">
                                     <label>Owner's Name</label>
-                                    <input class="au-input au-input--full" type="text" name="ownername" placeholder="Owner's Name">
+                                    <input class="au-input au-input--full" type="text" name="ownername" required placeholder="Owner's Name">
                                 </div>
                                 <div class="form-group">
                                     <label>Owner's Email ID</label>
                                     <input class="au-input au-input--full" type="email" name="owneremail"
-                                        placeholder="Owner's Email">
+                                        required placeholder="Owner's Email">
                                 </div>
                                 <div class="form-group">
                                     <label>Owner's Phone Number</label>
-                                    <input class="au-input au-input--full" type="text" name="ownerphone" maxlength="10" placeholder="Owner's Phone">
+                                    <input class="au-input au-input--full" type="text" name="ownerphone" maxlength="10" required placeholder="Owner's Phone">
                                 </div>
                                 <div class="form-group">
                                     <label>Owner's ID Number</label>
-                                    <input class="au-input au-input--full" type="text" name="ownerid" placeholder="Owner's ID Number">
+                                    <input class="au-input au-input--full" type="text" name="ownerid" required placeholder="Owner's ID Number">
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20"
                                     type="submit">register</button>
