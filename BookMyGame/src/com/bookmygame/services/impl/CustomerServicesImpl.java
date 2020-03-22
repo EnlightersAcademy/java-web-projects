@@ -58,7 +58,7 @@ public class CustomerServicesImpl implements CustomerServices {
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
 			em.getTransaction().begin();
-			em.persist(customer);
+			em.merge(customer);
 			em.getTransaction().commit();
 		} catch (Exception exe) {
 			logger.error("Error saving customer object", exe);

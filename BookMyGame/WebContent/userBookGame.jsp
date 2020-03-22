@@ -20,6 +20,9 @@
 
         		}
         	}
+        	if(request.getParameter("invalidLocation") != null) {
+        		out.println("<script>alert('Please select a valid Location and try again')</script>");
+        	}
         	CommonServices services = new CommonServicesImpl();
         	List<Location> locations = services.getAllLocations();
         	
@@ -27,7 +30,7 @@
         	List<SportCenter> centers = (List<SportCenter>)request.getAttribute("sportCenters");
         	%>
         	<div class="jumbotron" style="width: 90%; margin: auto; text-align: center;">
-				<form class="form-inline" action="customer/booking/centers" method="post" style="margin: auto;">
+				<form class="form-inline" action="customer-booking-centers" method="get" style="margin: auto;">
 				  	<div class="col-md-8">
 				  		Select Location: &nbsp;&nbsp;
 				  		<!-- POLPULATE All LOCATIONS HERE -->

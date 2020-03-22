@@ -17,7 +17,7 @@ import com.bookmygame.pojo.SportCenter;
 import com.bookmygame.services.CustomerServices;
 import com.bookmygame.services.impl.CustomerServicesImpl;
 
-@WebServlet(urlPatterns = { "/customer/register", "/customer/login", "/customer/booking/centers" , "customer/game/booking"})
+@WebServlet(urlPatterns = { "/customer-register", "/customer-login", "/customer-booking-centers" , "/customer-game-booking", "/customer-update"})
 public class CustomerServlet extends HttpServlet {
 
 	Logger logger = Logger.getLogger(CustomerServlet.class);
@@ -26,14 +26,16 @@ public class CustomerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		CustomerServices services = new CustomerServicesImpl();
 
-		 if ("/BookMyGame/customer/booking/centers".equals(request.getRequestURI())) {
+		 if ("/BookMyGame/customer-booking-centers".equals(request.getRequestURI())) {
 			String locationId = request.getParameter("searchmemberid");
-			
+			if(locationId == null || "null".equals(locationId) ){
+				request.getRequestDispatcher("userBookGame.jsp?invalidLocation=true" + locationId).forward(request, response);
+			} else {
 			List<SportCenter> centers = services.getSportCentersByLocation(Integer.parseInt(locationId));
 			
 			request.setAttribute("sportCenters", centers);
 			request.getRequestDispatcher("userBookGame.jsp?selectedLocation=" + locationId).forward(request, response);
-
+			}
 		}
 	}
 
@@ -44,26 +46,28 @@ public class CustomerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		CustomerServices services = new CustomerServicesImpl();
-		if ("/BookMyGame/customer/register".equals(request.getRequestURI())) {
+		if ("/BookMyGame/customer-register".equals(request.getRequestURI())) {
 
 			Customer customer = new Customer();
 			customer.setName(request.getParameter("name"));
 			customer.setPassword(request.getParameter("password"));
 			customer.setEmailId(request.getParameter("email"));
-			customer.setDob(request.getParameter("name"));
+			customer.setDob(request.getParameter("dob"));
 			customer.setSex(request.getParameter("gender"));
 			customer.setAddress(request.getParameter("address"));
+			customer.setLocation(request.getParameter("location"));
 			customer.setPhoneNo(Long.valueOf(request.getParameter("phone")));
 			customer.setIdentificationId(request.getParameter("identityNumber"));
+			customer.setIsActive(1);
 
 			try {
 				services.registerCustomer(customer);
 				request.getRequestDispatcher("index.jsp?regRequest=success").forward(request, response);
 			} catch (Exception exe) {
-				request.getRequestDispatcher("index.jsp?regRequest=fail").forward(request, response);
+				request.getRequestDispatcher("/index.jsp?regRequest=fail").forward(request, response);
 			}
 
-		} else if ("/BookMyGame/customer/login".equals(request.getRequestURI())) {
+		} else if ("/BookMyGame/customer-login".equals(request.getRequestURI())) {
 			String userName = request.getParameter("email");
 			String password = request.getParameter("password");
 			Customer customer = services.loginCustomer(userName, password);
@@ -74,25 +78,27 @@ public class CustomerServlet extends HttpServlet {
 			} else {
 				request.getRequestDispatcher("index.jsp?result=fail").forward(request, response);
 			}
-		} else if ("/BookMyGame/customer/update".equals(request.getRequestURI())) {
+		} else if ("/BookMyGame/customer-update".equals(request.getRequestURI())) {
 
 			int customerId = (Integer) request.getSession().getAttribute("customerId");
 			Customer customer = services.getCustomerById(customerId);
 			if (customer != null) {
 				customer.setPassword(request.getParameter("password"));
 				customer.setAddress(request.getParameter("address"));
+				customer.setLocation(request.getParameter("location"));
 				customer.setPhoneNo(Long.valueOf(request.getParameter("phone")));
 				customer.setIdentificationId(request.getParameter("identityNumber"));
 			}
 
 			try {
 				services.updateCustomerDetails(customer);
-				request.getRequestDispatcher("userAccount.jsp?request=success").forward(request, response);
+				request.getRequestDispatcher("userAccount.jsp?result=success").forward(request, response);
 			} catch (Exception exe) {
-				request.getRequestDispatcher("userAccount.jsp?request=fail").forward(request, response);
+				exe.printStackTrace();
+				request.getRequestDispatcher("userAccount.jsp?result=fail").forward(request, response);
 			}
 
-		}else if ("/BookMyGame/customer/game/booking".equals(request.getRequestURI())) {
+		}else if ("/BookMyGame/customer-game-booking".equals(request.getRequestURI())) {
 
 			GameBooking booking = new GameBooking();
 			booking.setCourtOrBoardName(request.getParameter("selectedCourt"));

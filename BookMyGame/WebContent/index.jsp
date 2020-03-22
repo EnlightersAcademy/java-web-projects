@@ -47,7 +47,7 @@ String regRequest = request.getParameter("regRequest");
 if(request != null) {
 	if("fail".equals(result)) {
 		out.println("<script>alert('Customer registration Failed. Please try again')</script>");
-	} else {
+	} else if("success".equals(result)){
 		out.println("<script>alert('Customer registered successfully!')</script>");
 	}
 }
@@ -72,7 +72,7 @@ if(request.getSession() != null && request.getSession().getAttribute("customerId
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="customer/login" method="post">
+                            <form action="customer-login" method="post">
                                 <div class="form-group">
                                     <label>Email Address</label>
                                     <input class="au-input au-input--full" type="email" name="email"

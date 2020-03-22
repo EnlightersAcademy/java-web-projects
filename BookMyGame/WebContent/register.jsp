@@ -50,7 +50,7 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="customer/register" method="post">
+                            <form action="customer-register" method="post">
                             	<div class="form-group">
                                     <label>Name</label>
                                     <input class="au-input au-input--full" type="text" name="name" required placeholder="Name">
@@ -70,10 +70,14 @@
 									  <label class="form-check-label" for="gender">Female</label>
 									</div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="align-content: left;">
                                     <label>Address</label>
                                     <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" required placeholder="Complete Address">
                                     </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <input class="au-input au-input--full" type="text" name="location" required placeholder="Location">
                                 </div>
                                 <div class="form-group">
                                     <label>Email Address</label>

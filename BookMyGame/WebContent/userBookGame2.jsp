@@ -73,7 +73,7 @@
 					}
 				}
 			%>
-				<form action="customer/game/booking" method="post">
+				<form action="customer-game-booking" method="post">
 
 					<div class="form-group">
 						<label>Court/Board/Lane</label> <input type="text"

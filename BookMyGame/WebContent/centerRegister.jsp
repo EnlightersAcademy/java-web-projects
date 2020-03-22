@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Center Phone Number</label>
-                                    <input class="au-input au-input--full" type="text" name="phone" maxlength="10" required placeholder="Phone">
+                                    <input class="au-input au-input--full" type="text" name="phone" pattern="[0-9]{10,10}" maxlength="10" required placeholder="Phone">
                                 </div>                                
                                 <div class="form-inline form-group">
                                     <label for="twowheeleravailable">Two Wheeler Parking Available?</label> &nbsp;&nbsp;
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Owner's Phone Number</label>
-                                    <input class="au-input au-input--full" type="text" name="ownerphone" maxlength="10" required placeholder="Owner's Phone">
+                                    <input class="au-input au-input--full" type="text" name="ownerphone" pattern="[0-9]{10,10}" maxlength="10" required placeholder="Owner's Phone">
                                 </div>
                                 <div class="form-group">
                                     <label>Owner's ID Number</label>
