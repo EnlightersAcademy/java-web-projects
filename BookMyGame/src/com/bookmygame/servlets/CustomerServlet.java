@@ -1,6 +1,7 @@
 package com.bookmygame.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,11 +14,13 @@ import org.apache.log4j.Logger;
 
 import com.bookmygame.pojo.Customer;
 import com.bookmygame.pojo.GameBooking;
+import com.bookmygame.pojo.Location;
 import com.bookmygame.pojo.SportCenter;
 import com.bookmygame.services.CustomerServices;
 import com.bookmygame.services.impl.CustomerServicesImpl;
 
-@WebServlet(urlPatterns = { "/customer-register", "/customer-login", "/customer-booking-centers" , "/customer-game-booking", "/customer-update"})
+@WebServlet(urlPatterns = { "/customer-register", "/customer-login", "/customer-booking-centers",
+		"/customer-game-booking", "/customer-update", "/cancel-booking" })
 public class CustomerServlet extends HttpServlet {
 
 	Logger logger = Logger.getLogger(CustomerServlet.class);
@@ -26,15 +29,21 @@ public class CustomerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		CustomerServices services = new CustomerServicesImpl();
 
-		 if ("/BookMyGame/customer-booking-centers".equals(request.getRequestURI())) {
+		if ("/BookMyGame/customer-booking-centers".equals(request.getRequestURI())) {
 			String locationId = request.getParameter("searchmemberid");
-			if(locationId == null || "null".equals(locationId) ){
-				request.getRequestDispatcher("userBookGame.jsp?invalidLocation=true" + locationId).forward(request, response);
+			if (locationId == null || "null".equals(locationId)) {
+				request.getRequestDispatcher("userBookGame.jsp?invalidLocation=true" + locationId).forward(request,
+						response);
 			} else {
-			List<SportCenter> centers = services.getSportCentersByLocation(Integer.parseInt(locationId));
-			
-			request.setAttribute("sportCenters", centers);
-			request.getRequestDispatcher("userBookGame.jsp?selectedLocation=" + locationId).forward(request, response);
+				Location location = services.getLocationById(Integer.parseInt(locationId));
+				List<SportCenter> centers = new ArrayList<SportCenter>();
+				if (location != null) {
+					centers = services.getSportCentersByLocation(location.getLocationName());
+				}
+
+				request.setAttribute("sportCenters", centers);
+				request.getRequestDispatcher("userBookGame.jsp?selectedLocation=" + locationId).forward(request,
+						response);
 			}
 		}
 	}
@@ -64,7 +73,7 @@ public class CustomerServlet extends HttpServlet {
 				services.registerCustomer(customer);
 				request.getRequestDispatcher("index.jsp?regRequest=success").forward(request, response);
 			} catch (Exception exe) {
-				request.getRequestDispatcher("/index.jsp?regRequest=fail").forward(request, response);
+				request.getRequestDispatcher("index.jsp?regRequest=fail").forward(request, response);
 			}
 
 		} else if ("/BookMyGame/customer-login".equals(request.getRequestURI())) {
@@ -98,7 +107,7 @@ public class CustomerServlet extends HttpServlet {
 				request.getRequestDispatcher("userAccount.jsp?result=fail").forward(request, response);
 			}
 
-		}else if ("/BookMyGame/customer-game-booking".equals(request.getRequestURI())) {
+		} else if ("/BookMyGame/customer-game-booking".equals(request.getRequestURI())) {
 
 			GameBooking booking = new GameBooking();
 			booking.setCourtOrBoardName(request.getParameter("selectedCourt"));
@@ -114,7 +123,19 @@ public class CustomerServlet extends HttpServlet {
 				request.getRequestDispatcher("userBookGame.jsp?gameBook=fail").forward(request, response);
 			}
 
-		} 
+		} else if ("/BookMyGame/cancel-booking".equals(request.getRequestURI())) {
+			
+			int bookingId = request.getParameter("bookingId") != null ? Integer.parseInt(request.getParameter("bookingId")) : 0;
+			try {
+				services.cancelBooking(bookingId);
+				request.getRequestDispatcher("userViewBookings.jsp?gameCancel=success").forward(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				request.getRequestDispatcher("userViewBookings.jsp?gameCancel=fail").forward(request, response);
+			}
+			
+		}
 
 	}
 

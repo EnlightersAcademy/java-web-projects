@@ -17,11 +17,11 @@
 			SportCenterOwnerServices services = new SportCenterOwnerServicesImpl();
     		Map<String, Object> countMap = services.getProvisionToActiveCountMap(sportCenterId);
     		
-    		int totalBookings = 0;
+    		long totalBookings = 0;
     		int totalGames = 0;
     		List<Announcement> announcements = null;
     		if(countMap != null && !countMap.isEmpty()) {
-    			totalBookings = (Integer)countMap.get("booking");
+    			totalBookings = (Long)countMap.get("booking");
     			totalGames = (Integer)countMap.get("gamesCount");
     			announcements = (List<Announcement>)countMap.get("announcements");
     		}

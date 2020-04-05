@@ -16,6 +16,7 @@ import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -32,14 +33,15 @@ public class SportCenter {
 	@Column(name = "address")
 	private String address;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH },fetch=FetchType.EAGER)
+	@ManyToOne(cascade = {  CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH },fetch=FetchType.EAGER)
 	@JoinColumn(name = "location_id", referencedColumnName="location_name")
 	private Location location;
+
 
 	@Column(name = "sport_center_phno")
 	private long sportCenterPhNo;
 
-	@ManyToMany(cascade=CascadeType.PERSIST, targetEntity=Sport.class, fetch = FetchType.EAGER)
+	@OneToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Sport.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "sport_center_to_sports", joinColumns = {
 			@JoinColumn(name = "sport_center_id") }, inverseJoinColumns = { @JoinColumn(name = "sport_id") })
 	private Set<Sport> sports;
@@ -194,4 +196,11 @@ public class SportCenter {
 		this.isApproved = isApproved;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

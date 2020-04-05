@@ -50,7 +50,7 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="center/register" method="post">
+                            <form action="center-register" method="post">
                             	<div class="form-group">
                                     <label>Sports Center Name</label>
                                     <input class="au-input au-input--full" type="text" name="name" required placeholder="Name">
@@ -81,7 +81,7 @@
                                 <div class="form-inline form-group">
                                     <label for="twowheeleravailable">Two Wheeler Parking Available?</label> &nbsp;&nbsp;
                                     <label class="switch switch-3d switch-primary mr-3">
-				                      <input type="checkbox" class="switch-input" name="twowheeleravailable" id="twowheeleravailable">
+				                      <input type="checkbox" class="switch-input" name="twowheeleravailable" data-on-text="Yes" data-off-text="On" id="twowheeleravailable">				                      
 				                      <span class="switch-label"></span>
 				                      <span class="switch-handle"></span>
 				                    </label>
@@ -89,7 +89,7 @@
                                 <div class="form-inline form-group">
                                     <label for="fourwheeleravailable">Four Wheeler Parking Available?</label> &nbsp;&nbsp;
                                     <label class="switch switch-3d switch-primary mr-3">
-				                      <input type="checkbox" class="switch-input" name="fourwheeleravailable" id="fourwheeleravailable">
+				                      <input type="checkbox" class="switch-input" name="fourwheeleravailable" data-on-text="Yes" data-off-text="On" id="fourwheeleravailable">
 				                      <span class="switch-label"></span>
 				                      <span class="switch-handle"></span>
 				                    </label>

@@ -52,15 +52,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="statistic__item statistic__item--red">
-                                <h2 class="number"><%=8 %></h2>
-                                <span class="desc">games</span>
-                                <div class="icon">
-                                    <i class="zmdi zmdi-bike"></i>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </section>

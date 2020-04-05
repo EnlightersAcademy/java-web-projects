@@ -58,7 +58,7 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="admin/login" method="post">
+                            <form action="admin-login" method="post">
                                 <div class="form-group">
                                     <label>Admin User ID</label>
                                     <input class="au-input au-input--full" type="text" name="UserId"

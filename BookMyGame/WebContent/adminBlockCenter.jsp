@@ -13,11 +13,11 @@
 	<!-- DATA TABLE-->
 	<div class="table-responsive m-b-40" style="width: 95%; margin: auto;">
 		<%
-				String result = request.getParameter("request");
+				String result = request.getParameter("result");
 				if(request != null) {
 					if("fail".equals(result)) {
 						out.println("<script>alert('Attempt to block the sport center failed. Please try again')</script>");
-					} else {
+					} else if("success".equals(result)) {
 						out.println("<script>alert('Sport Center blocked successfully!')</script>");
 					}
 				}
@@ -34,6 +34,7 @@
 					<th>Phone</th>
 					<th>Owner Name</th>
 					<th>Owner Id</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,7 +52,7 @@
 					<td>
 						<!-- Populate the Member ID into this field --> <a
 						class="btn btn-danger btn-sm"
-						href="admin/center?id=<%= sc.getSportCenterId() %>&blockCenter=true"> <i
+						href="admin-center?id=<%= sc.getSportCenterId() %>&blockCenter=true"> <i
 							class="fa fa-ban"></i> Block
 					</a>
 					</td>

@@ -40,7 +40,7 @@
                     %>
                         <tr>
                         	<td style="vertical-align: middle; text-align: center;"><%=sport.getId() %></td>
-                            <td><img class="gameImage" src=<%=sport.getImage() %>></td>
+                            <td><img class="gameImage" src="images/games/<%=sport.getImage() %>"></td>
                             <td style="vertical-align: middle;"><%= sport.getName() %></td>
                             <td style="vertical-align: middle; text-align: center;"><%= sport.getCourtOrBoardNames().size() %></td>
                         </tr>

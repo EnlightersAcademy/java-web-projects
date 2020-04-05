@@ -22,7 +22,7 @@
 
 	<div class="jumbotron"
 		style="width: 80%; margin: auto; text-align: center;">
-		<form class="form-inline" action="admin/booking?byCustomer=true" method="get" "margin: auto;">
+		<form class="form-inline" action="admin-booking-customer" method="get" "margin: auto;">
 			<div class="col-md-8">
 				Select Member ID: &nbsp;&nbsp; <select class="custom-select"
 					name="searchmemberid" style="width: 200px;">
@@ -34,7 +34,6 @@
 				      		if(selectedCustomer < 0) {
 				      			
 				     %>
-
 					<option value="null" selected>Select</option>
 					<%
 				      		}
@@ -90,7 +89,7 @@
 					<th>Booking ID</th>
 					<th>Center Name</th>
 					<th>Center Location</th>
-					<th>Customer Name</th>
+					<th>Sport Name</th>
 					<th>Date Of Booking</th>
 					<th>Time Slot</th>
 					<th>Court Or Board Name</th>
@@ -104,7 +103,7 @@
 					<td><%=booking.getBookingId() %></td>
 					<td><%=booking.getSportCenter().getName() %></td>
 					<td><%=booking.getSportCenter().getLocation().getLocationName() %></td>
-					<td><%=booking.getCustomer().getName() %></td>
+					<td><%=booking.getSportName() %></td>
 					<td><%=booking.getDateOfBooking().toString()%></td>
 					<td><%=booking.getTimeSlot()%></td>
 					<td><%=booking.getCourtOrBoardName()%></td>

@@ -16,26 +16,13 @@ import com.bookmygame.services.CommonServices;
 import com.bookmygame.services.impl.AdminServicesImpl;
 import com.bookmygame.services.impl.CommonServicesImpl;
 
-@WebServlet({ "/admin/game", "/admin/customer", "/admin/center", "/admin/booking", "/admin/announcement","/admin/login" })
+@WebServlet({ "/admin-game", "/admin-customer", "/admin-center", "/admin-booking-customer", "/admin-booking-center",
+		"/admin-announcement", "/admin-login" })
 public class AdminServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		AdminServices services = new AdminServicesImpl();
-		if ("/BookMyGame/admin/booking".equals(request.getRequestURI())) {
-			if (Boolean.getBoolean(request.getParameter("byCenter"))) {
-				int centerId = Integer.parseInt(request.getParameter("searchcenterid"));
-				request.setAttribute("selectedCenterId", centerId);
-				request.setAttribute("centerBookings", services.getAllBookingsOnSportCenter(centerId));
-				request.getRequestDispatcher("adminCenterBookings.jsp").forward(request, response);
-			}
-			if (Boolean.getBoolean(request.getParameter("byCustomer"))) {
-				int customerId = Integer.parseInt(request.getParameter("selectedMemberId"));
-				request.setAttribute("selectedMemberId", customerId);
-				request.setAttribute("customerBookings", services.getAllBookingsOnCustomer(customerId));
-				request.getRequestDispatcher("adminCustomerBookings.jsp").forward(request, response);
-			}
-		}
+
 	}
 
 	/**
@@ -53,6 +40,14 @@ public class AdminServlet extends HttpServlet {
 			anno.setMessage(message);
 			anno.setMessageDate(new Date(System.currentTimeMillis()).toString());
 			services.raiseAnnouncement(anno);
+			if (request.getParameter("fromAdmin") != null) {
+				request.getRequestDispatcher("adminMemberAnnouncement.jsp?result=success").forward(request, response);
+			}
+			if (type == 1) {
+				request.getRequestDispatcher("centerOfferAnnouncement.jsp?result=success").forward(request, response);
+			} else {
+				request.getRequestDispatcher("adminCenterAnnouncement.jsp?result=success").forward(request, response);
+			}
 		}
 	}
 
@@ -60,15 +55,15 @@ public class AdminServlet extends HttpServlet {
 			throws ServletException, IOException {
 		AdminServices services = new AdminServicesImpl();
 
-		if ("/BookMyGame/admin/login".equals(request.getRequestURI())) {
-			
+		if ("/BookMyGame/admin-login".equals(request.getRequestURI())) {
+
 			String userName = request.getParameter("UserId");
 			String password = request.getParameter("password");
-			
-			if(userName == null || password == null) {
+
+			if (userName == null || password == null) {
 				request.getRequestDispatcher("adminLogin.jsp?result=fail").forward(request, response);
 			} else {
-				if("admin".equals(userName) && "admin".equals(password)) {
+				if ("admin".equals(userName) && "admin".equals(password)) {
 					request.getRequestDispatcher("adminHome.jsp").forward(request, response);
 
 				} else {
@@ -76,8 +71,8 @@ public class AdminServlet extends HttpServlet {
 				}
 			}
 		}
-		
-		if ("/BookMyGame/admin/center".equals(request.getRequestURI())) {
+
+		if ("/BookMyGame/admin-center".equals(request.getRequestURI())) {
 			boolean blockAction = Boolean.parseBoolean(request.getParameter("blockCenter"));
 			if (blockAction) {
 				int sportCenterId = Integer.parseInt(request.getParameter("id"));
@@ -89,23 +84,23 @@ public class AdminServlet extends HttpServlet {
 				request.getRequestDispatcher("adminBlockCenter.jsp?result=success").forward(request, response);
 			}
 			String approveAction = request.getParameter("toApprove");
-			if(approveAction != null) {
+			if (approveAction != null) {
 				int sportCenterId = Integer.parseInt(request.getParameter("id"));
 				try {
-				if(Boolean.parseBoolean(approveAction)) {
-					services.approveOrRejectCenterApplication(sportCenterId, false);
-				} else {
-					services.approveOrRejectCenterApplication(sportCenterId, true);
-				}
-				request.getRequestDispatcher("adminCenterRequests.jsp?result=success").forward(request, response);
-				}catch(Exception exe) {
+					if (Boolean.parseBoolean(approveAction)) {
+						services.approveOrRejectCenterApplication(sportCenterId, false);
+					} else {
+						services.approveOrRejectCenterApplication(sportCenterId, true);
+					}
+					request.getRequestDispatcher("adminCenterRequests.jsp?result=success").forward(request, response);
+				} catch (Exception exe) {
 					request.getRequestDispatcher("adminCenterRequests.jsp?result=fail").forward(request, response);
 				}
-				
+
 			}
 		}
 
-		if ("/BookMyGame/admin/customer".equals(request.getRequestURI())) {
+		if ("/BookMyGame/admin-customer".equals(request.getRequestURI())) {
 			boolean blockAction = Boolean.parseBoolean(request.getParameter("blockCustomer"));
 			if (blockAction) {
 				int customerId = Integer.parseInt(request.getParameter("id"));
@@ -118,17 +113,24 @@ public class AdminServlet extends HttpServlet {
 			}
 		}
 
-		if ("/BookMyGame/admin/announcement".equals(request.getRequestURI())) {
+		if ("/BookMyGame/admin-announcement".equals(request.getRequestURI())) {
 
 			if ("POST".equalsIgnoreCase(request.getMethod())) {
 				doPost(request, response);
 			}
 		}
-		if ("/BookMyGame/admin/booking".equals(request.getRequestURI())) {
+		if ("/BookMyGame/admin-booking-customer".equals(request.getRequestURI())) {
 
-			if ("PUT".equalsIgnoreCase(request.getMethod())) {
-				doPut(request, response);
-			}
+			int customerId = Integer.parseInt(request.getParameter("searchmemberid"));
+			request.setAttribute("selectedMemberId", customerId);
+			request.setAttribute("customerBookings", services.getAllBookingsOnCustomer(customerId));
+			request.getRequestDispatcher("adminCustomerBookings.jsp").forward(request, response);
+		}
+		if ("/BookMyGame/admin-booking-center".equals(request.getRequestURI())) {
+			int centerId = Integer.parseInt(request.getParameter("searchcenterid"));
+			request.setAttribute("selectedCenterId", centerId);
+			request.setAttribute("centerBookings", services.getAllBookingsOnSportCenter(centerId));
+			request.getRequestDispatcher("adminCenterBookings.jsp").forward(request, response);
 		}
 	}
 }

@@ -39,8 +39,8 @@ public class SportCenterOwnerServicesImpl implements SportCenterOwnerServices {
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		SportCenter sc = null;
 		try {
-			TypedQuery<SportCenter> query = em.createNamedQuery(
-					"select sc from SportCenter sc where sc.sportCenterEmailId =: emailId and sc.password =: password", SportCenter.class);
+			TypedQuery<SportCenter> query = em.createQuery(
+					"select sc from SportCenter sc where sc.sportCenterEmailId = :emailId and sc.password = :password", SportCenter.class);
 			query.setParameter("emailId", userName);
 			query.setParameter("password", password);
 			sc = query.getSingleResult();
@@ -57,7 +57,7 @@ public class SportCenterOwnerServicesImpl implements SportCenterOwnerServices {
 		em.getTransaction().begin();
 		try {
 			
-			em.persist(center);
+			em.merge(center);
 			em.getTransaction().commit();
 
 		} catch (Exception exe) {
@@ -73,8 +73,8 @@ public class SportCenterOwnerServicesImpl implements SportCenterOwnerServices {
 		List<GameBooking> gameBookings = new ArrayList<>();
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
-			TypedQuery<GameBooking> query = em.createNamedQuery(
-					"select gb from GameBooking gb where gb.sportCenter.sportCenterId =: sportCenterId and gb.dateOfBooking =: date and gb.sportName =: gameName", GameBooking.class);
+			TypedQuery<GameBooking> query = em.createQuery(
+					"select gb from GameBooking gb where gb.sportCenter.sportCenterId = :sportCenterId and gb.dateOfBooking = :date and gb.sportName = :gameName", GameBooking.class);
 			query.setParameter("sportCenterId", sportCenterId);
 			query.setParameter("date", date);
 			query.setParameter("gameName", gameName);
@@ -92,8 +92,8 @@ public class SportCenterOwnerServicesImpl implements SportCenterOwnerServices {
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		SportCenter sc = new SportCenter();
 		try {
-			TypedQuery<SportCenter> query = em.createNamedQuery(
-					"select sc from SportCenter sc where sc.sportCenterId =: sportCenterId", SportCenter.class);
+			TypedQuery<SportCenter> query = em.createQuery(
+					"select sc from SportCenter sc where sc.sportCenterId =:sportCenterId", SportCenter.class);
 			query.setParameter("sportCenterId", sportCenterId);
 			sc = query.getSingleResult();
 		} catch (Exception exe) {
@@ -109,20 +109,20 @@ public class SportCenterOwnerServicesImpl implements SportCenterOwnerServices {
 		
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
-			TypedQuery<SportCenter> query = em.createNamedQuery(
-					"select sc from SportCenter sc where sc.sportCenterId =: sportCenterId",
+			TypedQuery<SportCenter> query = em.createQuery(
+					"select sc from SportCenter sc where sc.sportCenterId = :sportCenterId",
 					SportCenter.class);
 			query.setParameter("sportCenterId", sportCenterId);
 			SportCenter center = query.getSingleResult();
 			provToCountMap.put("gamesCount", center.getSports().size());
 
 
-			TypedQuery<Integer> bookQuery = em.createNamedQuery("select count(booking) from GameBooking booking where booking.sportCenter =: sportCenterId", Integer.class);
+			TypedQuery<Long> bookQuery = em.createQuery("select count(booking) from GameBooking booking where booking.sportCenterId =:sportCenterId", Long.class);
 			bookQuery.setParameter("sportCenterId", sportCenterId);
 			provToCountMap.put("booking", bookQuery.getSingleResult());
 			
-			TypedQuery<Announcement> annoQuery = em.createNamedQuery(
-					"select anno from Announcement anno where anno.announcementType =: announcementType",
+			TypedQuery<Announcement> annoQuery = em.createQuery(
+					"select anno from Announcement anno where anno.announcementType =:announcementType",
 					Announcement.class);
 			annoQuery.setParameter("announcementType", AnnouncementType.OWNER);
 			List<Announcement> announcements = annoQuery.getResultList();

@@ -23,7 +23,11 @@ List<Announcement> annoucs = services.getAllAnnoucements();
 
 							<table class="table table-borderless" style="color: white;">
 								<tbody>
-									<% for(Announcement ann: annoucs) { %>
+									<% for(Announcement ann: annoucs) {
+										if(ann.getAnnouncementType().ordinal() == 2 || ann.getAnnouncementType().ordinal() == 0) {
+											continue;
+										}
+										%>
 									<tr>
 										<td style="text-align: left;"><%=ann.getMessageDate() %></td>
 										<td style="text-align: left;"><%=ann.getMessage() %></td>

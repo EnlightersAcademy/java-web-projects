@@ -68,6 +68,7 @@
 					<th>No of tables/courts</th>
 					<th>Date</th>
 					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -87,14 +88,13 @@
 							class="form-control-plaintext" name="count"
 							value="<%=sport.getCourtOrBoardNames().size()%>"></td>
 						<td><input type="date" name="gameDate"> <input
-							type="text" hidden name="centerId" value=<%=selectedCenterId%>>
+							type="hidden" name="centerId" value=<%=selectedCenterId%>>
 						</td>
 						<td>
 							<!-- Populate the courts HREF--> <select name="court">
-								<option>Court1</option>
-								<option>Court2</option>
-								<option>Court3</option>
-								<option>Court4</option>
+							<% for(String courtName : sport.getCourtOrBoardNames())  {%>
+								<option><%=courtName %></option>
+								<%} %>
 						</select>
 						</td>
 						<td><input type="hidden" name="selectedCenter"

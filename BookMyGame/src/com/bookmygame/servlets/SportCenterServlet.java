@@ -16,7 +16,7 @@ import com.bookmygame.pojo.SportCenter;
 import com.bookmygame.services.SportCenterOwnerServices;
 import com.bookmygame.services.impl.SportCenterOwnerServicesImpl;
 
-@WebServlet({ "/center/register", "/center/login", "/center/sports" , "/center/update/sports"})
+@WebServlet({ "/center-register", "/center-login", "/center-sports" , "/center-update-sports", "/center-update"})
 public class SportCenterServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,7 +37,7 @@ public class SportCenterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		SportCenterOwnerServices services = new SportCenterOwnerServicesImpl();
 
-		if ("/BookMyGame/center/register".equals(request.getRequestURI())) {
+		if ("/BookMyGame/center-register".equals(request.getRequestURI())) {
 
 			SportCenter sc = new SportCenter();
 			sc.setName(request.getParameter("name"));
@@ -47,12 +47,14 @@ public class SportCenterServlet extends HttpServlet {
 			sc.setFourWheelerParkingAvailability(request.getParameter("fourwheeleravailable"));
 			sc.setIdentificationId(request.getParameter("ownerid"));
 			sc.setAddress(request.getParameter("address"));
+			sc.setPassword((request.getParameter("password")));
 			Location loc = new Location();
 			loc.setLocationName(request.getParameter("location"));
 			sc.setLocation(loc);
 			sc.setOwnerEmailId(request.getParameter("owneremail"));
 			sc.setOwnerName(request.getParameter("ownername"));
 			sc.setPhoneNo(request.getParameter("ownerphone"));
+			sc.setIsActive(1);
 			try {
 				services.registerSportCenter(sc);
 				request.getRequestDispatcher("centerLogin.jsp?regRequest=success").forward(request, response);
@@ -63,7 +65,7 @@ public class SportCenterServlet extends HttpServlet {
 			}
 		}
 		
-		if("/BookMyGame/center/login".equals(request.getRequestURI())) {
+		if("/BookMyGame/center-login".equals(request.getRequestURI())) {
 			String userName = request.getParameter("email");
 			String password = request.getParameter("password");
 			SportCenter center = services.loginSportCenter(userName, password);
@@ -77,7 +79,7 @@ public class SportCenterServlet extends HttpServlet {
 			}
 		}
 		
-		if("/center/update/sports".equals(request.getRequestURI())) {
+		if("/BookMyGame/center-update-sports".equals(request.getRequestURI())) {
 			String sportName = request.getParameter("gamename");
 			String sportImage = request.getParameter("gameimage");
 			String courts = request.getParameter("NoOfCourts");
@@ -93,7 +95,40 @@ public class SportCenterServlet extends HttpServlet {
 			newSport.setCourtOrBoardNames(Arrays.asList(courts.split(",")));
 			
 			center.getSports().add(newSport);
-			request.getRequestDispatcher("centerAddGame.jsp?result=success").forward(request, response);
+			try {
+				services.updateSportCenterDetails(center);
+				request.getRequestDispatcher("centerAddGame.jsp?result=success").forward(request, response);
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				request.getRequestDispatcher("centerAddGame.jsp?result=fail").forward(request, response);
+			}
+		}
+		
+		if("/BookMyGame/center-update".equals(request.getRequestURI())) {
+			
+			int centerId = (Integer) request.getSession().getAttribute("centerId");
+			SportCenter sc = services.getSportCenterById(centerId);
+			
+			sc.setSportCenterEmailId(request.getParameter("email"));
+			sc.setSportCenterPhNo(Long.parseLong(request.getParameter("phone")));
+			sc.setTwoWheelerparkingAvailability(request.getParameter("twowheeleravailable"));
+			sc.setFourWheelerParkingAvailability(request.getParameter("fourwheeleravailable"));
+			sc.setIdentificationId(request.getParameter("ownerid"));
+			sc.setAddress(request.getParameter("address"));
+			sc.setPassword(request.getParameter("password"));
+			sc.setOwnerEmailId(request.getParameter("owneremail"));
+			sc.setOwnerName(request.getParameter("ownername"));
+			sc.setPhoneNo(request.getParameter("ownerphone"));
+			try {
+				services.updateSportCenterDetails(sc);
+				request.getRequestDispatcher("centerAccount.jsp?result=success").forward(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				request.getRequestDispatcher("centerAccount.jsp?result=fail").forward(request, response);
+			}
 		}
 
 	}

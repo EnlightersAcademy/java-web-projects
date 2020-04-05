@@ -24,7 +24,7 @@ public class AdminServicesImpl implements AdminServices {
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
 
-			TypedQuery<Customer> query = em.createNamedQuery("select cus from Customer cus", Customer.class);
+			TypedQuery<Customer> query = em.createQuery("select cus from Customer cus", Customer.class);
 			customers = query.getResultList();
 
 		} catch (Exception exe) {
@@ -39,7 +39,7 @@ public class AdminServicesImpl implements AdminServices {
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		em.getTransaction().begin();
 		try {
-			Query query = em.createQuery("update Customer set cus.isActive = 0 where cus.id =: customerId");
+			Query query = em.createQuery("update Customer set cus.isActive = 0 where cus.id = :customerId");
 			query.setParameter("customerId", customerId);
 			query.executeUpdate();
 			em.getTransaction().commit();
@@ -57,8 +57,8 @@ public class AdminServicesImpl implements AdminServices {
 		List<GameBooking> gameBookings = new ArrayList<>();
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
-			TypedQuery<GameBooking> query = em.createNamedQuery(
-					"select gb from GameBooking gb where gb.customer.id =: customerId", GameBooking.class);
+			TypedQuery<GameBooking> query = em.createQuery(
+					"select gb from GameBooking gb where gb.customer.id = :customerId", GameBooking.class);
 			query.setParameter("customerId", customerId);
 			gameBookings = query.getResultList();
 
@@ -75,8 +75,8 @@ public class AdminServicesImpl implements AdminServices {
 		List<GameBooking> gameBookings = new ArrayList<>();
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
-			TypedQuery<GameBooking> query = em.createNamedQuery(
-					"select gb from GameBooking gb where gb.sportCenter.sportCenterId =: sportCenter",
+			TypedQuery<GameBooking> query = em.createQuery(
+					"select gb from GameBooking gb where gb.sportCenter.sportCenterId = :sportCenter",
 					GameBooking.class);
 			query.setParameter("sportCenter", sportCenter);
 			gameBookings = query.getResultList();
@@ -116,8 +116,10 @@ public class AdminServicesImpl implements AdminServices {
 		SportCenter spCenter = em.find(SportCenter.class, sportCenterId);
 		try {
 			if (!rejectedOnly) {
+				spCenter.setIsActive(1);
 				spCenter.setIsApproved(1);
 			} else {
+				spCenter.setIsActive(0);
 				spCenter.setIsApproved(2);
 
 			}
@@ -138,8 +140,8 @@ public class AdminServicesImpl implements AdminServices {
 		List<SportCenter> sportCenters = new ArrayList<>();
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
-			TypedQuery<SportCenter> query = em.createNamedQuery(
-					"select sc from SportCenter sc where sc.isApproved =: approved and sc.isActive =: active",
+			TypedQuery<SportCenter> query = em.createQuery(
+					"select sc from SportCenter sc where sc.isApproved = :approved and sc.isActive = :active",
 					SportCenter.class);
 			query.setParameter("approved", 1);
 			query.setParameter("active", 1);
@@ -157,7 +159,7 @@ public class AdminServicesImpl implements AdminServices {
 		List<SportCenter> sportCenters = new ArrayList<>();
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
-			TypedQuery<SportCenter> query = em.createNamedQuery("select sc from SportCenter sc", SportCenter.class);
+			TypedQuery<SportCenter> query = em.createQuery("select sc from SportCenter sc", SportCenter.class);
 			sportCenters = query.getResultList();
 
 		} catch (Exception exe) {
@@ -172,8 +174,8 @@ public class AdminServicesImpl implements AdminServices {
 		List<SportCenter> sportCenters = new ArrayList<>();
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
-			TypedQuery<SportCenter> query = em.createNamedQuery(
-					"select sc from SportCenter sc where sc.isApproved =: approved", SportCenter.class);
+			TypedQuery<SportCenter> query = em.createQuery(
+					"select sc from SportCenter sc where sc.isApproved =:approved", SportCenter.class);
 			query.setParameter("approved", 0);
 			sportCenters = query.getResultList();
 
@@ -209,20 +211,24 @@ public class AdminServicesImpl implements AdminServices {
 
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
-			TypedQuery<Integer> query = em.createNamedQuery(
-					"select count(sc) from SportCenter sc where sc.isApproved =: approved and sc.isActive =: active",
-					Integer.class);
+			TypedQuery<SportCenter> query = em.createQuery(
+					"select sc from SportCenter sc where sc.isApproved = :approved and sc.isActive = :active",
+					SportCenter.class);
 			query.setParameter("approved", 1);
 			query.setParameter("active", 1);
-			provToCountMap.put("sportCenter", query.getSingleResult());
+			List<SportCenter> centers = query.getResultList();
+			provToCountMap.put("sportCenter", centers.size());
 
-			query = em.createNamedQuery("select count(cus) from Customer cus where cus.isActive =: active",
-					Integer.class);
-			query.setParameter("active", 1);
-			provToCountMap.put("customer", query.getSingleResult());
+			TypedQuery<Customer> customerQuery = em
+					.createQuery("select cus from Customer cus where cus.isActive = :active", Customer.class);
+			customerQuery.setParameter("active", 1);
+			List<Customer> customers = customerQuery.getResultList();
+			provToCountMap.put("customer", customers.size());
 
-			query = em.createNamedQuery("select count(booking) from GameBooking booking", Integer.class);
-			provToCountMap.put("booking", query.getSingleResult());
+			TypedQuery<GameBooking> bookingQuery = em.createQuery("select booking from GameBooking booking",
+					GameBooking.class);
+			List<GameBooking> bookings = bookingQuery.getResultList();
+			provToCountMap.put("booking", bookings.size());
 
 		} catch (Exception exe) {
 			exe.printStackTrace();
@@ -231,13 +237,13 @@ public class AdminServicesImpl implements AdminServices {
 		}
 		return provToCountMap;
 	}
-	
+
 	public List<SportCenter> getAllRejectedSportCenters() {
 		List<SportCenter> sportCenters = new ArrayList<>();
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
-			TypedQuery<SportCenter> query = em.createNamedQuery(
-					"select sc from SportCenter sc where sc.isApproved =: approved", SportCenter.class);
+			TypedQuery<SportCenter> query = em.createQuery(
+					"select sc from SportCenter sc where sc.isApproved = :approved", SportCenter.class);
 			query.setParameter("approved", 2);
 			sportCenters = query.getResultList();
 
@@ -248,6 +254,5 @@ public class AdminServicesImpl implements AdminServices {
 		}
 		return sportCenters;
 	}
-
 
 }

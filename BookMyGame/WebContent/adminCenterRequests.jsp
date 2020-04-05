@@ -10,11 +10,11 @@
 	<br /> <br />
 
 	<%
-				String result = request.getParameter("request");
+				String result = request.getParameter("result");
 				if(request != null) {
 					if("fail".equals(result)) {
 						out.println("<script>alert('Attempt to approve/reject the sport center failed. Please try again')</script>");
-					} else {
+					} else if("success".equals(result)) {
 						out.println("<script>alert('Sport Center approved/rejected successfully!')</script>");
 					}
 				}
@@ -33,6 +33,7 @@
 					<th>Phone</th>
 					<th>Owner Name</th>
 					<th>Owner Id</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -52,10 +53,10 @@
 
 					<td>
 						<!-- Populate the Member ID into this field --> <a
-						class="btn btn-success btn-sm" href="admin/center?toApprove=true&id=<%= center.getSportCenterId()	 %>">
+						class="btn btn-success btn-sm" href="admin-center?toApprove=true&id=<%= center.getSportCenterId()	 %>">
 							<i class="fa fa-thumbs-up"></i> Approve
 					</a> <a class="btn btn-danger btn-sm"
-						href="admin/center?toApprove=false&id=<%= center.getSportCenterId() %>"> <i class="fa fa-ban"></i>
+						href="admin-center?toApprove=false&id=<%= center.getSportCenterId() %>"> <i class="fa fa-ban"></i>
 							Reject
 					</a>
 					</td>

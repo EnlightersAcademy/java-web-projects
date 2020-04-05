@@ -46,18 +46,18 @@ body {
 </style>
 
 <%
-				String result = request.getParameter("request");
-				if(request != null) {
+				String result = request.getParameter("result");
+				if(result != null) {
 					if("fail".equals(result)) {
 						out.println("<script>alert('Login Failed due to invalid credentials. Please try again')</script>");
 					}
 				}
 				
 				String regRequest = request.getParameter("regRequest");
-				if(request != null) {
-					if("fail".equals(result)) {
+				if(regRequest != null) {
+					if("fail".equals(regRequest)) {
 						out.println("<script>alert('Sport Center registration Failed. Please try again')</script>");
-					} else {
+					} else if("success".equals(regRequest)) {
 						out.println("<script>alert('Sport Center registered successfully!')</script>");
 					}
 				}
@@ -82,7 +82,7 @@ body {
 							</a>
 						</div>
 						<div class="login-form">
-							<form action="center/login" method="post">
+							<form action="center-login" method="post">
 								<div class="form-group">
 									<label>Sports Center Email Address</label> <input
 										class="au-input au-input--full" type="email" name="email"

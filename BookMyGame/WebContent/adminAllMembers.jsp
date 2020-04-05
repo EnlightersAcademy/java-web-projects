@@ -21,29 +21,36 @@
 					<th>Email</th>
 					<th>Phone</th>
 					<th>Status</th>
+					<th></th>
 				</tr>
 			</thead>
 			<%
-			AdminServices services = new AdminServicesImpl();
-			List<Customer> customers = services.getAllCustomerDetails();
-			for(Customer c: customers) {
-		%>
+				AdminServices services = new AdminServicesImpl();
+				List<Customer> customers = services.getAllCustomerDetails();
+				for (Customer c : customers) {
+			%>
 			<tbody>
-				<tr data-toggle="collapse" data-target="#<%=c.getId() %>"
+				<tr data-toggle="collapse" data-target="#<%=c.getId()%>"
 					class="clickable">
-					<td><%= c.getId()%></td>
-					<td><%= c.getName()%></td>
-					<td><%= c.getSex()%></td>
+					<td><%=c.getId()%></td>
+					<td><%=c.getName()%></td>
+					<td><%=c.getSex()%></td>
 
 
-					<td><%= c.getEmailId()%></td>
-					<td><%= c.getPhoneNo()%></td>
-					<%if(c.getIsActive() == 0) { %>
+					<td><%=c.getEmailId()%></td>
+					<td><%=c.getPhoneNo()%></td>
+					<%
+						if (c.getIsActive() == 0) {
+					%>
 					<!-- Use class="denied" for making it GREEN -->
 					<td class="denied">Disabled</td>
-					<% } else {%>
+					<%
+						} else {
+					%>
 					<td class="process">Active</td>
-					<% } %>
+					<%
+						}
+					%>
 					<td>
 						<button class="btn btn-default btn-sm">
 							<i class="fa fa-arrow-down"></i> More Details
@@ -52,26 +59,31 @@
 				</tr>
 				<tr>
 					<td colspan="6">
-						<div id="<%=c.getId() %>" class="collapse">
-							<table class="table">
+						<div id="<%=c.getId()%>" class="collapse"margin:auto;>
+							<table class="table table-borderless table-data3">
+								<thead style="background-color:gray;">
+									<tr>
+										<th>Identification Id</th>
+										<th>Address</th>
+										<th>Location</th>
 
-								<tr>
-									<th>Identification Id</th>
-									<th>Address</th>
-									<th>Location</th>
-	
-								</tr>
-								<tr>
-									<td><%=c.getIdentificationId()%></td>
-									<td><%=c.getAddress()%></td>
-									<td><%=c.getLocation() %></td>
-								</tr>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><%=c.getIdentificationId()%></td>
+										<td><%=c.getAddress()%></td>
+										<td><%=c.getLocation()%></td>
+									</tr>
+								</tbody>
 							</table>
 						</div>
 					</td>
 				</tr>
 			</tbody>
-			<%} %>
+			<%
+				}
+			%>
 		</table>
 	</div>
 	<!-- END DATA TABLE-->

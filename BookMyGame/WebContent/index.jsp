@@ -36,7 +36,7 @@
         }
     </style>
 <%
-String result = request.getParameter("request");
+String result = request.getParameter("result");
 if(request != null) {
 	if("fail".equals(result)) {
 		out.println("<script>alert('Login Failed due to invalid credentials. Please try again')</script>");
@@ -44,10 +44,10 @@ if(request != null) {
 }
 
 String regRequest = request.getParameter("regRequest");
-if(request != null) {
-	if("fail".equals(result)) {
+if(regRequest != null) {
+	if("fail".equals(regRequest)) {
 		out.println("<script>alert('Customer registration Failed. Please try again')</script>");
-	} else if("success".equals(result)){
+	} else if("success".equals(regRequest)){
 		out.println("<script>alert('Customer registered successfully!')</script>");
 	}
 }

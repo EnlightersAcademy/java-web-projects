@@ -43,7 +43,8 @@
 	                                </div>
 	                                <div class="form-group">
 	                                    <label>Address</label>
-	                                    <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" required value =<%=customer.getAddress() %> placeholder="Complete Address"></textarea>
+	                                    <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" placeholder="Address"><%=customer.getAddress()%></textarea>
+	                                    
 	                                </div>
 	                                <div class="form-group">
 	                                    <label>Location</label>
