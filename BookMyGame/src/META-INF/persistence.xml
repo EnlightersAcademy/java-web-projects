@@ -20,6 +20,7 @@
 			
 			<!-- Pretty print the SQL in the log file and console -->
 			<property name="hibernate.format_sql" value="true" />
+			<property name="packagesToScan" value="com.bookmygame.pojo" />
 		</properties>
 
 	</persistence-unit>
