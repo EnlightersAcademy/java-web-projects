@@ -16,7 +16,7 @@ import com.bookmygame.pojo.SportCenter;
 import com.bookmygame.services.SportCenterOwnerServices;
 import com.bookmygame.services.impl.SportCenterOwnerServicesImpl;
 
-@WebServlet({ "/center-register", "/center-login", "/center-sports" , "/center-update-sports", "/center-update"})
+@WebServlet({ "/center-register", "/center-login", "/center-sports", "/center-update-sports", "/center-update" })
 public class SportCenterServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,8 +48,10 @@ public class SportCenterServlet extends HttpServlet {
 			sc.setIdentificationId(request.getParameter("ownerid"));
 			sc.setAddress(request.getParameter("address"));
 			sc.setPassword((request.getParameter("password")));
-			Location loc = new Location();
-			loc.setLocationName(request.getParameter("location"));
+			Location loc = services.getLocationByName(request.getParameter("location"));
+			if (loc.getLocationId() <= 0) {
+				loc.setLocationName(request.getParameter("location"));
+			}
 			sc.setLocation(loc);
 			sc.setOwnerEmailId(request.getParameter("owneremail"));
 			sc.setOwnerName(request.getParameter("ownername"));
@@ -64,36 +66,38 @@ public class SportCenterServlet extends HttpServlet {
 				request.getRequestDispatcher("centerLogin.jsp?regRequest=fail").forward(request, response);
 			}
 		}
-		
-		if("/BookMyGame/center-login".equals(request.getRequestURI())) {
+
+		if ("/BookMyGame/center-login".equals(request.getRequestURI())) {
 			String userName = request.getParameter("email");
 			String password = request.getParameter("password");
 			SportCenter center = services.loginSportCenter(userName, password);
-			if(center == null) {
+			if (center == null) {
 				request.getRequestDispatcher("centerLogin.jsp?result=fail").forward(request, response);
 			} else {
 				HttpSession session = request.getSession();
 				session.setAttribute("centerId", center.getSportCenterId());
 				request.getRequestDispatcher("centerHome.jsp").forward(request, response);
-				
+
 			}
 		}
-		
-		if("/BookMyGame/center-update-sports".equals(request.getRequestURI())) {
+
+		if ("/BookMyGame/center-update-sports".equals(request.getRequestURI())) {
 			String sportName = request.getParameter("gamename");
 			String sportImage = request.getParameter("gameimage");
 			String courts = request.getParameter("NoOfCourts");
-			
-			int sportCenterId = request.getSession().getAttribute("centerId") != null ? (Integer)request.getSession().getAttribute("centerId"): -1;
-			if(sportCenterId < 0 ){
+
+			int sportCenterId = request.getSession().getAttribute("centerId") != null
+					? (Integer) request.getSession().getAttribute("centerId")
+					: -1;
+			if (sportCenterId < 0) {
 				response.sendRedirect("centerLogin.jsp?sessionExpired=true");
 			}
-    		SportCenter center = services.getSportCenterById(sportCenterId);
-    		Sport newSport = new Sport();
+			SportCenter center = services.getSportCenterById(sportCenterId);
+			Sport newSport = new Sport();
 			newSport.setName(sportName);
 			newSport.setImage(sportImage);
 			newSport.setCourtOrBoardNames(Arrays.asList(courts.split(",")));
-			
+
 			center.getSports().add(newSport);
 			try {
 				services.updateSportCenterDetails(center);
@@ -105,12 +109,12 @@ public class SportCenterServlet extends HttpServlet {
 				request.getRequestDispatcher("centerAddGame.jsp?result=fail").forward(request, response);
 			}
 		}
-		
-		if("/BookMyGame/center-update".equals(request.getRequestURI())) {
-			
+
+		if ("/BookMyGame/center-update".equals(request.getRequestURI())) {
+
 			int centerId = (Integer) request.getSession().getAttribute("centerId");
 			SportCenter sc = services.getSportCenterById(centerId);
-			
+
 			sc.setSportCenterEmailId(request.getParameter("email"));
 			sc.setSportCenterPhNo(Long.parseLong(request.getParameter("phone")));
 			sc.setTwoWheelerparkingAvailability(request.getParameter("twowheeleravailable"));

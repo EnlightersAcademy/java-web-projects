@@ -12,6 +12,7 @@ import com.bookmygame.hibernate.JPAUtil;
 import com.bookmygame.pojo.Announcement;
 import com.bookmygame.pojo.Customer;
 import com.bookmygame.pojo.GameBooking;
+import com.bookmygame.pojo.Location;
 import com.bookmygame.pojo.SportCenter;
 import com.bookmygame.pojo.enums.AnnouncementType;
 import com.bookmygame.services.SportCenterOwnerServices;
@@ -23,7 +24,7 @@ public class SportCenterOwnerServicesImpl implements SportCenterOwnerServices {
 		em.getTransaction().begin();
 		try {
 			
-			em.persist(center);
+			em.merge(center);
 			em.getTransaction().commit();
 
 		} catch (Exception exe) {
@@ -133,6 +134,22 @@ public class SportCenterOwnerServicesImpl implements SportCenterOwnerServices {
 			em.close();
 		}
 		return provToCountMap;
+	}
+	
+	public Location getLocationByName(String name) {
+		EntityManager em = JPAUtil.getEMF().createEntityManager();
+		Location lc = new Location();
+		try {
+			TypedQuery<Location> query = em.createQuery(
+					"select loc from Location loc where loc.locationName =:name", Location.class);
+			query.setParameter("name", name);
+			lc = query.getSingleResult();
+		} catch (Exception exe) {
+			exe.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return lc;
 	}
 	
 }

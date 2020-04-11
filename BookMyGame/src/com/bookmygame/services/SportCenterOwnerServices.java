@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bookmygame.pojo.GameBooking;
+import com.bookmygame.pojo.Location;
 import com.bookmygame.pojo.SportCenter;
 
 public interface SportCenterOwnerServices {
@@ -19,4 +20,6 @@ public interface SportCenterOwnerServices {
 	public SportCenter getSportCenterById(int sportCenterId);
 		
 	public Map<String, Object> getProvisionToActiveCountMap(int sportCenterId);
+	
+	public Location getLocationByName(String name) ;
 }
