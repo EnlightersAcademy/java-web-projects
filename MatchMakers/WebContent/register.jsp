@@ -78,7 +78,7 @@
                                 <h4 style="color: #757575;">New User</h4>
                         </div>
                         <div class="login-form">
-                            <form action="" method="post">
+                            <form action="customer-register" method="post">
                                 <div class="form-group">
                                     <label>Name</label>
                                     <input class="au-input au-input--full" type="text" name="name" placeholder="Name">
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Phone</label>
-                                    <input class="au-input au-input--full" type="text" name="phone" placeholder="Phone Number">
+                                    <input class="au-input au-input--full" type="text" name="phone" placeholder="Phone Number"/>
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
