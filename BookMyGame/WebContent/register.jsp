@@ -72,8 +72,7 @@
                                 </div>
                                 <div class="form-group" style="align-content: left;">
                                     <label>Address</label>
-                                    <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" required placeholder="Complete Address">
-                                    </textarea>
+                                    <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" required placeholder="Complete Address"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Location</label>

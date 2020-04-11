@@ -11,13 +11,14 @@
 
 
 <!-- PAGE CONTENT-->
-<div class="page-container3" style="height: 100%">
+<div class="page-content--bgf7" style="height: 100%">
 
-	<br /> <br />
+	<br />
+	<br />
 
 	<!-- DATA TABLE-->
 	<div class="table-responsive m-b-55" style="width: 95%; margin: auto;">
-		<table class="table table-borderless table-striped">
+		<table class="table table-borderless table-data3">
 			<thead>
 				<tr>
 					<th>ID</th>

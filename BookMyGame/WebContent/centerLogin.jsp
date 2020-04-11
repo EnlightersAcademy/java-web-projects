@@ -40,7 +40,7 @@
 
 <style>
 body {
-	background: url("images/mainbg.jpg") center no-repeat;
+	background: url("images/mainbg.jpg") no-repeat;
 	background-size: cover;
 }
 </style>
