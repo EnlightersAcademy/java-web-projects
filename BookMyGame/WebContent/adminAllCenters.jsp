@@ -29,6 +29,7 @@
 					<th>Available Sports</th>
 					<th>Center Address</th>
 					<th>Active status</th>
+					<th></th>
 				</tr>
 			</thead>
 			<%
@@ -79,7 +80,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="6">
+					<td colspan="9">
 						<div id="<%=sp.getSportCenterId()%>" class="collapse">
 							<table class="table">
 

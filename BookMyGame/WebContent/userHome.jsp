@@ -15,7 +15,7 @@ List<Announcement> annoucs = services.getAllAnnoucements();
 	<section class="statistic statistic2">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12 col-lg-6">
+				<div class="col-md-12 col-lg-12">
 					<div class="statistic__item statistic__item--green">
 						<h2 class="number">ANNOUNCEMENTS</h2>
 						<br />
@@ -29,7 +29,7 @@ List<Announcement> annoucs = services.getAllAnnoucements();
 										}
 										%>
 									<tr>
-										<td style="text-align: left;"><%=ann.getMessageDate() %></td>
+										<td style="text-align: left; color: #D6DBDF;"><%=ann.getMessageDate() %></td>
 										<td style="text-align: left;"><%=ann.getMessage() %></td>
 									</tr>
 
