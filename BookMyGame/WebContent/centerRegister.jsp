@@ -61,8 +61,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" required placeholder="Complete Address">
-                                    </textarea>
+                                    <textarea class="au-input au-input--full" rows="2" cols="50"  name="address" required placeholder="Complete Address"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Center Email ID</label>

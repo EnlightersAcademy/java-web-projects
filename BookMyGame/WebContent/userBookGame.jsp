@@ -72,7 +72,6 @@
 	<br />
 
 	<!-- BELOW SECTION SHOULD BE VISIBLE ONLY AFTER SEARCH! -->
-
 	<div style="width: 90%; margin: auto; text-align: center;">
 		<div class="form-group row">
 			<label class="col-sm-2 col-form-label" style="font-weight: bold;">LOCATION:
@@ -81,7 +80,7 @@
 				<!-- Populate the Selected Location HERE -->
 				<input type="text" readonly class="form-control-plaintext"
 					name="selectedLocation"
-					value="<%= request.getAttribute("locationName") %>">
+					value="<%= request.getAttribute("locationName")!= null?(String)request.getAttribute("locationName"):"" %>">
 			</div>
 		</div>
 	</div>
