@@ -63,11 +63,25 @@
 
 					<%
 						if (sp.getIsActive() == 0) {
+							if(sp.getIsApproved() == 0) {
 					%>
 					<!-- Use class="denied" for making it GREEN -->
-					<td class="denied">Disabled</td>
+					<td class="denied">Not Approved</td>
 					<%
-						} else {
+						
+							} else if (sp.getIsApproved() == 2) {
+								%>
+								<!-- Use class="denied" for making it GREEN -->
+								<td class="denied">Rejected</td>
+								<%
+							}
+							else {
+								%>
+								<!-- Use class="denied" for making it GREEN -->
+								<td class="denied">Disabled</td>
+								<%
+							}
+							} else {
 					%>
 					<td class="process">Active</td>
 					<%
