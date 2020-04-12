@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="com.bookmygame.pojo.Customer"%>
+<%@page import="com.bookmygame.services.impl.CustomerServicesImpl"%>
+<%@page import="com.bookmygame.services.CustomerServices"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +41,16 @@
 </head>
 
 <body class="animsition">
+	<%
+            int customerId = (Integer)request.getSession().getAttribute("customerId");
+            CustomerServices services = new CustomerServicesImpl();
+            Customer customer = services.getCustomerById(customerId);
+            if(customer == null) {
+            	response.sendRedirect("index.jsp?sessionExpired=true");
+            }
+            
+            String customerName = customer.getName();
+         %>
     <div class="page-wrapper">
         <!-- HEADER DESKTOP-->
         <header class="header-desktop3 d-none d-lg-block">
@@ -81,7 +94,7 @@
                                     <img src="images/icon/user.png" alt="User" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="#"><%= "User Name" %></a>	<!-- Populate the user name here -->
+                                    <a class="js-acc-btn" href="#"><%= customerName %> </a>	<!-- Populate the user name here -->
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
@@ -90,7 +103,7 @@
                                         </div>
                                         <div class="content">
                                             <h5 class="name" style="padding-top: 15px;">
-                                                <%= "User Name" %>	<!-- Populate the user name here -->
+                                                <%= customerName %>	<!-- Populate the user name here -->
                                             </h5>
                                         </div>
                                     </div>

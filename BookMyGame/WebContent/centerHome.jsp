@@ -65,7 +65,7 @@
 				                    			
 				                    %>
 				                        <tr>
-				                        	<td style="text-align: left;"><%=anno.getMessageDate().toString() %></td>
+				                        	<td style="text-align: left; color: #D6DBDF;"><%=anno.getMessageDate().toString() %></td>
 				                            <td style="text-align: left;"><%=anno.getMessage() %></td>
 				                        </tr>
 				                        <%}} %>

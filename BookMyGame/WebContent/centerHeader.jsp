@@ -1,5 +1,11 @@
+<%@page import="com.bookmygame.pojo.SportCenter"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.List"%>
+<%@page import="com.bookmygame.pojo.Announcement"%>
+<%@page import="java.util.Map"%>
+<%@page import="com.bookmygame.services.SportCenterOwnerServices"%>
+<%@page import="com.bookmygame.services.impl.SportCenterOwnerServicesImpl"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +44,22 @@
 </head>
 
 <body class="animsition">
+	
+	<%
+			int sportCenterId = request.getSession().getAttribute("centerId") != null ? (Integer)request.getSession().getAttribute("centerId"): -1;
+			if(sportCenterId < 0 ){
+				response.sendRedirect("centerLogin.jsp?sessionExpired=true");
+			}
+			
+			SportCenterOwnerServices services = new SportCenterOwnerServicesImpl();
+            SportCenter center = services.getSportCenterById(sportCenterId);
+            if(center == null) {
+            	response.sendRedirect("centerLogin.jsp?sessionExpired=true");
+            }
+            
+            String centerName = center.getName();
+         %>
+
     <div class="page-wrapper">
         <!-- HEADER DESKTOP-->
         <header class="header-desktop3 d-none d-lg-block">
@@ -101,7 +123,7 @@
                                     <img src="images/icon/center.png" alt="Admin" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="#">Sports Center</a>
+                                    <a class="js-acc-btn" href="#"><%= centerName %> </a>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
@@ -110,7 +132,7 @@
                                         </div>
                                         <div class="content">
                                             <h5 class="name" style="padding-top: 15px;">
-                                                <%= "Center Name" %>
+                                                <%= centerName %>
                                             </h5>
                                         </div>
                                     </div>

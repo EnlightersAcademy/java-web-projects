@@ -77,27 +77,26 @@
 				%>
 				<tr>
 					<form action="userBookGame2.jsp" method="post">
-						<td><img class="gameImage" src="images/games/"
-							+<%=sport.getImage()%>></td>
-						<td>
+						<td><img class="gameImage" src="images/games/<%=sport.getImage()%>"></td>
+						<td style="vertical-align: middle;">
 							<!-- Populate the game HREF--> <input type="text" readonly
 							class="form-control-plaintext" name="selectedGame"
 							value="<%=sport.getName()%>">
 						</td>
-						<td><input type="text" readonly
+						<td style="vertical-align: middle;"><input type="text" readonly
 							class="form-control-plaintext" name="count"
 							value="<%=sport.getCourtOrBoardNames().size()%>"></td>
-						<td><input type="date" name="gameDate"> <input
+						<td style="vertical-align: middle;"><input type="date" name="gameDate"> <input
 							type="hidden" name="centerId" value=<%=selectedCenterId%>>
 						</td>
-						<td>
+						<td style="vertical-align: middle;">
 							<!-- Populate the courts HREF--> <select name="court">
 							<% for(String courtName : sport.getCourtOrBoardNames())  {%>
 								<option><%=courtName %></option>
 								<%} %>
 						</select>
 						</td>
-						<td><input type="hidden" name="selectedCenter"
+						<td style="vertical-align: middle;"><input type="hidden" name="selectedCenter"
 							value="<%=selectedCenterId%>">
 							<button type="submit" class="btn btn-success mb-2">SELECT</button>
 						</td>

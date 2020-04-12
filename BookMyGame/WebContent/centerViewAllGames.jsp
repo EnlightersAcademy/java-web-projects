@@ -28,7 +28,6 @@
                 <table class="table table-borderless table-striped table-earning">
                     <thead>
                         <tr>
-                        	<th>Game ID</th>
                             <th>Image</th>
                             <th>Game Title</th>
                             <th>Available Courts/Boards/Lanes</th>
@@ -39,7 +38,6 @@
                     	for(Sport sport : sports) {
                     %>
                         <tr>
-                        	<td style="vertical-align: middle; text-align: center;"><%=sport.getId() %></td>
                             <td><img class="gameImage" src="images/games/<%=sport.getImage() %>"></td>
                             <td style="vertical-align: middle;"><%= sport.getName() %></td>
                             <td style="vertical-align: middle; text-align: center;"><%= sport.getCourtOrBoardNames().size() %></td>
