@@ -41,7 +41,7 @@ public class SportCenterOwnerServicesImpl implements SportCenterOwnerServices {
 		SportCenter sc = null;
 		try {
 			TypedQuery<SportCenter> query = em.createQuery(
-					"select sc from SportCenter sc where sc.sportCenterEmailId = :emailId and sc.password = :password and  sc.isApproved = 1", SportCenter.class);
+					"select sc from SportCenter sc where sc.sportCenterEmailId = :emailId and sc.password = :password and  sc.isApproved = 1 and sc.isActive = 1", SportCenter.class);
 			query.setParameter("emailId", userName);
 			query.setParameter("password", password);
 			sc = query.getSingleResult();

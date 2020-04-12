@@ -143,7 +143,7 @@ public class CustomerServicesImpl implements CustomerServices {
 		List<SportCenter> centers = new ArrayList<>();
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		try {
-			Query query = em.createQuery("from SportCenter sp where sp.location.locationName =:locationId",
+			Query query = em.createQuery("from SportCenter sp where sp.location.locationName =:locationId and sp.isActive = 1 and sp.isApproved= 1",
 					SportCenter.class);
 			query.setParameter("locationId", locationName);
 			centers = query.getResultList();

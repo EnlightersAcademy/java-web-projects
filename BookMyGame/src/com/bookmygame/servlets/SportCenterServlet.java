@@ -56,7 +56,7 @@ public class SportCenterServlet extends HttpServlet {
 			sc.setOwnerEmailId(request.getParameter("owneremail"));
 			sc.setOwnerName(request.getParameter("ownername"));
 			sc.setPhoneNo(request.getParameter("ownerphone"));
-			sc.setIsActive(1);
+
 			try {
 				services.registerSportCenter(sc);
 				request.getRequestDispatcher("centerLogin.jsp?regRequest=success").forward(request, response);
