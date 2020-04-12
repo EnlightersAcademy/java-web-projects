@@ -86,7 +86,7 @@
 						<td style="vertical-align: middle;"><input type="text" readonly
 							class="form-control-plaintext" name="count"
 							value="<%=sport.getCourtOrBoardNames().size()%>"></td>
-						<td style="vertical-align: middle;"><input type="date" name="gameDate"> <input
+						<td style="vertical-align: middle;"><input type="date" name="gameDate" required> <input
 							type="hidden" name="centerId" value=<%=selectedCenterId%>>
 						</td>
 						<td style="vertical-align: middle;">

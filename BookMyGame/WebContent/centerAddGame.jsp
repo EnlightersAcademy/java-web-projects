@@ -34,17 +34,17 @@
 		<form action="center-update-sports" method="post">
 			<div class="form-group">
 				<label>Sport Name</label> <input class="au-input au-input--full"
-					type="text" name="gamename" placeholder="Name Of Game">
+					type="text" name="gamename" placeholder="Name Of Game" required>
 			</div>
 			<div class="form-group">
 				<label>Image</label> <input type="file" name="gameimage"
-					class="form-control-file">
+					class="form-control-file" required>
 			</div>
 			<div class="form-group">
 				<label>Names of Courts/Boards/Lanes Available (Separate
 					using comma)</label> <input type="text" name="NoOfCourts"
 					class="au-input au-input--full"
-					placeholder="Names of Courts/Boards/Lanes">
+					placeholder="Names of Courts/Boards/Lanes" required>
 			</div>
 			<br />
 			<button type="submit"

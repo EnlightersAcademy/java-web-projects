@@ -27,7 +27,7 @@
 				<form action="admin-announcement?newAnno=true" method="post">
 			<div class="form-group">
 				<label>Content:</label>
-				<textarea class="form-control" name="content" rows="3"></textarea>
+				<textarea class="form-control" name="content" rows="3" required></textarea>
 				<input type="hidden" name="annou" value=<%=AnnouncementType.PLAYER.ordinal()%>></input>
 			</div>
 			<button type="submit"
