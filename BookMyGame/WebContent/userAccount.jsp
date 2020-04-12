@@ -31,7 +31,7 @@
 	                            <form action="customer-update" method="post">
 	                            	<div class="form-group">
 	                                    <label>Name</label>
-	                                    <input class="au-input au-input--full" type="text" name="name" readonly value=<%=customer.getName() %>>
+	                                    <input class="au-input au-input--full" type="text" name="name" readonly value="<%=customer.getName() %>">
 	                                </div>
 	                                <div class="form-group">
 	                                    <label>Date of Birth</label>
@@ -48,7 +48,7 @@
 	                                </div>
 	                                <div class="form-group">
 	                                    <label>Location</label>
-	                                    <input class="au-input au-input--full" type="text" name="location" required value =<%=customer.getLocation() %> placeholder="Location">
+	                                    <input class="au-input au-input--full" type="text" name="location" required value ="<%=customer.getLocation() %>" placeholder="Location">
 	                                </div>
 	                                <div class="form-group">
 	                                    <label>Email Address</label>

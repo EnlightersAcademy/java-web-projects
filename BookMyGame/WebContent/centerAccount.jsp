@@ -35,11 +35,11 @@
 			<form action="center-update" method="post">
 				<div class="form-group">
 					<label>Sports Center Name</label> <input
-						class="au-input au-input--full" type="text" name="name" readonly value=<%=center.getName() %>>
+						class="au-input au-input--full" type="text" name="name" readonly value="<%=center.getName() %>">
 				</div>
 				<div class="form-group">
 					<label>Location</label> <input class="au-input au-input--full"
-						type="text" name="location" readonly value=<%=center.getLocation().getLocationName() %>>
+						type="text" name="location" readonly value="<%=center.getLocation().getLocationName() %>">
 				</div>
 				<div class="form-group">
 					<label>Address</label>
@@ -84,7 +84,7 @@
 
 				<div class="form-group">
 					<label>Owner's Name</label> <input class="au-input au-input--full"
-						type="text" name="ownername" required placeholder="Owner's Name" value=<%=center.getOwnerName() %>>
+						type="text" name="ownername" required placeholder="Owner's Name" value="<%=center.getOwnerName() %>">
 				</div>
 				<div class="form-group">
 					<label>Owner's Email ID</label> <input
