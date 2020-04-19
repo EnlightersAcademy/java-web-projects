@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.jobsonclick.models.Candidate;
 import com.jobsonclick.models.Company;
 import com.jobsonclick.utils.HibernateUtils;
 
@@ -415,6 +416,33 @@ public class CompanyDao {
 	           return null;
 	        }
 		
+	}
+	
+	public boolean checkEmailExists(String email) {
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		  try {
+	          // start a transaction
+			  session.beginTransaction();
+	          
+			  Query query = session.createQuery("from Company where companyEmail=:companyEmail");
+			  query.setParameter("companyEmail", email);
+			  
+			  List<Company> companyList = query.getResultList();
+			  // commit transaction
+			  session.getTransaction().commit();
+	          session.close();
+	           
+			  if(companyList.size()==0)
+				  return false;
+			  else
+				  return true;
+	            
+	        } catch (Exception e) {
+	            session.getTransaction().rollback();
+	            e.printStackTrace();
+	            session.close();
+	            return false;
+	        }
 	}
 
 }

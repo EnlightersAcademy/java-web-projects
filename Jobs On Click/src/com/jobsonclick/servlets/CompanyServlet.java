@@ -138,13 +138,7 @@ public class CompanyServlet extends HttpServlet{
 		//View Applications
 		else if (request.getRequestURI().equalsIgnoreCase("/Jobs_On_Click/ViewApplications")) {
 			List<Jobs> jobsList= jobsDao.getAllActiveJobs(companyId);
-			
-			/*
-			for(Jobs job:jobsList) {
-				List<Application> applicationList = applicationDao.getApplicationsForJob(job.getJobId());
-				job.setApplications(applicationList);
-			}
-			*/ 
+
 			if(jobsList!=null) {
 			for(int i = 0; i< jobsList.size();i++) {
 				List<Application> applicationList = applicationDao.getApplicationsForJob(jobsList.get(i).getJobId());
@@ -182,9 +176,9 @@ public class CompanyServlet extends HttpServlet{
 			System.out.println("in downloadResume context-"+context);
 			//Blob blob;
             InputStream inputStream=null;
-			int candidateId=1; //Integer.parseInt(request.getParameter("candidateId"));
+			int candidateId= Integer.parseInt(request.getParameter("candidateId"));
 			byte[] resumeArray = companyDao.downloadResume(candidateId);
-			String fileName = request.getParameter("candidateId")+"resume.pdf";
+			String fileName = request.getParameter("candidateId")+"resume.doc";
 			
 			// sets MIME type for the file download
             String mimeType = context.getMimeType(fileName);
@@ -286,10 +280,6 @@ public class CompanyServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		
-		if(session.getAttribute("companyId")==null) {
-			request.getRequestDispatcher("Logout").forward(request, response);
-		}
-		
 		
 		// Save update Job
 		if (request.getRequestURI().equalsIgnoreCase("/Jobs_On_Click/SaveUpdateJob")) {
@@ -358,6 +348,14 @@ public class CompanyServlet extends HttpServlet{
 		// RegisterCompany
 		else if(request.getRequestURI().equalsIgnoreCase("/Jobs_On_Click/RegisterCompany")) {
 			
+			String email = request.getParameter("companyEmail");
+			if(companyDao.checkEmailExists(email))
+			{
+				request.setAttribute("message", "Sorry, Email is already registered!");
+				request.getRequestDispatcher("companyregistration.jsp").forward(request, response);
+				return;
+			}
+			
 			//******** Get the image ************
 			Part filePart = request.getPart("logo");
 			int docLength = (int)filePart.getSize();
@@ -379,21 +377,10 @@ public class CompanyServlet extends HttpServlet{
 			
 			boolean isNotError = companyDao.saveCompany(company);
 			
-		//*********** Save the file to Project folder as well***************
-			ServletContext context = getServletContext();
-			String appPath = context.getRealPath("/");
-			File file = new File(appPath+"images\\test\\company"+request.getParameter("companyEmail")+"logo.jpg");
-			byte[] bFile = company.getLogo();			
-			OutputStream os = new FileOutputStream(file);
-			os.write(bFile);
-			System.out.println("File inserted!");
-			os.close();
-		//*******************************************************************
-			
 			if(isNotError) {
-				request.setAttribute("message", "Approval request sent to Admin for Registration! You will get a mail with username"
-						+ " and password once approved!");
+				request.setAttribute("message", "Request sent to Admin for Registration. You will be able to login once approved!");
 			}
+			
 			request.getRequestDispatcher("companylogin.jsp").forward(request, response);
 		}
 		
@@ -446,17 +433,6 @@ public class CompanyServlet extends HttpServlet{
 			company.setLogo(logo);
 			
 			boolean isNotError = companyDao.updateCompany(company, (int)session.getAttribute("companyId"));
-		
-		//*********** Save the file to Project folder as well***************
-			ServletContext context = getServletContext();
-			String appPath = context.getRealPath("/");
-			File file = new File(appPath+"images\\test\\company"+sessioncompany.getCompanyEmail()+"logo.jpg");
-			byte[] bFile = company.getLogo();			
-			OutputStream os = new FileOutputStream(file);
-			os.write(bFile);
-			System.out.println("File inserted!");
-			os.close();
-		//*******************************************************************
 			
 			String message = isNotError?"Profile Updated successfully":"Error while updating profile";
 			request.setAttribute("message", message);

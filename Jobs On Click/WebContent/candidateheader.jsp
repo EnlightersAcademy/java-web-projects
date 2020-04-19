@@ -71,7 +71,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="companyhomepage.jsp">
+                <a href="CandidateHome">
                    <img src="images/applogo2.jpg" alt="CoolAdmin" style="width: 190px; height: 75px;">
                 </a>
             </div>

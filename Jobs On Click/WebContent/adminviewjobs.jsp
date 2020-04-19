@@ -11,7 +11,8 @@
 	
                 
                             	<% 
-                            		if(request.getAttribute("jobList")==null){
+                            		List<Jobs> jobsList = (List<Jobs>)request.getAttribute("jobList");
+                            		if(jobsList.size() == 0){
                             		%>
                             
                             	 <div class="table-responsive m-b-40" style="text-align: center; padding-top: 150px; color: #AEB6BF;">
@@ -22,7 +23,7 @@
                                 else{
                                 	%>
                                 	<div class="overview-wrap">
-                                    	<strong>Total 8 Jobs Found</strong>
+                                    	<strong>Companies Found : <%=jobsList.size() %> </strong>
                                 	</div>
                                 	<br/>
                                 	<!-- DATA TABLE-->
@@ -40,7 +41,7 @@
                                         </thead>
                                         <tbody>
                                         	<%
-                                        		List<Jobs> jobsList = (List<Jobs>)request.getAttribute("jobList");
+                                        		
                                         		for(Jobs job:jobsList){
                                        		 %>
                                             	

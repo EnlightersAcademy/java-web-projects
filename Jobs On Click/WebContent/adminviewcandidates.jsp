@@ -14,7 +14,8 @@
 	
                 
                             	<% 
-                            		if(request.getAttribute("candidateList")==null){
+                            		List<Candidate> candidateList = (List<Candidate>) request.getAttribute("candidateList");
+                            		if(candidateList.size()==0){
                             		%>
                             
                             	 <div class="table-responsive m-b-40" style="text-align: center; padding-top: 150px; color: #AEB6BF;">
@@ -23,11 +24,11 @@
                                 <%
                             		}
                                 else{
-                                	List<Candidate> candidateList = (List<Candidate>) request.getAttribute("candidateList");
+                                	
                                 	
                                 	%>
                                 	<div class="overview-wrap">
-                                    	<strong>Total <%=candidateList.size() %> Companies Found</strong>
+                                    	<strong>Candidates Found : <%=candidateList.size() %> </strong>
                                 	</div>
                                 	<br/>
                                 	<!-- DATA TABLE-->
@@ -37,9 +38,9 @@
 						aria-multiselectable="true">
 						
 						<%
-							int i =1;						
+							int i =1;			
 							for(Candidate candidate : candidateList){							
-				               
+								String base64Image = Base64.getEncoder().encodeToString(candidate.getProfile());
 							%>
 							
 						<!-- Accordion card -->
@@ -65,7 +66,7 @@
 								aria-labelledby="headingOne<%=i %>" data-parent="#accordionEx">
 								<div class="card-body">
 									<div class="mx-auto d-block">
-                                            <img class="mx-auto d-block" width="150px;" height="150px;" src="images/test/candidate<%=candidate.getCandidateEmail()%>logo.jpg" alt="Card image cap">
+                                            <img class="mx-auto d-block" width="150px;" height="150px;" src="data:image/jpg;base64,<%=base64Image %>">
                                             <h5 class="text-sm-center mt-2 mb-1"><%=candidate.getCandidateName() %></h5>
                                             <div class="location text-sm-center"> <%=candidate.getCandidateSkills() %></div>
                                             <div class="location text-sm-center"> Experience: <%=candidate.getCandidateExperience() %></div>

@@ -29,7 +29,7 @@
                                     
                                         <div class="form-group">
                                             <label for="company" class=" form-control-label">Candidate Name</label>
-                                            <input type="text" value="<%=candidate.getCandidateName() %>"  placeholder="Enter your name" class="form-control">
+                                            <input type="text" value="<%=candidate.getCandidateName() %>"  placeholder="Enter your name" class="form-control" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="vat" class=" form-control-label">Candidate Email Address</label>
@@ -37,22 +37,22 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="vat" class=" form-control-label">Contact Number</label>
-                                            <input type="text" value="<%=candidate.getCandidateContact()%>"  name="candidateContact" placeholder="Contact Number" class="form-control">
+                                            <input type="text" value="<%=candidate.getCandidateContact()%>"  name="candidateContact" placeholder="Contact Number" class="form-control" required  maxlength="10" pattern="[0-9]{10,10}">
                                         </div>
                                        
                                         <div class="form-group">
                                             <label for="country" class=" form-control-label">Summary</label>
-                                            <textarea name="candidateSummary" rows="9"  class="form-control"><%=candidate.getCandidateSummary()%></textarea>
+                                            <textarea name="candidateSummary" rows="9"  class="form-control" required><%=candidate.getCandidateSummary()%></textarea>
                                         </div>
                                         
                                         <div class="form-group">
                                             <label for="vat" class=" form-control-label">Experience</label>
-                                            <input type="text" value="<%=candidate.getCandidateExperience()%>"  name="candidateExperience" class="form-control">
+                                            <input type="text" value="<%=candidate.getCandidateExperience()%>"  name="candidateExperience" class="form-control" required>
                                         </div>
                                         
                                         <div class="form-group">
                                             <label for="country" class=" form-control-label">Skills</label>
-                                            <textarea name="candidateSkills" rows="2"  class="form-control"><%=candidate.getCandidateSkills()%></textarea>
+                                            <textarea name="candidateSkills" rows="2"  class="form-control" required><%=candidate.getCandidateSkills()%></textarea>
                                         </div>
                                         
                                         <div class="form-group">

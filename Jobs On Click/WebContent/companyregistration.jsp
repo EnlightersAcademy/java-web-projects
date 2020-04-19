@@ -55,6 +55,15 @@
                                 <img src="images/applogo2.jpg" alt="CoolAdmin" style="width: 270px;height: 120px;">
                             </a>
                             <div><strong>Company Registration</strong></div>
+                             <% 
+			                       String message = (String)request.getAttribute("message");
+			                        if(request.getAttribute("message")!=null)
+			                        { %>
+			                        <div class="alert alert-danger" role="alert">
+										<%=message %>
+									</div>
+									<%	} 
+							%>
                         </div>
                         <div class="login-form">
                             <form action="RegisterCompany" method="post" enctype="multipart/form-data">
@@ -72,7 +81,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Company Description</label>
-                                    <input required="required" class="au-input au-input--full" type="text" name="companyDescription" placeholder="Company Description">
+                                    <textarea name="companyDescription" rows="2" placeholder="Company Description"  class="au-input au-input--full" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Add Company Logo</label>

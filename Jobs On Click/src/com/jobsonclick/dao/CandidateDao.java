@@ -216,6 +216,33 @@ public class CandidateDao {
 	        }
 	}
 	
+	public boolean checkEmailExists(String email) {
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		  try {
+	          // start a transaction
+			  session.beginTransaction();
+	          
+			  Query query = session.createQuery("from Candidate where candidateEmail=:candidateEmail");
+			  query.setParameter("candidateEmail", email);
+			  
+			  List<Candidate> candidateList = query.getResultList();
+			  // commit transaction
+			  session.getTransaction().commit();
+	          session.close();
+	           
+			  if(candidateList.size()==0)
+				  return false;
+			  else
+				  return true;
+	            
+	        } catch (Exception e) {
+	            session.getTransaction().rollback();
+	            e.printStackTrace();
+	            session.close();
+	            return false;
+	        }
+	}
+	
 	
 	// count of total Candidates
 	public int totalCandidateCounts() {

@@ -13,20 +13,21 @@
 	
                 
                             	<% 
-                            		if(request.getAttribute("companyList")==null){
+                            		List<Company> companyList = (List<Company>) request.getAttribute("companyList");
+                            		if(companyList.size()==0){
                             		%>
                             
                             	 <div class="table-responsive m-b-40" style="text-align: center; padding-top: 150px; color: #AEB6BF;">
-                                    <strong >No Jobs Found</strong>
+                                    <strong >No Companies Found</strong>
                                 </div>
                                 <%
                             		}
                                 else{
-                                	List<Company> companyList = (List<Company>) request.getAttribute("companyList");
+                                	
                                 	
                                 	%>
                                 	<div class="overview-wrap">
-                                    	<strong>Total <%=companyList.size() %> Companies Found</strong>
+                                    	<strong>Companies Found : <%=companyList.size() %> </strong>
                                 	</div>
                                 	<br/>
                                 	<!-- DATA TABLE-->

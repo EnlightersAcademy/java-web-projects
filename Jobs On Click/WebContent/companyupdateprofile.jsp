@@ -29,7 +29,7 @@
                                     
                                         <div class="form-group">
                                             <label for="company" class=" form-control-label">Company Name</label>
-                                            <input type="text" value="<%=company.getCompanyName()%>" name ="companyName" placeholder="Enter your company name" class="form-control">
+                                            <input type="text" value="<%=company.getCompanyName()%>" name ="companyName" placeholder="Enter your company name" class="form-control" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="vat" class=" form-control-label">Company Email Address</label>
@@ -38,7 +38,7 @@
                                         
                                         <div class="form-group">
                                             <label for="country" class=" form-control-label">Company Description</label>
-                                            <textarea name="companyDescription" rows="9"  class="form-control"><%=company.getCompanyDescription() %></textarea>
+                                            <textarea name="companyDescription" rows="9" required  class="form-control"><%=company.getCompanyDescription() %></textarea>
                                         </div>
                                         
                                         <div class="form-group">
@@ -50,7 +50,7 @@
                                         <button type="submit" class="btn btn-primary btn-sm">
                                             <i class="fa fa-dot-circle-o"></i> Update
                                         </button>
-                                        <a href="companyhomepage.jsp" class="btn btn-danger btn-sm"> <i class="fa fa-ban"></i>Cancel</a>
+                                        <a href="CompanyHome" class="btn btn-danger btn-sm"> <i class="fa fa-ban"></i>Cancel</a>
                                     </div>
                                 </div>
                                 </form>

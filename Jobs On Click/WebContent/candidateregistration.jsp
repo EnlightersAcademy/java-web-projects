@@ -55,9 +55,18 @@
                                 <img src="images/applogo2.jpg" alt="CoolAdmin" style="width: 270px;height: 120px;">
                             </a>
                             <div><strong>Candidate Registration</strong></div>
+                             <% 
+			                       String message = (String)request.getAttribute("message");
+			                        if(request.getAttribute("message")!=null)
+			                        { %>
+			                        <div class="alert alert-danger" role="alert">
+										<%=message %>
+									</div>
+									<%	} 
+							%>
                         </div>
                         <div class="login-form">
-                            <form action="index.jsp" method="post" enctype="multipart/form-data">
+                            <form action="RegisterCandidate" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label>Candidate Name</label>
                                     <input required="required" class="au-input au-input--full" type="text" name="candidateName" placeholder="Name">
@@ -84,7 +93,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Candidate Contact Number</label>
-                                    <input class="au-input au-input--full" type="text" name="candidateContact" placeholder="Candidate Contact">
+                                    <input class="au-input au-input--full" type="text" name="candidateContact" placeholder="Candidate Contact" required maxlength="10" pattern="[0-9]{10,10}">
                                 </div>
                                 <div class="form-group">
                                     <label>Upload Resume</label>

@@ -142,24 +142,22 @@
                              </div>
                              </div>
                              </div>
-                             <strong><%=company.getCompanyName() %></strong>
+                             <div style="height: 45px; width: 120px;">
+                             	<img src="data:image/jpg;base64,<%=base64Image %>" height=100% />
+                             </div>
+                             
                             <div class="header-button">
                                 
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                        
-                                        <img src="data:image/jpg;base64,<%=base64Image %>" alt="John Doe" />
-                                            <!-- <img src="images/test/company<%=company.getCompanyEmail()%>logo.jpg" alt="John Doe" />-->
-                                        </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">Account Settings</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
-                                                <div class="image">
+                                                <div class="image" >
                                                    
-                                                         <img src="data:image/jpg;base64,<%=base64Image %>" alt="John Doe" />
+                                                         <img src="data:image/jpg;base64,<%=base64Image %>" style="vertical-align: middle;" />
                                                    
                                                 </div>
                                                 <div class="content">

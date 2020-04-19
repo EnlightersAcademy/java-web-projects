@@ -101,8 +101,7 @@ public class CandidateServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		int candidateId=1;
-		//int candidateId = (int)session.getAttribute("candidateId");
+		int candidateId= session.getAttribute("candidateId")==null? 0: (int)session.getAttribute("candidateId");
 		
 		if (request.getRequestURI().equalsIgnoreCase("/Jobs_On_Click/SearchJobs")) {
 			List<Jobs> jobsList = jobsDao.searchJobs(request.getParameter("skills"));
@@ -113,6 +112,17 @@ public class CandidateServlet extends HttpServlet {
 		
 		// RegisterCandidate
 		else if(request.getRequestURI().equalsIgnoreCase("/Jobs_On_Click/RegisterCandidate")) {
+			
+			//Check if email already exists.
+			String email = request.getParameter("candidateEmail");
+			if(candidateDao.checkEmailExists(email))
+			{
+				System.out.println("Email already exists." + email);
+				request.setAttribute("message", "Sorry, Email is already registered!");
+				request.getRequestDispatcher("candidateregistration.jsp").forward(request, response);
+				return;
+			}
+			System.out.println("Email doesn't exist already!");
 			
 			// Reading Profile picture
 			
@@ -150,32 +160,10 @@ public class CandidateServlet extends HttpServlet {
 			
 			boolean isNotError = candidateDao.saveCandidate(candidate);
 			
-		//*********** Save the profile to Project folder as well***************
-			ServletContext context = getServletContext();
-			String appPath = context.getRealPath("/");
-			File file = new File(appPath+"images\\test\\candidate"+request.getParameter("candidateEmail")+"logo.jpg");
-			byte[] bFile = candidate.getProfile();			
-			OutputStream os = new FileOutputStream(file);
-			os.write(bFile);
-			System.out.println("File inserted!");
-			os.close();
-		//*******************************************************************
-			
-		//*********** Save the resume to Project folder as well***************
-			
-			
-			File file2 = new File(appPath+"images\\test\\candidate"+request.getParameter("candidateEmail")+"resume.pdf");
-			byte[] bFile2 = candidate.getResume();			
-			OutputStream os2 = new FileOutputStream(file2);
-			os2.write(bFile2);
-			System.out.println("File inserted!");
-			os2.close();
-		//*******************************************************************
-			
 			if(isNotError) {
 				request.setAttribute("message", "Candidate Created successfully");
 			}
-			request.getRequestDispatcher("candidatelogin.jsp").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		
 		// EditCandidate
@@ -230,28 +218,6 @@ public class CandidateServlet extends HttpServlet {
 			candidate.setCandidateId(candidateId);
 			
 			boolean isNotError = candidateDao.saveCandidate(candidate);
-			
-		//*********** Save the profile to Project folder as well***************
-			ServletContext context = getServletContext();
-			String appPath = context.getRealPath("/");
-			File file = new File(appPath+"images\\test\\candidate"+request.getParameter("candidateEmail")+"logo.jpg");
-			byte[] bFile = candidate.getProfile();			
-			OutputStream os = new FileOutputStream(file);
-			os.write(bFile);
-			System.out.println("File inserted!");
-			os.close();
-		//*******************************************************************
-			
-		//*********** Save the resume to Project folder as well***************
-			
-			
-			File file2 = new File(appPath+"images\\test\\candidate"+request.getParameter("candidateEmail")+"resume.pdf");
-			byte[] bFile2 = candidate.getResume();			
-			OutputStream os2 = new FileOutputStream(file2);
-			os2.write(bFile2);
-			System.out.println("File inserted!");
-			os2.close();
-		//*******************************************************************
 			
 			if(isNotError) {
 				request.setAttribute("message", "Candidate Updated successfully");

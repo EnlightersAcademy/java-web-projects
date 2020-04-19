@@ -24,7 +24,7 @@
                                 <div class="card">
                                 <form action="CandidateApplyJob" method="post" >
                                     <div class="card-header" style="background-color: #0099FF; color: white;">
-                                        <strong>Job Id: <%=job.getJobId() %>  <span style="float: right;"><%=job.getDateOfPosting()%></span></strong>
+                                        <strong>Job Id: <%=job.getJobId() %>  <span style="float: right;">Job Posted On: <%=job.getDateOfPosting()%></span></strong>
                                         
                                     </div>
                                     <div class="card-body card-block">
@@ -59,6 +59,7 @@
                                     <div class="card-footer">
                                     <%
                                     	boolean alreadyApplied = (boolean)request.getAttribute("alreadyApplied");
+										System.out.println(request.getAttribute("alreadyApplied"));
                                     	if(alreadyApplied){
                                     	%>
                                     	<button  type="button" class="btn btn-secondary btn-sm">

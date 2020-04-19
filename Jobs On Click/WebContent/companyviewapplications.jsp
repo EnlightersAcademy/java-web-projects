@@ -85,10 +85,25 @@
         									id="nextPage"></form>
 											
 											<div class="col-md-3">
+											<%
+												if(app.getStatus().equalsIgnoreCase("new"))
+												{
+											%>
 											<a 
 											href="ApproveApplication?jobId=<%=job.getJobId()%>&candidateId=<%=app.getCandidateId()%>&candidateEmail=<%=app.getCandidate().getCandidateEmail()%>&jobTitle=<%=job.getJobTitle()%>" 
 											class="btn btn-success btn-sm">Accept</a>
 										    <a href="RejectApplication?jobId=<%=job.getJobId()%>&candidateId=<%=app.getCandidateId()%>" class="btn btn-danger btn-sm">Reject</a>
+										    <%
+										    	}
+												else
+												{
+										    %>
+										    	<button  type="button" class="btn btn-secondary btn-sm">
+		                                            Accepted
+		                                        </button>
+	                                        <%
+												}
+	                                        %>
 											</div>
 										</div>
 										

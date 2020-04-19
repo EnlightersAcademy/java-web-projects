@@ -47,7 +47,7 @@
                                             	<tr>
                                                 	<td>Job #<%=app.getJobId() %></td>
                                                 	<td><%=app.getJob().getCompany().getCompanyName() %></td>
-                                                	<td><%=app.getStatus().toUpperCase() %></td>
+                                                	<td><%=app.getStatus().toUpperCase().equalsIgnoreCase("new")? "IN PROCESS" : app.getStatus().toUpperCase() %></td>
                                            		</tr>
                                             <%
                                   	      	}

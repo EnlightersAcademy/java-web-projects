@@ -103,7 +103,7 @@
                                     <table class="table table-borderless table-data3">
                                         <thead>
                                             <tr>
-                                                <th>From</th>
+                                                <th>To</th>
                                                 <th>Date</th>
                                                 <th>Subject</th>
                                             </tr>
@@ -115,7 +115,7 @@
                                        		 
                                        			 %>
                                             	<tr>
-                                                	<td><a href="ViewMessage?type=<%=request.getParameter("type")%>&role=company&messageId=<%=msg.getMessageId()%>"><%=msg.getMessageFrom() %></a></td>
+                                                	<td><a href="ViewMessage?type=<%=request.getParameter("type")%>&role=company&messageId=<%=msg.getMessageId()%>"><%=msg.getMessageTo() %></a></td>
                                                 	<td><%=msg.getDate()%></td>
                                                 	<td><%=msg.getSubject() %></td>
                                            		</tr>

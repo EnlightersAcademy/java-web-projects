@@ -21,9 +21,10 @@ public class ApplicationDao {
 			  session.beginTransaction();
 	            
 			  	// get applications for jobId
-			  Query query = session.createQuery("from Application where jobId=:jobId and status=:status");
+			  Query query = session.createQuery("from Application where jobId=:jobId and (status=:statusnew or status=:statusaccepted)");
 			  query.setParameter("jobId", jobId);
-			  query.setParameter("status", "new");
+			  query.setParameter("statusnew", "new");
+			  query.setParameter("statusaccepted", "approved");
 			  List<Application> applicationsList = query.getResultList();
 			  
 			  for(int i =0;i<applicationsList.size();i++) {
