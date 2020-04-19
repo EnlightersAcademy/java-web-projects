@@ -64,7 +64,11 @@
        
       
        <%	
-       		Company company = (Company)session.getAttribute("company");
+       		Company company = session.getAttribute("company")==null? null : (Company)session.getAttribute("company");
+       		if(company ==null)
+       		{
+       			response.sendRedirect("companylogin.jsp?sessionExpired=true");
+       		}
        		MessageDao messageDao = new MessageDao();
        		int messageCount = messageDao.unreadMessagesCount(company.getCompanyEmail());  
        	 String base64Image = Base64.getEncoder().encodeToString(company.getLogo());

@@ -60,7 +60,17 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-        <%	Candidate candidate = (Candidate)session.getAttribute("candidate");
+        <%	
+        		
+        	System.out.println("Session Object: " + session);
+        	Candidate candidate = session.getAttribute("candidate")==null? null : (Candidate)session.getAttribute("candidate");
+    		if(candidate==null)
+    		{
+    			System.out.println("Session has expired.");
+    			response.sendRedirect("index.jsp?sessionExpired=true");
+    			return;
+    		}
+    		System.out.println("Session is active.");
        		MessageDao messageDao = new MessageDao();
        		int messageCount = messageDao.unreadMessagesCount(candidate.getCandidateEmail()); 
        		String base64Image="";

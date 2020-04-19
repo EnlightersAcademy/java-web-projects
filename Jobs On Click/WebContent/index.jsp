@@ -46,6 +46,11 @@
 
 
 <body class="animsition">
+<%
+	if(request.getParameter("sessionExpired") != null) {
+		out.println("<script>alert('Session expired. Please login again!')</script>");
+}
+%>
     <div class="page-wrapper">
         <div class="page-content--bge5">
             <div class="container">
@@ -67,11 +72,11 @@
                             <form action="Login" method="post">
                                 <div class="form-group">
                                     <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="username" placeholder="Email">
+                                    <input class="au-input au-input--full" type="email" name="username" placeholder="Email" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password" required>
                                 </div>
                                 <input type="hidden" name="role" value="candidate"/>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>

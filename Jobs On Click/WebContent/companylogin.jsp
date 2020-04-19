@@ -46,6 +46,12 @@
 
 
 <body class="animsition">
+
+<%
+	if(request.getParameter("sessionExpired") != null) {
+		out.println("<script>alert('Session expired. Please login again!')</script>");
+}
+%>
     <div class="page-wrapper">
         <div class="page-content--bge5">
             <div class="container">
