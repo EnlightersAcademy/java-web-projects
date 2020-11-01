@@ -3,12 +3,30 @@ package com.espresso.dto;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Order {
+	@Id
+	@GeneratedValue
+	@Column(name="order_id")
 	private int orderId;
+	
+	@Column(name="customer_id")
 	private int customerId;
+	
+	@Column(name="staff_id")
 	private int staffId;
+	
 	private List<Item> items;
+	
+	@Column(name="total_amount")
 	private int totalAmount;
+	
+	@Column(name="date_of_order")
 	private Date dateOfOrder;
 	
 	public int getOrderId() {

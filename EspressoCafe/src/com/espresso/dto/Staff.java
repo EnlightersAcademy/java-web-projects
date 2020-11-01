@@ -1,13 +1,37 @@
 package com.espresso.dto;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Staff {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "staff_id")
+	private int staffId;
+	
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "age")
 	private int age;
+	
+	@Column(name = "email_id")
 	private String emailId;
+	
+	@Column(name = "dob")
 	private String dob;
+	
+	@Column(name = "identification")
 	private String identification;
+	
+	@Column(name = "phone_no")
 	private String phoneNo;
+	
+	@Column(name = "address")
 	private String address;
 	
 	public String getName() {
