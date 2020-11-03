@@ -13,8 +13,6 @@
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
                         	<div>
-                                <span>Logged in at: </span>
-                                <b><%=currentDate %></b>
                             </div>
                             <div class="text-muted">Copyright &copy; Espresso Café</div>
                         </div>

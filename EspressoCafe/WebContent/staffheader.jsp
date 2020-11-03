@@ -33,6 +33,7 @@
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="staffchangepassword.jsp">Change Password</a>
+                        <a class="dropdown-item" href="staffupdatedetails.jsp">Update Details</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="index.jsp">Logout</a>
                     </div>
@@ -54,13 +55,13 @@
                                 Ongoing Orders
                             </a>
                             <div class="sb-sidenav-menu-heading">Details</div>
-                            <a class="nav-link" href="staffallorders.jsp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
-                                View All Orders
-                            </a>
                             <a class="nav-link" href="staffallitems.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-coffee"></i></div>
                                 View All Items
+                            </a>
+                            <a class="nav-link" href="staffallorders.jsp">
+                                <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                                View All Orders
                             </a>
                         </div>
                     </div>

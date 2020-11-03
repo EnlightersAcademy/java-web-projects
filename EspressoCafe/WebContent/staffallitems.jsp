@@ -11,8 +11,9 @@
 	<table class="table table-hover">
 	  <thead class="thead-dark">
 	    <tr>
-	      <th scope="col">Item Name</th>
 	      <th scope="col">Category</th>
+	      <th scope="col">Item Name</th>
+	      <th scope="col">Description</th>
 	      <th scope="col">Price</th>
 	    </tr>
 	  </thead>
@@ -22,8 +23,9 @@
 	    	{
 	    %>
 		    <tr>
-		      <th><%="Cappuccino" %></th>
 		      <td><%="Hot Coffee" %></td>
+		      <td><%="Cappuccino" %></td>
+		      <td><%="Hot standard coffee." %></td>
 		      <td>&#x20B9; <%=120 %></td>
 		    </tr>
 	    <%

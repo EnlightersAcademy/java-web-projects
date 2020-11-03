@@ -27,7 +27,7 @@
 		      <td><%="Abc@gmail.com" %></td>
 		      <td>&#x20B9; <%=850 %></td>
 		      <td>
-		      	<a class="btn btn-outline-warning" href="#" role="button"><i class="fas fa-edit"></i> Update Order</a>
+		      	<a class="btn btn-outline-warning" href="staffupdatedetails.jsp?id=<%=i %>" role="button"><i class="fas fa-edit"></i> Update Order</a>
 		      </td>
 		    </tr>
 	    <%

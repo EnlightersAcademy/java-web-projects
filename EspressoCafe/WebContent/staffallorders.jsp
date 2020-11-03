@@ -1,10 +1,11 @@
+<%@page import="java.util.Date"%>
 <%@ include file="staffheader.jsp"%>
 
 <div class="row" style="margin-top: 20px;">
 
 	<h3 class="mt-4" style="margin-bottom: 30px;">
 		<i class="fas fa-list"></i>
-		All Orders
+		Orders Handled By Me
 	</h3>
 	<br/><br/>
 			
@@ -13,6 +14,7 @@
 	    <tr>
 	      <th scope="col">Order ID</th>
 	      <th scope="col">Customer Email</th>
+	      <th scope="col">Date of Order</th>
 	      <th scope="col">Total Amount</th>
 	    </tr>
 	  </thead>
@@ -24,6 +26,7 @@
 		    <tr>
 		      <th><%=i %></th>
 		      <td><%="Abc@gmail.com" %></td>
+		      <td><%="30-Oct-2020" %></td>
 		      <td>&#x20B9; <%=850 %></td>
 		    </tr>
 	    <%
