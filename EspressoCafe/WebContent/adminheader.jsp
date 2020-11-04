@@ -24,7 +24,7 @@
             </a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             
-            <h4 class="navbar-brand ml-auto mr-0 mr-md-3 my-2 my-md-0"><i class="fas fa-chart-line"></i> Admin Dashboard</h4>
+            <h4 class="navbar-brand ml-auto mr-0 mr-md-3 my-2 my-md-0"><i class="fas fa-desktop"></i> Admin Dashboard</h4>
             
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -65,13 +65,9 @@
                             </a>
                             
                             <div class="sb-sidenav-menu-heading">Items</div>
-                            <a class="nav-link" href="adminaddcategory.jsp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tag"></i></div>
-                                Add New Category
-                            </a>
-                            <a class="nav-link" href="adminviewcategory.jsp">
+                            <a class="nav-link" href="admincategory.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
-                                View All Categories
+                                Item Categories
                             </a>
                             <a class="nav-link" href="adminadditem.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-coffee"></i></div>
