@@ -27,6 +27,10 @@
 	<span class="titleText" style="font-size: x-large;">
 						<b>Espresso Café</b>
 					</span>
+	
+	<div class="row titleText" style="text-align: center; margin-top: 50px;">
+		<h5>Welcome <%=userName %></h5>
+	</div>
 </div>
 
 
