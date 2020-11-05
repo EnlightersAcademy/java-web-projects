@@ -1,3 +1,5 @@
+<%@page import="org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.text.DateFormatSymbols"%>
 <%@page import="java.util.Calendar"%>
 <%@ include file="adminheader.jsp"%>
@@ -11,6 +13,9 @@
 </div>
 
 <%
+
+	boolean isSearchDone = true; 
+
 	//Get the current year and last 5 years.
 	int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 	String[] years = new String[]{ String.valueOf(currentYear),String.valueOf(currentYear-1),String.valueOf(currentYear-2),String.valueOf(currentYear-3),String.valueOf(currentYear-4) };
@@ -79,6 +84,57 @@
 	<div class="col col-md-4"></div>
 </div>
 
+
+<div class="row" style="margin-top: 80px;">
+	    	
+	<div class="col col-md-4"></div>
+	
+	<%
+		if(!isSearchDone){
+	%>
+	
+	<div class="col col-md-4" style="text-align: center;">
+		<h4>No Data Found!</h4>
+	</div>
+	<%
+		}
+		else{
+	%>
+
+	<div class="col col-md-4">
+		<table class="table table-bordered">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">Total Sales</th>
+		      <th scope="col">Total Purchases</th>
+		      <th scope="col">Profit/Loss</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  		<%
+		  			double totalSales = 11400;	//GET THE TOTAL SALES VALUE HERE.
+		  			double totalPurchases = 8700;	//GET THE TOTAL PURCHASES VALUE HERE.
+		  			
+		  			double profitLoss = ((totalSales - totalPurchases)/totalSales)*100;
+		  			String val =  new DecimalFormat("#.##").format(profitLoss);
+		  			
+		  			String cellColor = (profitLoss >=0) ? "#2ECC71":"#E74C3C";
+		  		%>
+	
+			    <tr>
+			      <td>&#x20B9; <%=totalSales %></td>
+			      <td>&#x20B9; <%=totalPurchases %></td>
+			      <td style="font-weight: bold; background-color: <%=cellColor%>;"><%=val %>%</td>
+			    </tr>
+		  </tbody>
+		</table>
+			<p style="text-align: right; font-size: small;">If % is positive, then its a Profit. Else a Loss! </p>
+	</div>
+	
+	<%} %>
+
+	<div class="col col-md-4"></div>
+</div>
 
 
 <%@ include file="adminfooter.jsp"%>
