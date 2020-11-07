@@ -16,8 +16,8 @@ public class Staff {
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "age")
-	private int age;
+	@Column(name = "gender")
+	private String gender;
 	
 	@Column(name = "email_id")
 	private String emailId;
@@ -40,11 +40,18 @@ public class Staff {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getAge() {
-		return age;
+
+	public int getStaffId() {
+		return staffId;
 	}
-	public void setAge(int age) {
-		this.age = age;
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	public String getEmailId() {
 		return emailId;

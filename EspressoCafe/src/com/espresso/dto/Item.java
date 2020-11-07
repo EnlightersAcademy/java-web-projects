@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Item {
@@ -16,9 +17,6 @@ public class Item {
 	@Column(name = "item_name")
 	private String itemName;
 	
-	@Column(name = "quantity")
-	private int quantity;
-	
 	@Column(name = "category")
 	private Category category;
 	
@@ -27,6 +25,10 @@ public class Item {
 	
 	@Column(name = "status")
 	private String status;
+	
+	@Column(name="photo")
+	@Lob
+	private byte[] photo;
 	
 	public int getItemId() {
 		return itemId;
@@ -39,12 +41,6 @@ public class Item {
 	}
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 	public Category getCategory() {
 		return category;
@@ -63,5 +59,11 @@ public class Item {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public byte[] getPhoto() {
+		return photo;
+	}
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
 	}
 }
