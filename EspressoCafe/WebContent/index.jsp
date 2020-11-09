@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="com.espresso.util.EspressoUtil"%>
 <html lang="en">
 
 <head>
@@ -13,7 +14,15 @@
 	<link rel="stylesheet" type="text/css" href="assets/login/css/main.css">
 	<!--===============================================================================================-->
 </head>
+<%
 
+	String expired = request.getParameter("exp");
+	if(expired != null && "true".equals(expired)) {
+		%>
+		alert("User Session expired. Please login again")
+		<% 
+	}
+%>
 <body>
 
 	<div class="limiter">

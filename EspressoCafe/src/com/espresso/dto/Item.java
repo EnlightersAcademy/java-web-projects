@@ -24,7 +24,10 @@ public class Item {
 	private String description;
 	
 	@Column(name = "status")
-	private String status;
+	private boolean isAvailable;
+	
+	private int price;
+	
 	
 	@Column(name="photo")
 	@Lob
@@ -54,16 +57,23 @@ public class Item {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+
 	public byte[] getPhoto() {
 		return photo;
 	}
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
+	}
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
 	}
 }

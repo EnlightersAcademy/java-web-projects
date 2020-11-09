@@ -34,6 +34,10 @@ public class Staff {
 	@Column(name = "address")
 	private String address;
 	
+	@Column(name="id_type")
+	private String idType;
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -82,6 +86,12 @@ public class Staff {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getIdType() {
+		return idType;
+	}
+	public void setIdType(String idType) {
+		this.idType = idType;
 	}
 
 }

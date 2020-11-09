@@ -1,6 +1,21 @@
 <%@ include file="adminheader.jsp"%>
+<%@page import="com.espresso.util.EspressoUtil"%>
 
+<%
+	if(EspressoUtil.isResponseSuccess(request) != -1) {
+		int status = EspressoUtil.isResponseSuccess(request);
+		if( status == 0) {
+			%>
+			alert("Successfully added the purchase entry")
+			<%
+		} else if (status == 1){
+			%>
+			alert("Failed to add the purchase entry. Please retry again")
+			<%
+		}
+	}
 
+%>
 <div class="row" style="margin-top: 20px;">
 	<div class="col col-md-4"></div>
 
@@ -14,7 +29,7 @@
 		    	</h3>
 		   	</div>
 		    <div class="card-body">
-		        <form class="form-signin" method="post" action="">
+		        <form class="form-signin" method="post" action="purchases">
 
                          <div class="form-group">
                              <label class="small mb-1" for="name">Material Name</label>

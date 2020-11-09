@@ -1,4 +1,26 @@
 <%@ include file="adminheader.jsp"%>
+<%@page import="com.espresso.util.EspressoUtil"%>
+
+
+<%
+	if(EspressoUtil.isResponseSuccess(request) != -1) {
+		int status = EspressoUtil.isResponseSuccess(request);
+		if( status == 0) {
+			%>
+			alert("Successfully added Staff details")
+			<%
+		} else if (status == 1){
+			%>
+			alert("Failed to add the new Staff details. Please retry again")
+			<%
+		} else if(status == 2) {
+			%>
+			alert("Staff with the provided Email Id already exist. Please verify the provided details")
+			<%
+		}
+	}
+
+%>
 
 <div class="row" style="margin-top: 20px;">
 
@@ -8,7 +30,7 @@
         <div class="card shadow-lg border-0 rounded-lg mt-5">
             <div class="card-header"><h3 class="text-center font-weight-light my-4"><i class="fas fa-user-plus"></i> Add New Staff</h3></div>
             <div class="card-body">
-                <form method="post" action="">
+                <form method="post" action="staff">
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -35,9 +57,9 @@
                                 <label class="small mb-1" for="gender">Gender</label>
                                 <select class="form-control" id="gender" required>
 							        <option selected>Select</option>
-							        <option value="1">Male</option>
-							        <option value="2">Female</option>
-							        <option value="3">Others</option>
+							        <option value="Male">Male</option>
+							        <option value="Female">Female</option>
+							        <option value="Other">Other</option>
 							      </select>
                             </div>
                         </div>
@@ -58,7 +80,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1" for="idtype">ID Type</label>
-                                <input class="form-control" id="idtype" type="text" placeholder="Enter ID Type - Aadhaar, PAN, etc." required />
+                                <select class="form-control" id="idtype" required>
+							        <option selected>Select</option>
+							        <option value="Aadhar Card">Aadhar Card</option>
+							        <option value="Passport">Passport</option>
+							        <option value="Driving License">Driving License</option>
+							        <option value="Voter Id">Voter Id</option>
+							      </select>
                             </div>
                         </div>
                         <div class="col-md-6">

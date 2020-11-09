@@ -1,7 +1,31 @@
+<%@page import="java.util.List"%>
+<%@page import="com.espresso.dto.Category"%>
+<%@page import="com.espresso.db.util.DbUtil"%>
+<%@page import="com.espresso.util.EspressoUtil"%>
 <%@ include file="adminheader.jsp"%>
 
 <%
-	String[] categories = new String[]{"Hot Coffee", "Cold Coffee", "Burger", "Pizza"};
+	List<Category> categories = DbUtil.getAllCategories();
+%>
+
+<%
+	if(EspressoUtil.isResponseSuccess(request) != -1) {
+		int status = EspressoUtil.isResponseSuccess(request);
+		if( status == 0) {
+			%>
+			alert("Successfully added the item")
+			<%
+		} else if (status == 1){
+			%>
+			alert("Failed to add the item. Please retry again")
+			<%
+		}  else if(status == 2) {
+			%>
+			alert("Item with the provided name already exist. Please verify the input details")
+			<%
+		}
+	}
+
 %>
 
 <div class="row" style="margin-top: 20px;">
@@ -17,17 +41,17 @@
 		    	</h3>
 		   	</div>
 		    <div class="card-body">
-		        <form class="form-signin" method="post" action="">
+		        <form class="form-signin" method="post" action="items">
 
                          <div class="form-group">
                              <label class="small mb-1" for="category">Category</label>
                              <select class="form-control" id="category" required>
 						        <option selected>Select</option>
 						        <%
-						        	for(int i=0; i< categories.length; i++)
+						        	for(Category cat: categories)
 						        	{
 						        %>
-						        		<option value="<%=categories[i]%>"><%=categories[i] %></option>
+						        		<option value="<%=cat.getCategoryName()%>"><%=cat.getCategoryName() %></option>
 						        <%
 						        	}
 						        %>
@@ -36,7 +60,7 @@
                      
                          <div class="form-group">
                              <label class="small mb-1" for="name">Item Name</label>
-                             <input class="form-control" id="name" type="text" placeholder="Item Name" required />
+                             <input class="form-control" id="name" type="text" pattern="[a-zA-z]" placeholder="Item Name" required />
                          </div>
                          
                          <div class="form-group">

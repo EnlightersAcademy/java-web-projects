@@ -1,5 +1,26 @@
 <%@ include file="adminheader.jsp"%>
+<%@page import="com.espresso.util.EspressoUtil"%>
 
+
+<%
+	if(EspressoUtil.isResponseSuccess(request) != -1) {
+		int status = EspressoUtil.isResponseSuccess(request);
+		if( status == 0) {
+			%>
+			alert("Successfully added the new Category details")
+			<%
+		} else if (status == 1){
+			%>
+			alert("Failed to add the Category details. Please retry again")
+			<%
+		} else if(status == 2) {
+			%>
+			alert("Category with the provided name already exist. Please verify the input details")
+			<%
+		}
+	}
+
+%>
 <div class="row" style="margin-top: 20px;">
 	<div class="col col-md-4"></div>
 
@@ -13,7 +34,7 @@
 		    	</h3>
 		   	</div>
 		    <div class="card-body">
-		        <form class="form-signin" method="post" action="">
+		        <form class="form-signin" method="post" action="category">
 					<input
 						type="text" id="categoryname" class="form-control"
 						placeholder="Category Name" required autofocus>
