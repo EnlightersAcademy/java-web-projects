@@ -11,8 +11,9 @@
 	<table class="table table-hover">
 	  <thead class="thead-dark">
 	    <tr>
-	      <th scope="col">Category</th>
+	      <th scope="col"></th>
 	      <th scope="col">Item Name</th>
+	      <th scope="col">Category</th>
 	      <th scope="col">Description</th>
 	      <th scope="col">Price</th>
 	      <th scope="col">Availability</th>
@@ -26,8 +27,9 @@
 	    		boolean isAvailable = false;
 	    %>
 		    <tr>
-		      <td><%="Hot Coffee" %></td>
+		      <td><img style="width: 200px;" alt="" src="<%="assets/images/sampleItems/cuppacino.jpeg" %>" > </td>
 		      <td><%="Cappuccino" %></td>
+		      <td><%="Hot Coffee" %></td>
 		      <td><%="Hot standard coffee." %></td>
 		      <td>&#x20B9; <%=120 %></td>
 		      <td><%=(isAvailable)?"Available":"Not Available" %></td>

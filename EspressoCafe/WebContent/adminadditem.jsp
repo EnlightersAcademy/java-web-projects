@@ -72,6 +72,11 @@
                              <label class="small mb-1" for="price">Price</label>
                              <input class="form-control" id="price" type="text" placeholder="Price in &#x20B9;" pattern="[0-9]{1,}" required />
                          </div>
+                         
+                         <div class="form-group">
+                             <label class="small mb-1" for="price">Picture</label>
+                             <input class="form-control" id="price" type="file" required accept="image/x-jpg,image/jpeg" style="height: auto;" />
+                         </div>
                         
 					<br/>
 					<button class="btn btn-lg btn-success btn-block" type="submit">Add Item</button>
