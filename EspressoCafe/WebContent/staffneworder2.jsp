@@ -29,7 +29,7 @@
 		    	</h3>
 		   	</div>
 		    <div class="card-body">
-		        <form method="post" action="staffneworder3.jsp">
+		        <form method="post" action="customer">
 		             <div class="form-row">
 		                 <div class="col-md-6">
 		                     <div class="form-group">

@@ -60,10 +60,10 @@ public class CustomerServlet extends HttpServlet {
 		try {
 
 			util.createEntry(cus);
-			request.getRequestDispatcher("adminaddstaff.jsp?msg=success").forward(request, response);
+			request.getRequestDispatcher("staffneworder3.jsp?msg=success").forward(request, response);
 						
 		} catch (Exception exe) {
-			request.getRequestDispatcher("adminaddstaff.jsp?msg=fail").forward(request, response);
+			request.getRequestDispatcher("staffneworder3.jsp?msg=fail").forward(request, response);
 		}
 
 	}

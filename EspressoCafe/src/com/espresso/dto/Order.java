@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -29,7 +30,7 @@ public class Order {
 	private Staff staff;
 
 
-	@OneToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=OrderItem.class, fetch = FetchType.EAGER)
+	@ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=OrderItem.class, fetch = FetchType.EAGER)
 	private List<OrderItem> items = new ArrayList<OrderItem>();
 
 
