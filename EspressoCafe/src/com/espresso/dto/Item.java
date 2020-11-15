@@ -2,9 +2,12 @@ package com.espresso.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import com.espresso.dto.Category;
 
 @Entity
 public class Item {
@@ -17,7 +20,8 @@ public class Item {
 	@Column(name = "item_name")
 	private String itemName;
 	
-	@Column(name = "category")
+	
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Category category;
 	
 	@Column(name = "description")

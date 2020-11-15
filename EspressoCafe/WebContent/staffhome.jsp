@@ -1,5 +1,14 @@
+<%@page import="com.espresso.dto.Staff"%>
 <%@ include file="staffheader.jsp"%>
-
+<%@page import="com.espresso.util.*" %>
+<%
+if (!EspressoUtil.isValidSession(request)) {
+	response.sendRedirect("index.jsp?exp=true");
+}
+%>
+<%
+	Staff staff = (Staff)request.getSession().getAttribute("staff");
+%>
 <style>
 	@font-face {
 		  font-family: Poppins-Regular;
@@ -29,7 +38,7 @@
 					</span>
 	
 	<div class="row titleText" style="text-align: center; margin-top: 50px;">
-		<h5>Welcome <%=userName %></h5>
+		<h5>Welcome <%=staff.getName() %></h5>
 	</div>
 </div>
 

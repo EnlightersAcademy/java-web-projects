@@ -1,5 +1,19 @@
+<%@page import="com.espresso.dto.Staff"%>
+<%@page import="java.util.List"%>
+<%@page import="com.espresso.dto.Order"%>
 <%@page import="java.util.Date"%>
 <%@ include file="staffheader.jsp"%>
+<%@page import="com.espresso.db.util.*" %>
+<%@page import="com.espresso.util.*" %>
+<%
+if (!EspressoUtil.isValidSession(request)) {
+	response.sendRedirect("index.jsp?exp=true");
+}
+%>
+<%
+	Staff staff = (Staff)request.getSession().getAttribute("staff");
+	List<Order> orders = DbUtil.getOrdersByStaffId(staff.getStaffId());
+%>
 
 <div class="row" style="margin-top: 20px;">
 
@@ -20,14 +34,14 @@
 	  </thead>
 	  <tbody>
 	    <%
-	    	for(int i=1; i<5; i++)
+	    	for(Order order: orders)
 	    	{
 	    %>
 		    <tr>
-		      <th><%=i %></th>
-		      <td><%="Abc@gmail.com" %></td>
-		      <td><%="30-Oct-2020" %></td>
-		      <td>&#x20B9; <%=850 %></td>
+		      <th><%=order.getOrderId()%></th>
+		      <td><%=order.getCustomer().getEmailId() %></td>
+		      <td><%=order.getDateOfOrder() %></td>
+		      <td>&#x20B9; <%=order.getTotalAmount()%></td>
 		    </tr>
 	    <%
 	    	}

@@ -1,3 +1,6 @@
+<%@page import="com.espresso.dto.Order"%>
+<%@page import="java.util.List"%>
+<%@page import="com.espresso.db.util.DbUtil"%>
 <%@page import="java.util.Date"%>
 
 <%@ include file="adminheader.jsp"%>
@@ -12,6 +15,10 @@
 	</h3>
 	<br/><br/>
 	
+	<%
+	List<Order> orders = DbUtil.getAllOrders();
+	%>
+	
 	<div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead class="thead-dark">
@@ -25,15 +32,15 @@
                 </thead>
                 <tbody>
                     <%
-				    	for(int i=1; i<25; i++)
+				    	for(Order order: orders)
 				    	{
 				    %>
 					    <tr>
-					      <th><%=i %></th>
-					      <td><%="Abc@gmail.com" %></td>
-					      <td><%= i +"-Oct-2020" %></td>
-					      <td>&#x20B9; <%=850 + 2*i %></td>
-					      <td><%="[Staff Name]" %></td>
+					      <th><%= order.getOrderId() %></th>
+					      <td><%= order.getCustomer().getEmailId() %></td>
+					      <td><%= order.getDateOfOrder() %></td>
+					      <td>&#x20B9; <%=order.getTotalAmount() %></td>
+					      <td><%=order.getStaff().getName() %></td>
 					    </tr>
 				    <%
 				    	}

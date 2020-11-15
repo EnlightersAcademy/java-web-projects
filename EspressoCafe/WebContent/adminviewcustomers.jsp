@@ -1,7 +1,15 @@
+<%@page import="java.util.List"%>
+<%@page import="com.espresso.dto.Customer"%>
+<%@page import="com.espresso.db.util.DbUtil"%>
 <%@page import="java.util.Date"%>
 
 <%@ include file="adminheader.jsp"%>
 
+
+
+<%
+List<Customer> customers = DbUtil.getAllCustomers();
+%>
 <link href="assets/datatable/datatable.bootstrap.css" rel="stylesheet" />
 
 <div class="row" style="margin-top: 20px;">
@@ -19,19 +27,17 @@
 						<th scope="col">Customer Name</th>
 						<th scope="col">Customer Email</th>
 						<th scope="col">Customer Phone</th>
-						<th scope="col">No. of Orders</th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
-				    	for(int i=1; i<25; i++)
-				    	{
+                    	for(Customer cus: customers) {
+				    	
 				    %>
 					    <tr>
-					      <th><%="Raj" %></th>
-					      <td><%="Abc@gmail.com" %></td>
-					      <td><%="9005290052" %></td>
-					      <td><%=i %></td>
+					      <th><%=cus.getName() %></th>
+					      <td><%=cus.getEmailId() %></td>
+					      <td><%=cus.getPhoneNo() %></td>
 					    </tr>
 				    <%
 				    	}

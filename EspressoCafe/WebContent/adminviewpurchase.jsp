@@ -1,5 +1,10 @@
+<%@page import="java.util.List"%>
+<%@page import="com.espresso.dto.PurchaseItem"%>
+<%@page import="com.espresso.db.util.DbUtil"%>
 <%@ include file="adminheader.jsp"%>
-
+<%
+	List<PurchaseItem> purchases = DbUtil.getAllPurchases();
+%>
 <div class="row" style="margin-top: 20px;">
 
 	<h3 class="mt-4" style="margin-bottom: 30px;">
@@ -20,15 +25,15 @@
 	  </thead>
 	  <tbody>
 	    <%
-	    	for(int i=1; i<5; i++)
+	    	for(PurchaseItem item : purchases)
 	    	{
 	    %>
 		    <tr>
-		      <td><%="Coffee Beans" %></td>
-		      <td><%="Robusta Coffee beans from Coorg." %></td>
-		      <td><%="30-Oct-2020" %></td>
-		      <td><%="30kgs" %></td>
-		      <td><%=1800.0 %></td>
+		      <td><%=item.getName() %></td>
+		      <td><%=item.getDescription() %></td>
+		      <td><%=item.getDate() %></td>
+		      <td><%=item.getQuantity() %></td>
+		      <td><%=item.getTotalCost()%></td>
 		    </tr>
 	    <%
 	    	}

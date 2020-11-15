@@ -37,6 +37,10 @@ public class Staff {
 	@Column(name="id_type")
 	private String idType;
 	
+	@Column(name="is_active")
+	private boolean isActive;
+	
+	private String password = "1234";
 	
 	public String getName() {
 		return name;
@@ -92,6 +96,18 @@ public class Staff {
 	}
 	public void setIdType(String idType) {
 		this.idType = idType;
+	}
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

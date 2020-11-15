@@ -1,3 +1,6 @@
+<%@page import="com.espresso.db.util.DbUtil"%>
+<%@page import="java.util.List"%>
+<%@page import="com.espresso.dto.Category"%>
 <%@ include file="adminheader.jsp"%>
 <%@page import="com.espresso.util.EspressoUtil"%>
 
@@ -48,6 +51,9 @@
 
 	<div class="col col-md-4"></div>
 </div>
+<%
+	List<Category> categories = DbUtil.getAllCategories();
+%>
 
 <div class="row" style="margin-top: 50px;">
 
@@ -66,12 +72,12 @@
 	  </thead>
 	  <tbody>
 	    <%
-	    	for(int i=1; i<5; i++)
+	    	for(Category cat: categories)
 	    	{
 	    %>
 		    <tr>
-		      <td><%="Hot Coffee" %></td>
-		      <td><%=6 %></td>
+		      <td><%=cat.getCategoryName() %></td>
+		      <td><%=cat.getItems().size() %></td>
 		    </tr>
 	    <%
 	    	}

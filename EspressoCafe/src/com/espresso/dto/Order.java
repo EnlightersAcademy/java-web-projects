@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Order {
@@ -20,10 +21,12 @@ public class Order {
 	private int orderId;
 
 	@Column(name = "customer_id")
-	private int customerId;
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Customer.class)
+	private Customer customer;
 
 	@Column(name = "staff_id")
-	private int staffId;
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Staff.class)
+	private Staff staff;
 
 
 	@OneToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=OrderItem.class, fetch = FetchType.EAGER)
@@ -44,21 +47,6 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	public int getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-
-	public int getStaffId() {
-		return staffId;
-	}
-
-	public void setStaffId(int staffId) {
-		this.staffId = staffId;
-	}
 
 	public int getTotalAmount() {
 		return totalAmount;
@@ -82,6 +70,22 @@ public class Order {
 
 	public void setItems(List<OrderItem> items) {
 		this.items = items;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Staff getStaff() {
+		return staff;
+	}
+
+	public void setStaff(Staff staff) {
+		this.staff = staff;
 	}
 
 }

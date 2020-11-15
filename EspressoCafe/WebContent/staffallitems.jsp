@@ -1,5 +1,18 @@
+<%@page import="com.espresso.dto.Item"%>
+<%@page import="com.espresso.db.util.DbUtil"%>
+
+<%@page import="java.util.List"%>
 <%@ include file="staffheader.jsp"%>
 
+<%
+	List<Item> items = DbUtil.getAllItems();
+%>
+<%@page import="com.espresso.util.*" %>
+<%
+if (!EspressoUtil.isValidSession(request)) {
+	response.sendRedirect("index.jsp?exp=true");
+}
+%>
 <div class="row" style="margin-top: 20px;">
 
 	<h3 class="mt-4" style="margin-bottom: 30px;">
@@ -20,15 +33,15 @@
 	  </thead>
 	  <tbody>
 	    <%
-	    	for(int i=1; i<5; i++)
+	    	for(Item item: items)
 	    	{
 	    %>
 		    <tr>
-		      <td><img style="width: 200px;" alt="" src="<%="assets/images/sampleItems/cuppacino.jpeg" %>" > </td>
-		      <td><%="Cappuccino" %></td>
-		      <td><%="Hot Coffee" %></td>
-		      <td><%="Hot standard coffee." %></td>
-		      <td>&#x20B9; <%=120 %></td>
+		      <td><img style="width: 200px;" alt="" src=<%=item.getPhoto() %> > </td>
+		      <td><%=item.getItemName() %></td>
+		      <td><%=item.getCategory().getCategoryName()%></td>
+		      <td><%=item.getDescription() %></td>
+		      <td>&#x20B9; <%=item.getPrice()%></td>
 		    </tr>
 	    <%
 	    	}

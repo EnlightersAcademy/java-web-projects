@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.espresso.db.util.DbUtil;
 import com.espresso.dto.Staff;
@@ -34,6 +35,21 @@ public class StaffServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String userName = request.getParameter("username");
+		String password = request.getParameter("password");
+		Staff staff = DbUtil.getStaffByEmailId(userName);
+		if(staff != null) {
+			if(password.equals(staff.getPassword())) {
+				HttpSession session = request.getSession(true);
+				session.setAttribute("staff", staff);
+				session.setAttribute("sessionId", staff.getEmailId());
+				request.getRequestDispatcher("staffhome.jsp").forward(request, response);
+			} else {
+				response.sendRedirect("index.jsp?msg=fail");
+			}
+		} else {
+			response.sendRedirect("index.jsp?msg=fail");
+		}
 	}
 
 	/**
@@ -45,12 +61,33 @@ public class StaffServlet extends HttpServlet {
 		if (!EspressoUtil.isValidSession(request)) {
 			response.sendRedirect("index.jsp?exp=true");
 		}
+		
+		if(request.getParameter("pass") != null && "true".equals(request.getParameter("pass"))) {
+			Staff staff = (Staff)request.getSession().getAttribute("staff");
+			String pass1 = request.getParameter("password1");
+			String pass2 = request.getParameter("password2");
+			if(!(pass1.equals(pass2))) {
+				request.getRequestDispatcher("staffchangepass.jsp?msg=mismatch").forward(request, response);
+				try {
+					DbUtil.updateStaffPassword(staff, pass1);
+					request.getRequestDispatcher("staffchangepass.jsp?msg=success").forward(request, response);
+				} catch (Exception e) {
+					request.getRequestDispatcher("staffchangepass.jsp?msg=fail").forward(request, response);
+				}
+			}
+		}
 		DbUtil<Staff> util = new DbUtil<>();
 		String emailId = request.getParameter("email");
 		if (DbUtil.getStaffByEmailId(emailId) != null) {
 			request.getRequestDispatcher("adminaddstaff.jsp?msg=dup").forward(request, response);
 		}
-		Staff staff = new Staff();
+		Staff staff = null;
+		boolean isUpdateReq = (request.getParameter("update") != null && "true".equals(request.getParameter("update")));
+		if(isUpdateReq) {
+			staff = util.getStaffByEmailId(emailId);
+		} else {
+		staff = new Staff();
+		}
 		staff.setName(request.getParameter("name"));
 		staff.setEmailId(emailId);
 		staff.setGender(request.getParameter("gender"));
@@ -61,8 +98,14 @@ public class StaffServlet extends HttpServlet {
 		staff.setIdType(request.getParameter("idtype"));
 
 		try {
+			if(isUpdateReq) {
+				util.updateStaffDetails(staff);
+				request.getRequestDispatcher("admineditstaff.jsp?msg=success").forward(request, response);
+			}else {
 			util.createEntry(staff);
 			request.getRequestDispatcher("adminaddstaff.jsp?msg=success").forward(request, response);
+			}
+			
 		} catch (Exception exe) {
 			request.getRequestDispatcher("adminaddstaff.jsp?msg=fail").forward(request, response);
 		}

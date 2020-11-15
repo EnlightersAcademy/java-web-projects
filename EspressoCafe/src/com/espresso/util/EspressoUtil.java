@@ -24,7 +24,11 @@ public class EspressoUtil {
 		case "dup":
 			response = 2;
 			break;
+		case "mismatch":
+			response = 3;
+			break;
 		}
+		
 
 		return response;
 	}

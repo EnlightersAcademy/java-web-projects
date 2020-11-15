@@ -1,5 +1,21 @@
 <!DOCTYPE html>
 <%@page import="com.espresso.util.EspressoUtil"%>
+<%@page import="com.espresso.dto.Staff"%>
+<%@page import="com.espresso.db.util.DbUtil"%>
+<%
+	if (EspressoUtil.isResponseSuccess(request) != -1) {
+		int status = EspressoUtil.isResponseSuccess(request);
+		if (status == 0) {
+%>
+alert("Successfully updated the staff details")
+<%
+	} else if (status == 1) {
+%>
+alert("Invalid login credentials or profile could be deactivated. Please try again or contact Administrator")
+<%
+	}
+	}
+%>
 <html lang="en">
 
 <head>
@@ -28,7 +44,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" method="post" action="adminhome.jsp">
+				<form class="login100-form validate-form" method="get" action="staff">
 					<span class="login100-form-title p-b-34" style="margin-top: -100px;">
 						<img src="assets/images/logo.png" />
 					</span>
