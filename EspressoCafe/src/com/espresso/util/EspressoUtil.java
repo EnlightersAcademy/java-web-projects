@@ -14,6 +14,9 @@ public class EspressoUtil {
 	public static int isResponseSuccess(HttpServletRequest request) {
 		String msg = request.getParameter("msg");
 		int response = -1;
+		if (msg == null) {
+			return response;
+		}
 		switch (msg) {
 		case "success":
 			response = 0;

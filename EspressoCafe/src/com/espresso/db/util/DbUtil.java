@@ -85,17 +85,23 @@ public class DbUtil<T> {
 
 	public static Staff getStaffByEmailId(String emailId) {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
-		TypedQuery<Staff> query = manager.createQuery("select staff from Staff staff where staff.email_id =:emailId",
+		TypedQuery<Staff> query = manager.createQuery("select staff from Staff staff where staff.emailId =:emailId",
 				Staff.class);
-		query.setParameter(1, emailId);
-		return query.getSingleResult();
+		query.setParameter("emailId", emailId);
+		Staff staff = null;
+		try {
+		 staff = query.getSingleResult();
+		} catch(Exception exe) {
+			return null;
+		}
+		return staff;
 	}
 	
 	public static List<Order> getOrdersByStaffId(int staffId) {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
 		TypedQuery<Order> query = manager.createQuery("select order from Order order where order.staffId =:staffId",
 				Order.class);
-		query.setParameter(1, staffId);
+		query.setParameter("staffId", staffId);
 		return query.getResultList();
 	}
 	
@@ -104,15 +110,15 @@ public class DbUtil<T> {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
 		TypedQuery<Item> query = manager.createQuery("select item from Item item where item.name = :name",
 				Item.class);
-		query.setParameter(1, name);
+		query.setParameter("name", name);
 		return query.getSingleResult();
 	}
 	
 	public static Category getCategoryByName(String name) {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
-		TypedQuery<Category> query = manager.createQuery("select cat from Category cat where cat.category_name = :name",
+		TypedQuery<Category> query = manager.createQuery("select cat from Category cat where cat.categoryNname = :name",
 				Category.class);
-		query.setParameter(1, name);
+		query.setParameter("name", name);
 		return query.getSingleResult();
 	}
 	
@@ -120,7 +126,7 @@ public class DbUtil<T> {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
 		TypedQuery<Customer> query = manager.createQuery("select cus from Customer cus where cus.emailId =:emailId",
 				Customer.class);
-		query.setParameter(1, emailId);
+		query.setParameter("emailId", emailId);
 		return query.getSingleResult();
 	}
 	
@@ -129,7 +135,7 @@ public class DbUtil<T> {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
 		manager.getTransaction().begin();
 		try {
-			TypedQuery<Staff> query = manager.createQuery(" update Staff s set s.name =:name, s.gender =:gender, s.dob =:dob, s.identification =:identification, s.phoneNo =:phoneNo, s.address =:address, s.idType =:idType  where staff.email_id =:emailId",
+			TypedQuery<Staff> query = manager.createQuery(" update Staff s set s.name =:name, s.gender =:gender, s.dob =:dob, s.identification =:identification, s.phoneNo =:phoneNo, s.address =:address, s.idType =:idType  where staff.emailId =:emailId",
 					Staff.class);
 			query.setParameter("name", staff.getName());
 			query.setParameter("gender", staff.getGender());
