@@ -1,12 +1,3 @@
-<%@page import="java.util.Date, java.text.DateFormat, java.text.SimpleDateFormat"%>
-
-<%
-	DateFormat df = new SimpleDateFormat("dd-MMM-yy HH:mm:ss");
-	Date dateobj = new Date();
-	String currentDate = df.format(dateobj);
-%>
-
-
 </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -14,7 +5,7 @@
                         <div class="d-flex align-items-center justify-content-between small">
                         	<div>
                                 <span>Logged in at: </span>
-                                <b><%=currentDate %></b>
+                                <b><%=loggedInDateTime %></b>
                             </div>
                             <div class="text-muted">Copyright &copy; Espresso Café</div>
                         </div>
