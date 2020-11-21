@@ -1,3 +1,5 @@
+<%@page import="java.util.Date, java.text.DateFormat, java.text.SimpleDateFormat"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,6 +17,12 @@
     	<%
     		String userName = "Kajin";
     	%>
+    	
+    	<%
+			DateFormat df = new SimpleDateFormat("dd-MMM-yy HH:mm:ss");
+			Date dateobj = new Date();
+			String loggedInDateTime = df.format(dateobj);
+		%>
     
     
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
