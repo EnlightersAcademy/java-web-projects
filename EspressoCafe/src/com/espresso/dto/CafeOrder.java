@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -17,12 +18,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Order")
-public class Order {
+@Table(name = "Cafe_Order")
+public class CafeOrder {
 	@Id
-	@GeneratedValue
-	@Column(name = "order_id")
-	private int orderId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer_id", unique= true)
@@ -33,8 +33,8 @@ public class Order {
 	private Staff staff;
 
 
-//	@ManyToMany(targetEntity=OrderItem.class, fetch = FetchType.EAGER)
-//	private List<OrderItem> items = new ArrayList<OrderItem>();
+	@ManyToMany(targetEntity=OrderItem.class, fetch = FetchType.EAGER)
+	private List<OrderItem> items = new ArrayList<OrderItem>();
 
 
 	@Column(name = "total_amount")
@@ -44,15 +44,16 @@ public class Order {
 	private Date dateOfOrder;
 	
 	//1 for completed, 2 for in progress
+	@Column(name = "status")
 	private int status;
 
-	public int getOrderId() {
-		return orderId;
+	public int getId() {
+		return id;
 	}
 
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setId(int orderId) {
+		this.id = orderId;
 	}
 
 
@@ -72,29 +73,29 @@ public class Order {
 		this.dateOfOrder = dateOfOrder;
 	}
 
-//	public List<OrderItem> getItems() {
-//		return items;
-//	}
-//
-//	public void setItems(List<OrderItem> items) {
-//		this.items = items;
-//	}
+	public List<OrderItem> getItems() {
+		return items;
+	}
 
-//	public Customer getCustomer() {
-//		return customer;
-//	}
-//
-//	public void setCustomer(Customer customer) {
-//		this.customer = customer;
-//	}
-//
-//	public Staff getStaff() {
-//		return staff;
-//	}
-//
-//	public void setStaff(Staff staff) {
-//		this.staff = staff;
-//	}
+	public void setItems(List<OrderItem> items) {
+		this.items = items;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Staff getStaff() {
+		return staff;
+	}
+
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
 
 
 	public int getStatus() {

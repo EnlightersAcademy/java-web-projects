@@ -34,19 +34,19 @@
 		                 <div class="col-md-6">
 		                     <div class="form-group">
 		                         <label class="small mb-1" for="customername">Customer Name</label>
-		                         <input class="form-control py-4" id="customername" type="text" readonly value= <%=cus.getName() %> placeholder="Enter Customer Name" />
+		                         <input class="form-control py-4" name="customername" id="customername" type="text" readonly value= <%=cus.getName() %> placeholder="Enter Customer Name" />
 		                     </div>
 		                 </div>
 		                 <div class="col-md-6">
 		                     <div class="form-group">
 		                         <label class="small mb-1" for="mobile">Mobile Number</label>
-		                         <input class="form-control py-4" id="mobile" type="text" pattern="[0-9]{10}" readonly value= <%=cus.getPhoneNo() %> placeholder="Enter Mobile Number" />
+		                         <input class="form-control py-4" name="mobile" id="mobile" type="text" pattern="[0-9]{10}" readonly value= <%=cus.getPhoneNo() %> placeholder="Enter Mobile Number" />
 		                     </div>
 		                 </div>
 		             </div>
 		             <div class="form-group">
 		                 <label class="small mb-1" for="email">Email</label>
-		                 <input class="form-control py-4" id="email" type="email" readonly value= <%=cus.getEmailId() %> placeholder="Enter E-Mail Address" readonly />
+		                 <input class="form-control py-4" name="email" id="email" type="email" readonly value= <%=cus.getEmailId() %> placeholder="Enter E-Mail Address" readonly />
 		             </div>
 		             
 		             <div class="form-group mt-4 mb-0">

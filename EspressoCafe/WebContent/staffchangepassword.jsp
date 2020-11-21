@@ -37,11 +37,11 @@
 		    <div class="card-body">
 		        <form class="form-signin" method="post" action="staff?pass=true">
 					<input
-						type="password" id="password1" class="form-control"
+						type="password" name="password1" id="password1" class="form-control"
 						placeholder="Enter New Password" required autofocus>
 						<br/>
 						<input
-						type="password" id="password2" class="form-control"
+						type="password" name="password2" id="password2" class="form-control"
 						placeholder="Confirm New Password" required autofocus>
 					<br/>
 					<button class="btn btn-lg btn-success btn-block" type="submit">Update Password</button>

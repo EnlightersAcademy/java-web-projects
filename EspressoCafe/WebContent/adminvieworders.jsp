@@ -1,4 +1,4 @@
-<%@page import="com.espresso.dto.Order"%>
+<%@page import="com.espresso.dto.CafeOrder"%>
 <%@page import="java.util.List"%>
 <%@page import="com.espresso.db.util.DbUtil"%>
 <%@page import="java.util.Date"%>
@@ -16,8 +16,8 @@
 	<br/><br/>
 	
 	<%
-	List<Order> orders = DbUtil.getAllOrders();
-	%>
+			List<CafeOrder> orders = DbUtil.getAllOrders();
+		%>
 	
 	<div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -32,11 +32,11 @@
                 </thead>
                 <tbody>
                     <%
-				    	for(Order order: orders)
-				    	{
-				    %>
+                    	for(CafeOrder order: orders)
+                    		    	{
+                    %>
 					    <tr>
-					      <th><%= order.getOrderId() %></th>
+					      <th><%= order.getId() %></th>
 					      <td><%= order.getCustomer().getEmailId() %></td>
 					      <td><%= order.getDateOfOrder() %></td>
 					      <td>&#x20B9; <%=order.getTotalAmount() %></td>

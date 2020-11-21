@@ -1,18 +1,18 @@
 <%@page import="com.espresso.dto.Staff"%>
 <%@page import="java.util.List"%>
-<%@page import="com.espresso.dto.Order"%>
+<%@page import="com.espresso.dto.CafeOrder"%>
 <%@page import="java.util.Date"%>
 <%@ include file="staffheader.jsp"%>
 <%@page import="com.espresso.db.util.*" %>
 <%@page import="com.espresso.util.*" %>
 <%
-if (!EspressoUtil.isValidSession(request)) {
+	if (!EspressoUtil.isValidSession(request)) {
 	response.sendRedirect("index.jsp?exp=true");
 }
 %>
 <%
 	Staff staff = (Staff)request.getSession().getAttribute("staff");
-	List<Order> orders = DbUtil.getOrdersByStaffId(staff.getStaffId());
+	List<CafeOrder> orders = DbUtil.getOrdersByStaffId(staff.getStaffId());
 %>
 
 <div class="row" style="margin-top: 20px;">
@@ -34,11 +34,11 @@ if (!EspressoUtil.isValidSession(request)) {
 	  </thead>
 	  <tbody>
 	    <%
-	    	for(Order order: orders)
-	    	{
+	    	for(CafeOrder order: orders)
+	    	    	{
 	    %>
 		    <tr>
-		      <th><%=order.getOrderId()%></th>
+		      <th><%=order.getId()%></th>
 		      <td><%=order.getCustomer().getEmailId() %></td>
 		      <td><%=order.getDateOfOrder() %></td>
 		      <td>&#x20B9; <%=order.getTotalAmount()%></td>

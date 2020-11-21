@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 import com.espresso.dto.Category;
 import com.espresso.dto.Customer;
 import com.espresso.dto.Item;
-import com.espresso.dto.Order;
+import com.espresso.dto.CafeOrder;
 import com.espresso.dto.PurchaseItem;
 import com.espresso.dto.Staff;
 import com.espresso.hibernate.JPAUtil;
@@ -50,9 +50,9 @@ public class DbUtil<T> {
 		return query.getResultList();
 	}
 	
-	public static List<Order> getAllOrders() {
+	public static List<CafeOrder> getAllOrders() {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
-		TypedQuery<Order> query = manager.createQuery("select ord from Order ord", Order.class);
+		TypedQuery<CafeOrder> query = manager.createQuery("select ord from Order ord", CafeOrder.class);
 		return query.getResultList();
 	}
 	
@@ -97,10 +97,10 @@ public class DbUtil<T> {
 		return staff;
 	}
 	
-	public static List<Order> getOrdersByStaffId(int staffId) {
+	public static List<CafeOrder> getOrdersByStaffId(int staffId) {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
-		TypedQuery<Order> query = manager.createQuery("select order from Order order where order.staffId =:staffId",
-				Order.class);
+		TypedQuery<CafeOrder> query = manager.createQuery("select order from Order order where order.staffId =:staffId",
+				CafeOrder.class);
 		query.setParameter("staffId", staffId);
 		return query.getResultList();
 	}

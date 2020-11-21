@@ -13,27 +13,27 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1" for="name">Name</label>
-                                <input class="form-control" id="name" type="text" placeholder="Enter User Name" required />
+                                <input class="form-control" name="name" id="name" type="text" placeholder="Enter User Name" required />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1" for="mobile">Mobile</label>
-                                <input class="form-control" id="mobile" type="text" pattern="[0-9]{10}" placeholder="Enter Mobile Number" required />
+                                <input class="form-control" name="mobile" id="mobile" type="text" pattern="[0-9]{10}" placeholder="Enter Mobile Number" required />
                             </div>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label class="small mb-1" for="email">Email</label>
-                        <input class="form-control" id="email" type="email" placeholder="Enter E-Mail Address" readonly />
+                        <input class="form-control" name="email" id="email" type="email" placeholder="Enter E-Mail Address" readonly />
                     </div>
                     
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1" for="gender">Gender</label>
-                                <select class="form-control" id="gender" required>
+                                <select class="form-control" name="gender" id="gender" required>
 							        <option selected>Select</option>
 							        <option value="1">Male</option>
 							        <option value="2">Female</option>
@@ -44,7 +44,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
 		                        <label class="small mb-1" for="email">Date of Birth</label>
-		                        <input type="date" class="form-control" id="dob" placeholder="Enter Date of Birth" required>
+		                        <input type="date" class="form-control" name="dob" id="dob" placeholder="Enter Date of Birth" required>
 		                    </div>
                         </div>
                     </div>
@@ -52,19 +52,19 @@
                     
                     <div class="form-group">
                         <label class="small mb-1" for="address">Address</label>
-                        <textarea rows="2" cols="50" class="form-control" id="address" placeholder="Enter Address" required></textarea>
+                        <textarea rows="2" cols="50" class="form-control" name="address" id="address" placeholder="Enter Address" required></textarea>
                     </div>
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1" for="idtype">ID Type</label>
-                                <input class="form-control" id="idtype" type="text" placeholder="Enter ID Type - Aadhaar, PAN, etc." required />
+                                <input class="form-control" name="idtype" id="idtype" type="text" placeholder="Enter ID Type - Aadhaar, PAN, etc." required />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="small mb-1" for="idnumber">ID Number</label>
-                                <input class="form-control" id="idnumber" type="text" placeholder="Enter ID Number" required />
+                                <input class="form-control" name="idnumber" id="idnumber" type="text" placeholder="Enter ID Number" required />
                             </div>
                         </div>
                     </div>

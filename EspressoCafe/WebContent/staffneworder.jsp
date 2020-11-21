@@ -15,7 +15,7 @@
 		    <div class="card-body">
 		        <form class="form-signin" method="post" action="staffneworder2.jsp">
 					<input
-						type="email" id="customeremail" class="form-control"
+						type="email" name="customeremail" id="customeremail" class="form-control"
 						placeholder="Customer E-Mail Address" required autofocus>
 					<br/>
 					<button class="btn btn-lg btn-success btn-block" type="submit">SEARCH</button>

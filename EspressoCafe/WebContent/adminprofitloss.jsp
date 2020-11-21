@@ -38,7 +38,7 @@
 	                        <div class="col-md-6">
 	                            <div class="form-group">
 	                                <label class="small mb-1" for="year">Year</label>
-	                                <select class="form-control" id="year" required>
+	                                <select class="form-control" name="year" id="year" required>
 	                                	<%
 	                                		for(int i=0; i<years.length; i++)
 	                                		{
@@ -52,7 +52,7 @@
 	                        <div class="col-md-6">
 	                            <div class="form-group">
 	                                <label class="small mb-1" for="month">Month</label>
-	                                <select class="form-control" id="month" required>
+	                                <select class="form-control" name="month" id="month" required>
 	                                	<%
 	                                		for(int i=0; i<12; i++)
 	                                		{
@@ -66,7 +66,7 @@
 	                        <div class="col-md-6">
 	                            <div class="form-group">
 			                        <div class="custom-control custom-switch" style="margin-left: 10px;">
-									  <input type="checkbox" class="custom-control-input" id="showyearly">
+									  <input type="checkbox" class="custom-control-input" name="showyearly" id="showyearly">
 									  <label class="custom-control-label" for="showyearly">Show Yearly Data</label>
 									</div>
 								</div>

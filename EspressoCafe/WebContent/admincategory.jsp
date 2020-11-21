@@ -39,7 +39,7 @@
 		    <div class="card-body">
 		        <form class="form-signin" method="post" action="category">
 					<input
-						type="text" id="categoryname" class="form-control"
+						type="text" name="categoryname" id="categoryname" class="form-control"
 						placeholder="Category Name" required autofocus>
 					<br/>
 					<button class="btn btn-lg btn-success btn-block" type="submit">Add Category</button>

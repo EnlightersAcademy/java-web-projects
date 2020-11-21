@@ -43,14 +43,14 @@ alert("Failed to update staff details. Please retry again")
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="small mb-1" for="name">Name</label> <input
-									class="form-control" id="name" type="text" value=<%=staff.getName() %>
+									class="form-control" name="name" id="name" type="text" value=<%=staff.getName() %>
 									placeholder="Enter User Name" />
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="small mb-1" for="mobile">Mobile</label> <input
-									class="form-control" id="mobile" type="text" value=<%=staff.getPhoneNo() %>
+									class="form-control" name="mobile" id="mobile" type="text" value=<%=staff.getPhoneNo() %>
 									pattern="[0-9]{10}" placeholder="Enter Mobile Number" />
 							</div>
 						</div>
@@ -58,7 +58,7 @@ alert("Failed to update staff details. Please retry again")
 
 					<div class="form-group">
 						<label class="small mb-1" for="email">Email</label> <input
-							class="form-control" id="email" type="email" value=<%=staff.getEmailId() %>
+							class="form-control" name="email" id="email" type="email" value=<%=staff.getEmailId() %>
 							placeholder="Enter E-Mail Address" readonly />
 					</div>
 
@@ -66,7 +66,7 @@ alert("Failed to update staff details. Please retry again")
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="small mb-1" for="gender">Gender</label> <select
-									class="form-control" id="gender">
+									class="form-control" name="gender" id="gender">
 									<%
 									switch(staff.getGender()) {
 									
@@ -99,7 +99,7 @@ alert("Failed to update staff details. Please retry again")
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="small mb-1" for="email">Date of Birth</label> <input
-									type="date" class="form-control" id="dob" value=<%=staff.getDob() %>
+									type="date" class="form-control" name="dob" id="dob" value=<%=staff.getDob() %>
 									placeholder="Enter Date of Birth">
 							</div>
 						</div>
@@ -108,21 +108,21 @@ alert("Failed to update staff details. Please retry again")
 
 					<div class="form-group">
 						<label class="small mb-1" for="address">Address</label>
-						<textarea rows="2" cols="50" class="form-control" id="address" value=<%=staff.getAddress() %>
+						<textarea rows="2" cols="50" class="form-control" name="address" id="address" value=<%=staff.getAddress() %>
 							placeholder="Enter Address"></textarea>
 					</div>
 					<div class="form-row">
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="small mb-1" for="idtype">ID Type</label> <input
-									class="form-control" id="idtype" type="text" value=<%=staff.getIdType() %>
+									class="form-control" name="idtype" id="idtype" type="text" value=<%=staff.getIdType() %>
 									placeholder="Enter ID Type - Aadhaar, PAN, etc." />
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="small mb-1" for="idnumber">ID Number</label> <input
-									class="form-control" id="idnumber" type="text" value=<%=staff.getIdentification() %>
+									class="form-control" name="idnumber" id="idnumber" type="text" value=<%=staff.getIdentification() %>
 									placeholder="Enter ID Number" />
 							</div>
 						</div>

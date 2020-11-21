@@ -45,7 +45,7 @@
 
                          <div class="form-group">
                              <label class="small mb-1" for="category">Category</label>
-                             <select class="form-control" id="category" required>
+                             <select class="form-control" name="category" id="category" required>
 						        <option selected>Select</option>
 						        <%
 						        	for(Category cat: categories)
@@ -60,22 +60,22 @@
                      
                          <div class="form-group">
                              <label class="small mb-1" for="name">Item Name</label>
-                             <input class="form-control" id="name" type="text" pattern="[a-zA-z]" placeholder="Item Name" required />
+                             <input class="form-control" name ="name" id="name" type="text" pattern="[a-zA-z]" placeholder="Item Name" required />
                          </div>
                          
                          <div class="form-group">
                              <label class="small mb-1" for="description">Description</label>
-                             <input class="form-control" id="description" type="text" placeholder="Item Description" required />
+                             <input class="form-control" name="description" id="description" type="text" placeholder="Item Description" required />
                          </div>
                          
                          <div class="form-group">
                              <label class="small mb-1" for="price">Price</label>
-                             <input class="form-control" id="price" type="text" placeholder="Price in &#x20B9;" pattern="[0-9]{1,}" required />
+                             <input class="form-control" name="price" id="price" type="text" placeholder="Price in &#x20B9;" pattern="[0-9]{1,}" required />
                          </div>
                          
                          <div class="form-group">
                              <label class="small mb-1" for="price">Picture</label>
-                             <input class="form-control" id="price" type="file" required accept="image/x-jpg,image/jpeg" style="height: auto;" />
+                             <input class="form-control" name="picture" id="picture" type="file" required accept="image/x-jpg,image/jpeg" style="height: auto;" />
                          </div>
                         
 					<br/>

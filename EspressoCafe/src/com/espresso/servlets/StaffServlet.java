@@ -60,6 +60,7 @@ public class StaffServlet extends HttpServlet {
 			throws ServletException, IOException {
 		if (!EspressoUtil.isValidSession(request)) {
 			response.sendRedirect("index.jsp?exp=true");
+			return;
 		}
 		
 		if(request.getParameter("pass") != null && "true".equals(request.getParameter("pass"))) {
@@ -71,8 +72,10 @@ public class StaffServlet extends HttpServlet {
 				try {
 					DbUtil.updateStaffPassword(staff, pass1);
 					request.getRequestDispatcher("staffchangepass.jsp?msg=success").forward(request, response);
+					return;
 				} catch (Exception e) {
 					request.getRequestDispatcher("staffchangepass.jsp?msg=fail").forward(request, response);
+					return;
 				}
 			}
 		}
@@ -80,6 +83,7 @@ public class StaffServlet extends HttpServlet {
 		String emailId = request.getParameter("email");
 		if (DbUtil.getStaffByEmailId(emailId) != null) {
 			request.getRequestDispatcher("adminaddstaff.jsp?msg=dup").forward(request, response);
+			return;
 		}
 		Staff staff = null;
 		boolean isUpdateReq = (request.getParameter("update") != null && "true".equals(request.getParameter("update")));
@@ -101,12 +105,15 @@ public class StaffServlet extends HttpServlet {
 			if(isUpdateReq) {
 				util.updateStaffDetails(staff);
 				request.getRequestDispatcher("admineditstaff.jsp?msg=success").forward(request, response);
+				return;
 			}else {
 			util.createEntry(staff);
 			request.getRequestDispatcher("adminaddstaff.jsp?msg=success").forward(request, response);
+			return;
 			}
 			
 		} catch (Exception exe) {
+			exe.printStackTrace();
 			request.getRequestDispatcher("adminaddstaff.jsp?msg=fail").forward(request, response);
 		}
 
