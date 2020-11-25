@@ -1,11 +1,13 @@
+<%@page import="com.espresso.dto.Staff"%>
 </div>
+<% Staff staffDetails = (Staff)request.getSession().getAttribute("staff"); %>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
                         	<div>
                                 <span>Logged in at: </span>
-                                <b><%=loggedInDateTime %></b>
+                                <b><%=staffDetails.getLastLoginTime() %></b>
                             </div>
                             <div class="text-muted">Copyright &copy; Espresso Café</div>
                         </div>

@@ -52,7 +52,7 @@ public class CategoryServlet extends HttpServlet {
 			response.sendRedirect("index.jsp?exp=true");
 		}
 		DbUtil<Category> util = new DbUtil<>();
-		String name = request.getParameter("name");
+		String name = request.getParameter("categoryname");
 		if (DbUtil.getCategoryByName(name) != null) {
 			request.getRequestDispatcher("admincategory.jsp?msg=dup").forward(request, response);
 		}

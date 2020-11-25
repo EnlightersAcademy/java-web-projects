@@ -32,7 +32,7 @@
 		      <td><%=item.getName() %></td>
 		      <td><%=item.getDescription() %></td>
 		      <td><%=item.getDate() %></td>
-		      <td><%=item.getQuantity() %></td>
+		      <td><%=item.getQuantity()%></td>
 		      <td><%=item.getTotalCost()%></td>
 		    </tr>
 	    <%

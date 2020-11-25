@@ -50,8 +50,8 @@ public class PurchaseServlet extends HttpServlet {
 		purchase.setName(request.getParameter("name"));
 		purchase.setDescription(request.getParameter("description"));
 		purchase.setTotalCost(Integer.parseInt(request.getParameter("price")));
-		purchase.setQuantity(Integer.parseInt(request.getParameter("quantity")));
-		purchase.setDate(request.getParameter("date"));
+		purchase.setQuantity(request.getParameter("quantity"));
+		purchase.setDate(request.getParameter("purchasedate"));
 		try {
 			DbUtil<PurchaseItem> util = new DbUtil<>();
 			util.createEntry(purchase);

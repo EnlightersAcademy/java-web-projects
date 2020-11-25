@@ -10,15 +10,21 @@
 		int status = EspressoUtil.isResponseSuccess(request);
 		if( status == 0) {
 			%>
+			<script>
 			alert("Successfully added the new Category details")
+			</script>
 			<%
 		} else if (status == 1){
 			%>
+			<script>
 			alert("Failed to add the Category details. Please retry again")
+			</script>
 			<%
 		} else if(status == 2) {
 			%>
+			<script>
 			alert("Category with the provided name already exist. Please verify the input details")
+			</script>
 			<%
 		}
 	}

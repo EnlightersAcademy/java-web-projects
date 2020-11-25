@@ -34,6 +34,24 @@ public class ItemsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String status = request.getParameter("status");
+		int itemId = Integer.parseInt(request.getParameter("id"));
+		if(status != null) {
+			boolean returnStatus = true;
+			if("true".equals(status)) {
+
+				DbUtil<Item> util = new DbUtil<>();
+				 returnStatus = util.updateItemStatus(itemId, false);
+			} else if("false".equals(status)) {
+				DbUtil<Item> util = new DbUtil<>();
+				 returnStatus = util.updateItemStatus(itemId, true);
+			}
+			if(returnStatus) {
+				request.getRequestDispatcher("adminviewitem.jsp?msg=success").forward(request, response);
+			} else {
+				request.getRequestDispatcher("adminviewitem.jsp?msg=fail").forward(request, response);
+			}
+		}
 	}
 
 	/**

@@ -38,7 +38,7 @@
 <!--                         <a class="dropdown-item" href="staffchangepassword.jsp">Change Password</a> -->
 <!--                         <a class="dropdown-item" href="staffupdatedetails.jsp">Update Details</a> -->
 <!--                         <div class="dropdown-divider"></div> -->
-                        <a class="dropdown-item" href="index.jsp">Logout</a>
+                        <a class="dropdown-item" href="login?logout=true">Logout</a>
                     </div>
                 </li>
             </ul>

@@ -18,7 +18,7 @@ public class PurchaseItem {
 	private String name;
 	private String description;
 	private String date;
-	private int quantity;
+	private String quantity;
 	
 	@Column(name = "total_cost")
 	private int totalCost;
@@ -41,10 +41,10 @@ public class PurchaseItem {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public int getQuantity() {
+	public String getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
+	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
 	public int getTotalCost() {

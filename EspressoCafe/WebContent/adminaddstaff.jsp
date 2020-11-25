@@ -7,7 +7,9 @@
 		int status = EspressoUtil.isResponseSuccess(request);
 		if( status == 0) {
 			%>
+			<script>
 			alert("Successfully added Staff details")
+			</script>
 			<%
 		} else if (status == 1){
 			%>

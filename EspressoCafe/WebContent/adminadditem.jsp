@@ -13,15 +13,21 @@
 		int status = EspressoUtil.isResponseSuccess(request);
 		if( status == 0) {
 			%>
+			<script>
 			alert("Successfully added the item")
+			</script>
 			<%
 		} else if (status == 1){
 			%>
+			<script>
 			alert("Failed to add the item. Please retry again")
+			</script>
 			<%
 		}  else if(status == 2) {
 			%>
+			<script>
 			alert("Item with the provided name already exist. Please verify the input details")
+			</script>
 			<%
 		}
 	}
@@ -60,7 +66,7 @@
                      
                          <div class="form-group">
                              <label class="small mb-1" for="name">Item Name</label>
-                             <input class="form-control" name ="name" id="name" type="text" pattern="[a-zA-z]" placeholder="Item Name" required />
+                             <input class="form-control" name ="name" id="name" type="text" pattern="[a-zA-Z\s]*" placeholder="Item Name" required />
                          </div>
                          
                          <div class="form-group">

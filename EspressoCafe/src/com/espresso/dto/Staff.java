@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Staff {
@@ -42,6 +43,9 @@ public class Staff {
 	private boolean isActive;
 	
 	private String password = "1234";
+	
+	@Transient
+	private String lastLoginTime;
 	
 	public String getName() {
 		return name;
@@ -109,6 +113,12 @@ public class Staff {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getLastLoginTime() {
+		return lastLoginTime;
+	}
+	public void setLastLoginTime(String lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
 	}
 
 }

@@ -8,7 +8,9 @@
 		int status = EspressoUtil.isResponseSuccess(request);
 		if (status == 0) {
 %>
+<script>
 alert("Successfully updated the staff details")
+</script>
 <%
 	} else if (status == 1) {
 %>
@@ -108,8 +110,8 @@ alert("Failed to update staff details. Please retry again")
 
 					<div class="form-group">
 						<label class="small mb-1" for="address">Address</label>
-						<textarea rows="2" cols="50" class="form-control" name="address" id="address" value=<%=staff.getAddress() %>
-							placeholder="Enter Address"></textarea>
+						<textarea rows="2" cols="50" class="form-control" name="address" id="address" 
+							placeholder="Enter Address"><%=staff.getAddress() %></textarea>
 					</div>
 					<div class="form-row">
 						<div class="col-md-6">

@@ -6,11 +6,15 @@
 		int status = EspressoUtil.isResponseSuccess(request);
 		if( status == 0) {
 			%>
+			<script>
 			alert("Successfully added the purchase entry")
+			</script>
 			<%
 		} else if (status == 1){
 			%>
+			<script>
 			alert("Failed to add the purchase entry. Please retry again")
+			</script>
 			<%
 		}
 	}

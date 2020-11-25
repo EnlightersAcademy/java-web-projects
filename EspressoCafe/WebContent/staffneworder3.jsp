@@ -1,7 +1,13 @@
+<%@page import="com.espresso.dto.Item"%>
+<%@page import="java.util.List"%>
 <%@page import="com.espresso.dto.Customer"%>
+<%@page import="com.espresso.dto.Category" %>
 <%@page import="com.espresso.db.util.DbUtil"%>
 <%@ include file="staffheader.jsp"%>
 
+<%
+	List<Category> cats = DbUtil.getAllCategories();
+%>
 <style>
         	.nav-pills-custom .nav-link {
 			    color: #888;
@@ -44,10 +50,10 @@
 			                <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
        							<!--Based on number of Categories -->
        							<%
-       								for(int i=0; i<3; i++){
+       								for(int i = 0; i < cats.size(); i++){
        							%>
-			                    <a class="nav-link mb-3 p-3 shadow <%= (i==0)? "active" : "" %>" id="tab<%=i %>" data-toggle="pill" href="#details<%=i %>" role="tab" aria-controls="v-pills-home" aria-selected="true">
-			                        <span class="font-weight-bold small text-uppercase">Hot Beverages</span></a>
+			                    <a class="nav-link mb-3 p-3 shadow <%= (i==0)? "active" : "" %>" id="tab<%=i %>" data-toggle="pill" href="#details<%=i%>" role="tab" aria-controls="v-pills-home" aria-selected="true">
+			                        <span class="font-weight-bold small text-uppercase"><%=cats.get(i).getCategoryName() %></span></a>
 			
 			                    <%} %>
 			                 </div>
@@ -60,9 +66,9 @@
 			                
        							<!--Based on number of Items in each Category -->
        							<%
-       								for(int i=0; i<3; i++){
+       								for(int i = 0; i < cats.size(); i++){
        							%>
-			                    <div class="tab-pane fade shadow rounded bg-white show p-5 <%= (i==0)? "active" : "" %> " id="details<%=i %>" role="tabpanel" aria-labelledby="v-pills-home-tab">
+			                    <div class="tab-pane fade shadow rounded bg-white show p-5 <%= (i==0)? "active" : "" %> " id="details<%=i%>" role="tabpanel" aria-labelledby="v-pills-home-tab">
 			                        <table class="table table-hover">
 									  <thead class="thead-dark">
 									    <tr>
@@ -72,27 +78,20 @@
 									    </tr>
 									  </thead>
 									  <tbody>
-									  		<form method="post">
+									  		<%
+									  			List<Item> itemsOfCat = DbUtil.getAllItemsByCategory(cats.get(i));
+									  		for(Item item : itemsOfCat) {
+									  		%>
 											    <tr>
-											      <td style="width: 70%;">Cuppacino<%=i %></td>
-											      <td><input type="number" id="quanity" value="0" class="form-control" min="0" max="10" /></td>
+											    <form method="post">
+											      <td style="width: 70%;"><%=item.getItemName() %></td>
+											      <td><input type="number" name = "quantity" id="quanity" value="0" class="form-control" min="0" max="10" /></td>
+											      <input hidden="true" name="itemId" value=<%=item.getItemId() %>>
 											      <td><input type="submit" value=" ADD " class="btn btn-sm btn-success" > </td>
+											      </form>
 											    </tr>
-										    </form>
-										    <form method="post">
-											    <tr>
-											      <td>Espresso<%=i %></td>
-											      <td><input type="number" id="quanity" value="0" class="form-control" min="0" max="10" /></td>
-											      <td><input type="submit" value=" ADD " class="btn btn-sm btn-success" > </td>
-											    </tr>
-										    </form>
-										    <form method="post">
-											    <tr>
-											      <td>Filter Coffee<%=i %></td>
-											      <td><input type="number" id="quanity" value="0" class="form-control" min="0" max="10" /></td>
-											      <td><input type="submit" value=" ADD " class="btn btn-sm btn-success" > </td>
-											    </tr>
-										    </form>
+										    <%} %>
+										   
 									  </tbody>
 									</table>
 			                    </div>
@@ -110,7 +109,7 @@
                         <div class="d-flex align-items-center justify-content-between small">
                         	<div>
                                 <span>Logged in at: </span>
-                                <b><%=loggedInDateTime %></b>
+                                <b><%=staff.getLastLoginTime() %></b>
                             </div>
                             <div class="text-muted">Copyright &copy; Espresso Café</div>
                         </div>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.espresso.db.util.DbUtil;
+import com.espresso.dto.Item;
 import com.espresso.dto.Staff;
 import com.espresso.util.EspressoUtil;
 
@@ -35,6 +36,26 @@ public class StaffServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String status = request.getParameter("status");
+		int staffId = Integer.parseInt(request.getParameter("id"));
+		if(status != null) {
+			boolean returnStatus = true;
+			if("true".equals(status)) {
+
+				DbUtil<Item> util = new DbUtil<>();
+				 returnStatus = util.updateStaffStatus(staffId, false);
+			} else if("false".equals(status)) {
+				DbUtil<Item> util = new DbUtil<>();
+				 returnStatus = util.updateStaffStatus(staffId, true);
+			}
+			if(returnStatus) {
+				request.getRequestDispatcher("adminviewstaff.jsp?msg=success").forward(request, response);
+			} else {
+				request.getRequestDispatcher("adminviewstaff.jsp?msg=fail").forward(request, response);
+			}
+			return;
+		}
+		
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 		Staff staff = DbUtil.getStaffByEmailId(userName);
@@ -81,16 +102,14 @@ public class StaffServlet extends HttpServlet {
 		}
 		DbUtil<Staff> util = new DbUtil<>();
 		String emailId = request.getParameter("email");
-		if (DbUtil.getStaffByEmailId(emailId) != null) {
-			request.getRequestDispatcher("adminaddstaff.jsp?msg=dup").forward(request, response);
-			return;
-		}
+
 		Staff staff = null;
 		boolean isUpdateReq = (request.getParameter("update") != null && "true".equals(request.getParameter("update")));
 		if(isUpdateReq) {
 			staff = util.getStaffByEmailId(emailId);
 		} else {
 		staff = new Staff();
+		staff.setActive(true);
 		}
 		staff.setName(request.getParameter("name"));
 		staff.setEmailId(emailId);
@@ -104,7 +123,7 @@ public class StaffServlet extends HttpServlet {
 		try {
 			if(isUpdateReq) {
 				util.updateStaffDetails(staff);
-				request.getRequestDispatcher("admineditstaff.jsp?msg=success").forward(request, response);
+				request.getRequestDispatcher("admineditstaff.jsp?emailId="+emailId+"&msg=success").forward(request, response);
 				return;
 			}else {
 			util.createEntry(staff);

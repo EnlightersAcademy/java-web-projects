@@ -11,8 +11,8 @@
 }
 %>
 <%
-	Staff staff = (Staff)request.getSession().getAttribute("staff");
-	List<CafeOrder> orders = DbUtil.getOrdersByStaffId(staff.getStaffId());
+	Staff staffOrderPage = (Staff)request.getSession().getAttribute("staff");
+	List<CafeOrder> orders = DbUtil.getOrdersByStaffId(staffOrderPage.getStaffId(), staffOrderPage.getEmailId());
 %>
 
 <div class="row" style="margin-top: 20px;">

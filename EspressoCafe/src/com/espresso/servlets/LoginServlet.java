@@ -1,6 +1,9 @@
 package com.espresso.servlets;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +37,13 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		String logout = request.getParameter("logout");
+		if(logout != null) {
+			if("true".equals(logout)) {
+				request.getSession().invalidate();
+				response.sendRedirect("index.jsp");
+			}
+		}
 	}
 
 	/**
@@ -49,8 +58,10 @@ public class LoginServlet extends HttpServlet {
 
 		if ("admin".equals(userName)) {
 			if ("admin".equals(password)) {
+				
 				request.getRequestDispatcher("adminhome.jsp").forward(request, response);
-
+				HttpSession session = request.getSession(true);
+				session.setAttribute("sessionId", "admin");
 			} else {
 				response.sendRedirect("index.jsp?msg=fail");
 			}
@@ -59,8 +70,15 @@ public class LoginServlet extends HttpServlet {
 			if (staff != null) {
 				if (password.equals(staff.getPassword())) {
 					HttpSession session = request.getSession(true);
+					
+					DateFormat df = new SimpleDateFormat("dd-MMM-yy HH:mm:ss");
+					Date dateobj = new Date();
+					String loggedInDateTime = df.format(dateobj);
+					staff.setLastLoginTime(loggedInDateTime);
+					
 					session.setAttribute("staff", staff);
 					session.setAttribute("sessionId", staff.getEmailId());
+					
 					request.getRequestDispatcher("staffhome.jsp").forward(request, response);
 				} else {
 					response.sendRedirect("index.jsp?msg=fail");

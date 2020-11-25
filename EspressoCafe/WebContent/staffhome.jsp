@@ -7,7 +7,7 @@ if (!EspressoUtil.isValidSession(request)) {
 }
 %>
 <%
-	Staff staff = (Staff)request.getSession().getAttribute("staff");
+	Staff staffHome = (Staff)request.getSession().getAttribute("staff");
 %>
 <style>
 	@font-face {
@@ -38,7 +38,7 @@ if (!EspressoUtil.isValidSession(request)) {
 					</span>
 	
 	<div class="row titleText" style="text-align: center; margin-top: 50px;">
-		<h5>Welcome <%=staff.getName() %></h5>
+		<h5>Welcome <%=staffHome.getName() %></h5>
 	</div>
 </div>
 

@@ -1,3 +1,4 @@
+<%@page import="com.espresso.dto.Staff"%>
 <%@page import="java.util.Date, java.text.DateFormat, java.text.SimpleDateFormat"%>
 
 <!DOCTYPE html>
@@ -15,14 +16,9 @@
     
     <body class="sb-nav-fixed">
     	<%
-    		String userName = "Kajin";
+    		Staff staff = (Staff)request.getSession().getAttribute("staff");
+    		String userName = staff.getName();
     	%>
-    	
-    	<%
-			DateFormat df = new SimpleDateFormat("dd-MMM-yy HH:mm:ss");
-			Date dateobj = new Date();
-			String loggedInDateTime = df.format(dateobj);
-		%>
     
     
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">

@@ -7,11 +7,15 @@
 		int status = EspressoUtil.isResponseSuccess(request);
 		if (status == 0) {
 %>
+<script>
 alert("Successfully updated the staff details")
+</script>
 <%
 	} else if (status == 1) {
 %>
+<script>
 alert("Invalid login credentials or profile could be deactivated. Please try again or contact Administrator")
+</script>
 <%
 	}
 	}
@@ -35,7 +39,9 @@ alert("Invalid login credentials or profile could be deactivated. Please try aga
 	String expired = request.getParameter("exp");
 	if(expired != null && "true".equals(expired)) {
 		%>
+		<script>
 		alert("User Session expired. Please login again")
+		</script>
 		<% 
 	}
 %>
