@@ -26,8 +26,10 @@
 		      <th><%=i %></th>
 		      <td><%="Abc@gmail.com" %></td>
 		      <td>&#x20B9; <%=850 %></td>
-		      <td>
+		      <td class="text-center">
 		      	<a class="btn btn-outline-warning" href="staffupdatedetails.jsp?id=<%=i %>" role="button"><i class="fas fa-edit"></i> Update Order</a>
+		      		&nbsp;&nbsp;
+		      	<a class="btn btn-outline-success" href="stafforderpayment.jsp?id=<%=i %>" role="button"><i class="fas fa-paper-plane"></i> Complete Order</a>
 		      </td>
 		    </tr>
 	    <%

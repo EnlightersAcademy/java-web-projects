@@ -6,6 +6,7 @@
 <%@ include file="staffheader.jsp"%>
 
 <%
+	String cartItemsCount = (request.getAttribute("CartCount")==null? "0" : (String)request.getAttribute("CartCount"));
 	List<Category> cats = DbUtil.getAllCategories();
 %>
 <style>
@@ -42,6 +43,15 @@
 			}
         </style>
         
+        		<div class="row" style="margin: 50px;">
+        			<div class="col-md-12 text-right">
+	        			<a type="button" class="btn btn-outline-info" href="stafforderpayment.jsp">
+	        				<i class="fa fa-shopping-cart"></i>
+						  Cart &nbsp; <span class="badge badge-pill badge-warning"><%=cartItemsCount %></span>
+						  <span class="sr-only">unread messages</span>
+						</a>
+					</div>
+        		</div>
 				<div class="row" style="margin: 50px;">
 				
 
