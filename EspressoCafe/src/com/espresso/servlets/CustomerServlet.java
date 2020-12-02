@@ -1,6 +1,8 @@
 package com.espresso.servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,7 +49,7 @@ public class CustomerServlet extends HttpServlet {
 		if (!EspressoUtil.isValidSession(request)) {
 			response.sendRedirect("index.jsp?exp=true");
 		}
-		
+		boolean isExisting = Boolean.parseBoolean(request.getParameter("existing"));
 		DbUtil<Customer> util = new DbUtil<>();
 		String emailId = request.getParameter("email");
 		String name = request.getParameter("customername");
@@ -56,13 +58,26 @@ public class CustomerServlet extends HttpServlet {
 		cus.setEmailId(emailId);
 		cus.setName(name);
 		cus.setPhoneNo(phoneNo);
-		
-		try {
 
-			util.createEntry(cus);
-			request.getRequestDispatcher("staffneworder3.jsp?msg=success").forward(request, response);
-						
+		try {
+			if (!isExisting) {
+				util.createEntry(cus);
+			}
+			Object orderMap = request.getSession().getAttribute("cusEmailToOrder");
+			Map<String, Integer> cusEmailToOrder = null;
+			if (orderMap != null) {
+				cusEmailToOrder = (Map<String, Integer>) orderMap;
+			} else {
+				cusEmailToOrder = new HashMap<String, Integer>();
+			}
+			if (!isExisting) {
+				cusEmailToOrder.put(emailId, null);
+				request.getSession().setAttribute("cusEmailToOrder", cusEmailToOrder);
+			}
+			request.getRequestDispatcher("staffneworder3.jsp?msg=success&email="+emailId).forward(request, response);
+
 		} catch (Exception exe) {
+			exe.printStackTrace();
 			request.getRequestDispatcher("staffneworder3.jsp?msg=fail").forward(request, response);
 		}
 

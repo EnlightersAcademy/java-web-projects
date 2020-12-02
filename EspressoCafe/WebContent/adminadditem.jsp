@@ -47,7 +47,7 @@
 		    	</h3>
 		   	</div>
 		    <div class="card-body">
-		        <form class="form-signin" method="post" action="items">
+		        <form class="form-signin" method="post" action="items" enctype="multipart/form-data">
 
                          <div class="form-group">
                              <label class="small mb-1" for="category">Category</label>

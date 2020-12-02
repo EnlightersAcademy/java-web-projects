@@ -1,12 +1,16 @@
 package com.espresso.servlets;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.espresso.db.util.DbUtil;
 import com.espresso.dto.Item;
@@ -16,6 +20,7 @@ import com.espresso.util.EspressoUtil;
  * Servlet implementation class ItemsServlet
  */
 @WebServlet("/items")
+@MultipartConfig
 public class ItemsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -67,21 +72,37 @@ public class ItemsServlet extends HttpServlet {
 		DbUtil<Item> util = new DbUtil<>();
 		if (DbUtil.getItemByName(name) != null) {
 			request.getRequestDispatcher("adminadditem.jsp?msg=dup").forward(request, response);
+			return;
 		}
 		Item item = new Item();
 		item.setItemName(name);
 		item.setDescription(request.getParameter("description"));
 		item.setPrice(Integer.parseInt(request.getParameter("price")));
 		item.setCategory(DbUtil.getCategoryByName(request.getParameter("category")));
-		// item.setPhoto(photo);
-		try {
+		item.setAvailable(true);
 
+		try {
+			item.setPhoto(getPhoto(request));
 			util.createEntry(item);
 			request.getRequestDispatcher("adminadditem.jsp?msg=success").forward(request, response);
 		} catch (Exception exe) {
+			exe.printStackTrace();
 			request.getRequestDispatcher("adminadditem.jsp?msg=fail").forward(request, response);
 		}
 
+	}
+	
+	private byte[] getPhoto(HttpServletRequest request) throws Exception {
+		Part filePartProfile = request.getPart("picture");
+		int docLength1 = (int)filePartProfile.getSize();
+		InputStream inputProfile = filePartProfile.getInputStream();
+		ByteArrayOutputStream profileOutput = new ByteArrayOutputStream();
+		byte[] bufferProfile = new byte[docLength1 * 1024];
+		System.out.println("profile length:---------"+docLength1);
+		for (int length = 0; (length = inputProfile.read(bufferProfile)) > 0;) 
+			profileOutput.write(bufferProfile, 0, length);
+		// ************ Set as output.toByteArray()***************
+		return profileOutput.toByteArray();
 	}
 
 }

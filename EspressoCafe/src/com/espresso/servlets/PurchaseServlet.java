@@ -57,6 +57,7 @@ public class PurchaseServlet extends HttpServlet {
 			util.createEntry(purchase);
 			request.getRequestDispatcher("adminaddpurchase.jsp?msg=success").forward(request, response);
 		} catch (Exception exe) {
+			exe.printStackTrace();
 			request.getRequestDispatcher("adminaddpurchase.jsp?msg=fail").forward(request, response);
 		}
 

@@ -29,7 +29,7 @@
 		    	</h3>
 		   	</div>
 		    <div class="card-body">
-		        <form method="post" action="customer">
+		        <form method="post" action="customer?existing=true">
 		             <div class="form-row">
 		                 <div class="col-md-6">
 		                     <div class="form-group">
@@ -78,19 +78,19 @@
 		                 <div class="col-md-6">
 		                     <div class="form-group">
 		                         <label class="small mb-1" for="customername">Customer Name</label>
-		                         <input class="form-control py-4" id="customername" type="text" placeholder="Enter Customer Name" />
+		                         <input class="form-control py-4" name="customername" id="customername" type="text" placeholder="Enter Customer Name" />
 		                     </div>
 		                 </div>
 		                 <div class="col-md-6">
 		                     <div class="form-group">
 		                         <label class="small mb-1" for="mobile">Mobile Number</label>
-		                         <input class="form-control py-4" id="mobile" type="text" pattern="[0-9]{10}" placeholder="Enter Mobile Number" />
+		                         <input class="form-control py-4" name="mobile" id="mobile" type="text" pattern="[0-9]{10}" placeholder="Enter Mobile Number" />
 		                     </div>
 		                 </div>
 		             </div>
 		             <div class="form-group">
 		                 <label class="small mb-1" for="email">Email</label>
-		                 <input class="form-control py-4" id="email" type="email" placeholder="Enter E-Mail Address" />
+		                 <input class="form-control py-4" name="email" id="email" type="email" placeholder="Enter E-Mail Address" />
 		             </div>
 		             
 		             <div class="form-group mt-4 mb-0">

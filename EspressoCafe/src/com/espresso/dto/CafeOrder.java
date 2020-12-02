@@ -1,6 +1,5 @@
 package com.espresso.dto;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -32,8 +30,7 @@ public class CafeOrder {
 	@JoinColumn(name = "staff_id", unique = true)
 	private Staff staff;
 
-
-	@ManyToMany(targetEntity=OrderItem.class, fetch = FetchType.EAGER)
+	@OneToMany(targetEntity=OrderItem.class, mappedBy="cafeOrder", cascade=CascadeType.PERSIST)
 	private List<OrderItem> items = new ArrayList<OrderItem>();
 
 
@@ -41,7 +38,7 @@ public class CafeOrder {
 	private int totalAmount;
 
 	@Column(name = "date_of_order")
-	private Date dateOfOrder;
+	private String dateOfOrder;
 	
 	//1 for completed, 2 for in progress
 	@Column(name = "status")
@@ -65,11 +62,11 @@ public class CafeOrder {
 		this.totalAmount = totalAmount;
 	}
 
-	public Date getDateOfOrder() {
+	public String getDateOfOrder() {
 		return dateOfOrder;
 	}
 
-	public void setDateOfOrder(Date dateOfOrder) {
+	public void setDateOfOrder(String dateOfOrder) {
 		this.dateOfOrder = dateOfOrder;
 	}
 
@@ -108,16 +105,3 @@ public class CafeOrder {
 	}
 
 }
-
-//Add new staff – Name, Phone, Email, Address, ID Type, ID Number, Gender, DOB
-//
-//
-//@ManyToOne(targetEntity=SportCenter.class, cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
-//	@JoinColumn(name="sport_center_id", insertable=false, updatable=false)
-//	private SportCenter sportCenter;
-//
-//
-//		@OneToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Sport.class, fetch = FetchType.EAGER)
-//	@JoinTable(name = "sport_center_to_sports", joinColumns = {
-//			@JoinColumn(name = "sport_center_id") }, inverseJoinColumns = { @JoinColumn(name = "sport_id") })
-//	private Set<Sport> sports;

@@ -1,3 +1,6 @@
+<%@page import="java.io.Console"%>
+<%@page import="com.espresso.dto.CafeOrder"%>
+<%@page import="com.espresso.dto.OrderItem"%>
 <%@page import="com.espresso.dto.Item"%>
 <%@page import="com.espresso.db.util.DbUtil"%>
 
@@ -5,7 +8,11 @@
 <%@ include file="staffheader.jsp"%>
 
 <%
-	List<Item> items = DbUtil.getAllItems();
+	Staff paymentStaff = (Staff)request.getSession().getAttribute("staff");
+	String customerEmail = request.getParameter("customerEmail");
+	List<CafeOrder> orders = DbUtil.getOngoingOrdersByStaffId(paymentStaff.getStaffId());
+	CafeOrder order1 = orders.stream().filter(b -> b.getCustomer().getEmailId().equals(customerEmail)).findFirst().get();
+
 %>
 <%@page import="com.espresso.util.*" %>
 <%
@@ -28,10 +35,10 @@ if (!EspressoUtil.isValidSession(request)) {
 		    <table class="table border" style="margin-bottom:0;">
 		    	<tr>
 		    		<td>Customer Name : </td>
-		    		<th><%= "Name of the Customer" %></th>
+		    		<th><%= order1.getCustomer().getName() %></th>
 		    		<td>&nbsp;</td>
 		    		<td>Customer Email : </td>
-		    		<th><%= "Email of the Customer" %></th>
+		    		<th><%= order1.getCustomer().getEmailId() %></th>
 		    	</tr>
 		    </table>
 		  </div>
@@ -51,15 +58,16 @@ if (!EspressoUtil.isValidSession(request)) {
 		  </thead>
 		  <tbody>
 		    <%
-		    	for(int i=0; i<3; i++)
+		    	for(OrderItem item : order1.getItems())
 		    	{
+		    		Item orderItem = DbUtil.getItemById(item.getItemId());
 		    %>
 			    <tr>
 			      <td><img style="width: 200px;" alt="" src="" > </td>
-			      <td><%=i %></td>
-			      <td><%="itemPrice" %></td>
-			      <td><%="itemQuantity" %></td>
-			      <td><%="price x quanitity"%></td>
+			      <td><%=orderItem.getItemName()%></td>
+			      <td><%=orderItem.getPrice()%></td>
+			      <td><%=item.getQuantity() %></td>
+			      <td><%=orderItem.getPrice() * item.getQuantity()%></td>
 			    </tr>
 		    <%
 		    	}
@@ -68,7 +76,7 @@ if (!EspressoUtil.isValidSession(request)) {
 		  <tfoot class="table-secondary">
 		  	<tr>
 		  		<th colspan="4">Total Amount </th>
-		  		<th><%="Total Amount" %></th>
+		  		<th><%=order1.getTotalAmount() %></th>
 		  	</tr>
 		  </tfoot>		  
 		</table>
@@ -76,7 +84,8 @@ if (!EspressoUtil.isValidSession(request)) {
 	
 	<div class="row col-md-12">
 		<div class="col-md-12 text-right">
-			<form action="" method="post">
+			<form action="itemorder?status=complete" method="post">
+			<input hidden="true" name="orderId" value=<%=order1.getId() %>>
 				<button type="button" class="btn btn-success btn-lg">
 		        				<i class="fa fa-paper-plane" style="margin-right: 10px;"></i>
 							  Make Payment & Complete Order

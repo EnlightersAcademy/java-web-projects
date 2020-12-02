@@ -6,8 +6,10 @@
 <%@ include file="staffheader.jsp"%>
 
 <%
-	String cartItemsCount = (request.getAttribute("CartCount")==null? "0" : (String)request.getAttribute("CartCount"));
+	String cartItemsCount = (request.getAttribute("CartCount")==null? "0" : String.valueOf(request.getAttribute("CartCount")));
 	List<Category> cats = DbUtil.getAllCategories();
+	String customerEmail = request.getParameter("email");
+	Staff orderStaff = (Staff)request.getSession().getAttribute("staff");
 %>
 <style>
         	.nav-pills-custom .nav-link {
@@ -45,7 +47,7 @@
         
         		<div class="row" style="margin: 50px;">
         			<div class="col-md-12 text-right">
-	        			<a type="button" class="btn btn-outline-info" href="stafforderpayment.jsp">
+	        			<a type="button" class="btn btn-outline-info" href="stafforderpayment.jsp?customerEmail=<%=customerEmail%>">
 	        				<i class="fa fa-shopping-cart"></i>
 						  Cart &nbsp; <span class="badge badge-pill badge-warning"><%=cartItemsCount %></span>
 						  <span class="sr-only">unread messages</span>
@@ -93,10 +95,12 @@
 									  		for(Item item : itemsOfCat) {
 									  		%>
 											    <tr>
-											    <form method="post">
+											    <form method="post" action= "itemorder">
 											      <td style="width: 70%;"><%=item.getItemName() %></td>
 											      <td><input type="number" name = "quantity" id="quanity" value="0" class="form-control" min="0" max="10" /></td>
 											      <input hidden="true" name="itemId" value=<%=item.getItemId() %>>
+											      <input hidden="true" name="email" value=<%=customerEmail%>>
+											      
 											      <td><input type="submit" value=" ADD " class="btn btn-sm btn-success" > </td>
 											      </form>
 											    </tr>
@@ -137,7 +141,7 @@
         		})
         	
         	$("form").on("submit", function(e) {
-        		alert("Form Submitted. Need Servlet for Function!");
+        		
 			    $.ajax({
 			      type: $(this).attr('method'),
 			      url: $(this).attr('action'),

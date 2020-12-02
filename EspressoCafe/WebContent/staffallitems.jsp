@@ -1,11 +1,11 @@
 <%@page import="com.espresso.dto.Item"%>
 <%@page import="com.espresso.db.util.DbUtil"%>
-
+<%@page import="java.util.Base64"%>
 <%@page import="java.util.List"%>
 <%@ include file="staffheader.jsp"%>
 
 <%
-	List<Item> items = DbUtil.getAllItems();
+	List<Item> items = DbUtil.getAllAvailableItems();
 %>
 <%@page import="com.espresso.util.*" %>
 <%
@@ -37,7 +37,10 @@ if (!EspressoUtil.isValidSession(request)) {
 	    	{
 	    %>
 		    <tr>
-		      <td><img style="width: 200px;" alt="" src=<%=item.getPhoto() %> > </td>
+		    <%
+				String base64Image = Base64.getEncoder().encodeToString(item.getPhoto());
+				%>
+		      <td><img style="width: 200px;" alt="" src="data:image/jpg;base64,<%=base64Image %>" > </td>
 		      <td><%=item.getItemName() %></td>
 		      <td><%=item.getCategory().getCategoryName()%></td>
 		      <td><%=item.getDescription() %></td>

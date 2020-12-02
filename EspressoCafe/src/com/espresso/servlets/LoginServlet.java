@@ -68,7 +68,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			Staff staff = DbUtil.getStaffByEmailId(userName);
 			if (staff != null) {
-				if (password.equals(staff.getPassword())) {
+				if (staff.isActive() && password.equals(staff.getPassword())) {
 					HttpSession session = request.getSession(true);
 					
 					DateFormat df = new SimpleDateFormat("dd-MMM-yy HH:mm:ss");

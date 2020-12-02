@@ -11,8 +11,27 @@
 }
 %>
 <%
+	if(EspressoUtil.isResponseSuccess(request) != -1) {
+		int status = EspressoUtil.isResponseSuccess(request);
+		if( status == 0) {
+			%>
+			<script>
+			alert("Payment completed successfully")
+			</script>
+			<%
+		} else if (status == 1){
+			%>
+			<script>
+			alert("Payment failed")
+			</script>
+			<%
+		}
+	}
+
+%>
+<%
 	Staff staffOrderPage = (Staff)request.getSession().getAttribute("staff");
-	List<CafeOrder> orders = DbUtil.getOrdersByStaffId(staffOrderPage.getStaffId(), staffOrderPage.getEmailId());
+	List<CafeOrder> orders = DbUtil.getAllOrdersByStaffId(staffOrderPage.getStaffId());
 %>
 
 <div class="row" style="margin-top: 20px;">
@@ -30,6 +49,7 @@
 	      <th scope="col">Customer Email</th>
 	      <th scope="col">Date of Order</th>
 	      <th scope="col">Total Amount</th>
+	      <th scope="col">Status</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -42,6 +62,7 @@
 		      <td><%=order.getCustomer().getEmailId() %></td>
 		      <td><%=order.getDateOfOrder() %></td>
 		      <td>&#x20B9; <%=order.getTotalAmount()%></td>
+		      <td><%=order.getStatus() == 2? "Ongoing": "Completed" %></td>
 		    </tr>
 	    <%
 	    	}

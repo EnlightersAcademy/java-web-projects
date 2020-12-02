@@ -29,9 +29,15 @@ public class DbUtil<T> {
 		return query.getResultList();
 	}
 	
+	public static List<Item> getAllAvailableItems() {
+		EntityManager manager = JPAUtil.getEMF().createEntityManager();
+		TypedQuery<Item> query = manager.createQuery("select item from Item item where item.isAvailable = TRUE", Item.class);
+		return query.getResultList();
+	}
+	
 	public static List<Item> getAllItems() {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
-		TypedQuery<Item> query = manager.createQuery("select item from Item item where item.isAvailable = true", Item.class);
+		TypedQuery<Item> query = manager.createQuery("select item from Item item", Item.class);
 		return query.getResultList();
 	}
 	
@@ -81,19 +87,76 @@ public class DbUtil<T> {
 		return staff;
 	}
 	
-	public static List<CafeOrder> getOrdersByStaffId(int staffId, String emailId) {
+	public static Staff getStaffByStaffId(int staffId) {
+		EntityManager manager = JPAUtil.getEMF().createEntityManager();
+		TypedQuery<Staff> query = manager.createQuery("select staff from Staff staff where staff.staffId =:staffId",
+				Staff.class);
+		query.setParameter("staffId", staffId);
+		Staff staff = null;
+		try {
+		 staff = query.getSingleResult();
+		} catch(Exception exe) {
+			return null;
+		}
+		return staff;
+	}
+	
+	public static List<CafeOrder> getAllOrdersByStaffId(int staffId) {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
 
-		Staff staff = getStaffByEmailId(emailId);
+		Staff staff = getStaffByStaffId(staffId);
 		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.staff =:staffId",
 				CafeOrder.class);
 		query.setParameter("staffId", staff);
 		return query.getResultList();
 	}
 	
+	public static CafeOrder getOngoingOrdersByCustomerEmail(String email) {
+		EntityManager manager = JPAUtil.getEMF().createEntityManager();
+		Customer cus = getCustomerByEmailId(email);
+
+		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.customer =:customer and ord.status = 2",
+				CafeOrder.class);
+		query.setParameter("customer", cus);
+		CafeOrder order;
+		try {
+			order = query.getSingleResult();
+			} catch(Exception exe) {
+				return null;
+			}
+		return order;
+	}
+	
+	public static List<CafeOrder> getOngoingOrdersByStaffId(int staffId) {
+		EntityManager manager = JPAUtil.getEMF().createEntityManager();
+
+		Staff staff = getStaffByStaffId(staffId);
+		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.staff =:staffId and ord.status = 2",
+				CafeOrder.class);
+		query.setParameter("staffId", staff);
+		return query.getResultList();
+	}
+	
+	public static CafeOrder getOngoingOrdersByStaffIdAndCustomerEmail(int staffId, String customerEmail) {
+		EntityManager manager = JPAUtil.getEMF().createEntityManager();
+		Customer customer = getCustomerByEmailId(customerEmail);
+		Staff staff = getStaffByStaffId(staffId);
+		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.staff =:staffId and ord.status = 2 and ord.customer=:cus",
+				CafeOrder.class);
+		query.setParameter("staffId", staff);
+		query.setParameter("cus", customer);
+		CafeOrder order;
+		try {
+			order = query.getSingleResult();
+			} catch(Exception exe) {
+				return null;
+			}
+		return order;
+	}
+	
 	public static List<Item> getAllItemsByCategory(Category cat) {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
-		TypedQuery<Item> query = manager.createQuery("select item from Item item where item.category = :cat", Item.class);
+		TypedQuery<Item> query = manager.createQuery("select item from Item item where item.category = :cat and item.isAvailable = TRUE", Item.class);
 		query.setParameter("cat", cat);
 		return query.getResultList();
 	}
@@ -124,6 +187,20 @@ public class DbUtil<T> {
 			return null;
 		}
 		return item;
+	}
+	
+	public static CafeOrder getCafeOrderById(int id) {
+		EntityManager manager = JPAUtil.getEMF().createEntityManager();
+		TypedQuery<CafeOrder> query = manager.createQuery("select co from CafeOrder co where co.id = :id",
+				CafeOrder.class);
+		query.setParameter("id", id);
+		CafeOrder cafeOrder = null;
+		try {
+			cafeOrder = query.getSingleResult();
+		} catch(Exception exe) {
+			return null;
+		}
+		return cafeOrder;
 	}
 	
 	public static Category getCategoryByName(String name) {
@@ -182,6 +259,28 @@ public class DbUtil<T> {
 		try {
 			Query query = manager.createQuery(" update Staff staff set staff.password =:pass");
 			query.setParameter("pass", newPassword);
+			query.executeUpdate();
+			manager.getTransaction().commit();
+		} catch (Exception e) {
+			manager.getTransaction().rollback();
+		} finally {
+			manager.close();
+		}
+	}
+	
+	public static void updateCafeOrder(CafeOrder cafeOrder) throws Exception {
+		EntityManager manager = JPAUtil.getEMF().createEntityManager();
+		manager.getTransaction().begin();
+		try {
+			Query query = manager.createQuery(" update CafeOrder co set co.customer =:customer, co.staff =:staff, co.totalAmount =:totalAmount, "
+					+ "co.dateOfOrder =:dateOfOrder, co.status =:status, co.items =:items where co.id =:id");
+			query.setParameter("customer", cafeOrder.getCustomer());
+			query.setParameter("staff", cafeOrder.getStaff());
+			query.setParameter("totalAmount", cafeOrder.getTotalAmount());
+			query.setParameter("dateOfOrder", cafeOrder.getDateOfOrder());
+			query.setParameter("status", 1);
+			query.setParameter("items", cafeOrder.getItems());
+			query.setParameter("id", cafeOrder.getId());
 			query.executeUpdate();
 			manager.getTransaction().commit();
 		} catch (Exception e) {

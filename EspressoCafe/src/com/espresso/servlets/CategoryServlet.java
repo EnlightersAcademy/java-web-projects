@@ -63,6 +63,7 @@ public class CategoryServlet extends HttpServlet {
 			util.createEntry(cat);
 			request.getRequestDispatcher("admincategory.jsp?msg=success").forward(request, response);
 		} catch (Exception exe) {
+			exe.printStackTrace();
 			request.getRequestDispatcher("admincategory.jsp?msg=fail").forward(request, response);
 		}
 

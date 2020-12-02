@@ -1,5 +1,11 @@
+<%@page import="java.util.List"%>
+<%@page import="com.espresso.dto.CafeOrder"%>
+<%@page import="com.espresso.db.util.DbUtil"%>
 <%@ include file="staffheader.jsp"%>
 
+<%
+List<CafeOrder> orders = DbUtil.getOngoingOrdersByStaffId(staff.getStaffId());
+%>
 <div class="row" style="margin-top: 20px;">
 
 	<h3 class="mt-4" style="margin-bottom: 30px;">
@@ -19,17 +25,17 @@
 	  </thead>
 	  <tbody>
 	    <%
-	    	for(int i=1; i<5; i++)
+	    	for(CafeOrder order: orders)
 	    	{
 	    %>
 		    <tr>
-		      <th><%=i %></th>
-		      <td><%="Abc@gmail.com" %></td>
-		      <td>&#x20B9; <%=850 %></td>
+		      <th><%=order.getId() %></th>
+		      <td><%=order.getCustomer().getEmailId() %></td>
+		      <td>&#x20B9; <%=order.getTotalAmount() %></td>
 		      <td class="text-center">
-		      	<a class="btn btn-outline-warning" href="staffupdatedetails.jsp?id=<%=i %>" role="button"><i class="fas fa-edit"></i> Update Order</a>
+		      	<a class="btn btn-outline-warning" href="itemorder?customerEmail=<%=order.getCustomer().getEmailId() %>" role="button"><i class="fas fa-edit"></i> Update Order</a>
 		      		&nbsp;&nbsp;
-		      	<a class="btn btn-outline-success" href="stafforderpayment.jsp?id=<%=i %>" role="button"><i class="fas fa-paper-plane"></i> Complete Order</a>
+		      	<a class="btn btn-outline-success" href="stafforderpayment.jsp?customerEmail=<%=order.getCustomer().getEmailId() %>" role="button"><i class="fas fa-paper-plane"></i> Complete Order</a>
 		      </td>
 		    </tr>
 	    <%

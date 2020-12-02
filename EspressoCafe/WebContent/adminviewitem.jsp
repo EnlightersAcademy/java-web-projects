@@ -2,7 +2,10 @@
 <%@page import="com.espresso.dto.Item"%>
 <%@page import="com.espresso.db.util.DbUtil"%>
 <%@ include file="adminheader.jsp"%>
+<%@page import="java.util.Base64"%>
 <%@page import="com.espresso.util.EspressoUtil"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 
 <%
 	if(EspressoUtil.isResponseSuccess(request) != -1) {
@@ -57,9 +60,11 @@
 	    %>
 			<form action="items" method="get">
 			<tr>
-				
+				<%
+				String base64Image = Base64.getEncoder().encodeToString(item.getPhoto());
+				%>
 				<td><img style="width: 200px;" alt=""
-					src="<%=item.getPhoto() %>"></td>
+					src="data:image/jpg;base64,<%=base64Image %>"></td>
 				<td><%=item.getItemName() %></td>
 				<td><%=item.getCategory().getCategoryName() %></td>
 				<td><%=item.getDescription() %></td>
