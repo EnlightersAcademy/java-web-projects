@@ -1,3 +1,6 @@
+<%@page import="java.util.Optional"%>
+<%@page import="com.espresso.dto.OrderItem"%>
+<%@page import="com.espresso.dto.CafeOrder"%>
 <%@page import="com.espresso.dto.Item"%>
 <%@page import="java.util.List"%>
 <%@page import="com.espresso.dto.Customer"%>
@@ -8,7 +11,18 @@
 <%
 	String cartItemsCount = (request.getAttribute("CartCount")==null? "0" : String.valueOf(request.getAttribute("CartCount")));
 	List<Category> cats = DbUtil.getAllCategories();
-	String customerEmail = request.getParameter("email");
+	String strOrderId = request.getParameter("orderid");
+	
+	int orderId = request.getParameter("orderid") != null ? Integer.parseInt(request.getParameter("orderid")) : -1;
+	CafeOrder order = DbUtil.getCafeOrderById(orderId);
+	order = order != null ? order : new CafeOrder();
+	String emailId = "";
+	if(orderId < 0) {
+		emailId = request.getParameter("email");
+	} else {
+		emailId = order.getCustomerEmailId();
+	}
+
 	Staff orderStaff = (Staff)request.getSession().getAttribute("staff");
 %>
 <style>
@@ -47,7 +61,7 @@
         
         		<div class="row" style="margin: 50px;">
         			<div class="col-md-12 text-right">
-	        			<a type="button" class="btn btn-outline-info" href="stafforderpayment.jsp?customerEmail=<%=customerEmail%>">
+	        			<a type="button" class="btn btn-outline-info" href="stafforderpayment.jsp?customerEmail=<%=emailId%>">
 	        				<i class="fa fa-shopping-cart"></i>
 						  Cart &nbsp; <span class="badge badge-pill badge-warning"><%=cartItemsCount %></span>
 						  <span class="sr-only">unread messages</span>
@@ -93,13 +107,18 @@
 									  		<%
 									  			List<Item> itemsOfCat = DbUtil.getAllItemsByCategory(cats.get(i));
 									  		for(Item item : itemsOfCat) {
+									  			OrderItem existingItem = new OrderItem();
+									  			Optional<OrderItem> optionalItem = order.getItems().stream().filter(f -> f.getItemId() == item.getItemId()).findFirst();
+									  			if(optionalItem != null && optionalItem.isPresent()) {
+									  				existingItem = optionalItem.get();
+									  			}
 									  		%>
 											    <tr>
 											    <form method="post" action= "itemorder">
 											      <td style="width: 70%;"><%=item.getItemName() %></td>
-											      <td><input type="number" name = "quantity" id="quanity" value="0" class="form-control" min="0" max="10" /></td>
+											      <td><input type="number" name = "quantity" id="quanity" value=<%=existingItem.getQuantity() %> class="form-control" min="0" max="10" /></td>
 											      <input hidden="true" name="itemId" value=<%=item.getItemId() %>>
-											      <input hidden="true" name="email" value=<%=customerEmail%>>
+											      <input hidden="true" name="email" value=<%=emailId%>>
 											      
 											      <td><input type="submit" value=" ADD " class="btn btn-sm btn-success" > </td>
 											      </form>

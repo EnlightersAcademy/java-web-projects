@@ -59,7 +59,7 @@
 	    %>
 		    <tr>
 		      <th><%=order.getId()%></th>
-		      <td><%=order.getCustomer().getEmailId() %></td>
+		      <td><%=order.getCustomerEmailId() %></td>
 		      <td><%=order.getDateOfOrder() %></td>
 		      <td>&#x20B9; <%=order.getTotalAmount()%></td>
 		      <td><%=order.getStatus() == 2? "Ongoing": "Completed" %></td>

@@ -1,14 +1,17 @@
 package com.espresso.db.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.websocket.Session;
 
 import com.espresso.dto.Category;
 import com.espresso.dto.Customer;
 import com.espresso.dto.Item;
+import com.espresso.dto.OrderItem;
 import com.espresso.dto.CafeOrder;
 import com.espresso.dto.PurchaseItem;
 import com.espresso.dto.Staff;
@@ -64,6 +67,7 @@ public class DbUtil<T> {
 		manager.getTransaction().begin();
 		try {
 			manager.persist(item);
+		
 			manager.getTransaction().commit();
 		} catch (Exception e) {
 			manager.getTransaction().rollback();
@@ -105,9 +109,9 @@ public class DbUtil<T> {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
 
 		Staff staff = getStaffByStaffId(staffId);
-		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.staff =:staffId",
+		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.staffId =:staffId",
 				CafeOrder.class);
-		query.setParameter("staffId", staff);
+		query.setParameter("staffId", staff.getStaffId());
 		return query.getResultList();
 	}
 	
@@ -115,9 +119,9 @@ public class DbUtil<T> {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
 		Customer cus = getCustomerByEmailId(email);
 
-		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.customer =:customer and ord.status = 2",
+		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.customerEmailId =:customer and ord.status = 2",
 				CafeOrder.class);
-		query.setParameter("customer", cus);
+		query.setParameter("customer", cus.getEmailId());
 		CafeOrder order;
 		try {
 			order = query.getSingleResult();
@@ -131,9 +135,9 @@ public class DbUtil<T> {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
 
 		Staff staff = getStaffByStaffId(staffId);
-		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.staff =:staffId and ord.status = 2",
+		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.staffId =:staffId and ord.status = 2",
 				CafeOrder.class);
-		query.setParameter("staffId", staff);
+		query.setParameter("staffId", staff.getStaffId());
 		return query.getResultList();
 	}
 	
@@ -141,10 +145,10 @@ public class DbUtil<T> {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
 		Customer customer = getCustomerByEmailId(customerEmail);
 		Staff staff = getStaffByStaffId(staffId);
-		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.staff =:staffId and ord.status = 2 and ord.customer=:cus",
+		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.staffId =:staffId and ord.status = 2 and ord.customerEmailId=:cus",
 				CafeOrder.class);
-		query.setParameter("staffId", staff);
-		query.setParameter("cus", customer);
+		query.setParameter("staffId", staff.getStaffId());
+		query.setParameter("cus", customer.getEmailId());
 		CafeOrder order;
 		try {
 			order = query.getSingleResult();
@@ -271,23 +275,44 @@ public class DbUtil<T> {
 	public static void updateCafeOrder(CafeOrder cafeOrder) throws Exception {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
 		manager.getTransaction().begin();
+		
 		try {
-			Query query = manager.createQuery(" update CafeOrder co set co.customer =:customer, co.staff =:staff, co.totalAmount =:totalAmount, "
-					+ "co.dateOfOrder =:dateOfOrder, co.status =:status, co.items =:items where co.id =:id");
-			query.setParameter("customer", cafeOrder.getCustomer());
-			query.setParameter("staff", cafeOrder.getStaff());
+			Query query = manager.createQuery(" update CafeOrder co set co.customerEmailId =:customer, co.staffId =:staff, co.totalAmount =:totalAmount, "
+					+ "co.dateOfOrder =:dateOfOrder, co.status =:status where co.id =:id");
+			query.setParameter("customer", cafeOrder.getCustomerEmailId());
+			query.setParameter("staff", cafeOrder.getStaffId());
 			query.setParameter("totalAmount", cafeOrder.getTotalAmount());
 			query.setParameter("dateOfOrder", cafeOrder.getDateOfOrder());
-			query.setParameter("status", 1);
-			query.setParameter("items", cafeOrder.getItems());
+			query.setParameter("status", cafeOrder.getStatus());
+			List<OrderItem> items = new ArrayList<>();
+			items.addAll(cafeOrder.getItems());
+//			query.setParameter("items",items);
 			query.setParameter("id", cafeOrder.getId());
 			query.executeUpdate();
 			manager.getTransaction().commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			manager.getTransaction().rollback();
+			throw e;
 		} finally {
-			manager.close();
+		//	manager.close();
 		}
+	}
+	
+	public static void udateCafeOrderSimple(CafeOrder cafeOrder) throws Exception {
+		EntityManager manager = JPAUtil.getEMF().createEntityManager();
+		manager.getTransaction().begin();
+		try {
+			manager.merge(cafeOrder);
+			manager.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+			manager.getTransaction().rollback();
+			throw e;
+		} finally {
+		//	manager.close();
+		}
+		
 	}
 	
 	public static boolean updateItemStatus(int itemId, boolean isAvailable) {

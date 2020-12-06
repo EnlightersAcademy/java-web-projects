@@ -17,6 +17,10 @@
     <body class="sb-nav-fixed">
     	<%
     		Staff staff = (Staff)request.getSession().getAttribute("staff");
+    		if(staff == null) {
+    			response.sendRedirect("index.jsp?exp=true");
+    			return;
+    		}
     		String userName = staff.getName();
     	%>
     

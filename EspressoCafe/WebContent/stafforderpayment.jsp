@@ -1,3 +1,4 @@
+<%@page import="com.espresso.dto.Customer"%>
 <%@page import="java.io.Console"%>
 <%@page import="com.espresso.dto.CafeOrder"%>
 <%@page import="com.espresso.dto.OrderItem"%>
@@ -11,7 +12,8 @@
 	Staff paymentStaff = (Staff)request.getSession().getAttribute("staff");
 	String customerEmail = request.getParameter("customerEmail");
 	List<CafeOrder> orders = DbUtil.getOngoingOrdersByStaffId(paymentStaff.getStaffId());
-	CafeOrder order1 = orders.stream().filter(b -> b.getCustomer().getEmailId().equals(customerEmail)).findFirst().get();
+	CafeOrder order1 = orders.stream().filter(b -> b.getCustomerEmailId().equals(customerEmail)).findFirst().get();
+	Customer cus1 = DbUtil.getCustomerByEmailId(customerEmail);
 
 %>
 <%@page import="com.espresso.util.*" %>
@@ -35,10 +37,10 @@ if (!EspressoUtil.isValidSession(request)) {
 		    <table class="table border" style="margin-bottom:0;">
 		    	<tr>
 		    		<td>Customer Name : </td>
-		    		<th><%= order1.getCustomer().getName() %></th>
+		    		<th><%= cus1.getName() %></th>
 		    		<td>&nbsp;</td>
 		    		<td>Customer Email : </td>
-		    		<th><%= order1.getCustomer().getEmailId() %></th>
+		    		<th><%= cus1.getEmailId() %></th>
 		    	</tr>
 		    </table>
 		  </div>
@@ -86,7 +88,7 @@ if (!EspressoUtil.isValidSession(request)) {
 		<div class="col-md-12 text-right">
 			<form action="itemorder?status=complete" method="post">
 			<input hidden="true" name="orderId" value=<%=order1.getId() %>>
-				<button type="button" class="btn btn-success btn-lg">
+				<button type="submit" class="btn btn-success btn-lg">
 		        				<i class="fa fa-paper-plane" style="margin-right: 10px;"></i>
 							  Make Payment & Complete Order
 							</button>

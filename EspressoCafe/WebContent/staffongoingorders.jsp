@@ -27,15 +27,16 @@ List<CafeOrder> orders = DbUtil.getOngoingOrdersByStaffId(staff.getStaffId());
 	    <%
 	    	for(CafeOrder order: orders)
 	    	{
+
 	    %>
 		    <tr>
 		      <th><%=order.getId() %></th>
-		      <td><%=order.getCustomer().getEmailId() %></td>
+		      <td><%=order.getCustomerEmailId() %></td>
 		      <td>&#x20B9; <%=order.getTotalAmount() %></td>
 		      <td class="text-center">
-		      	<a class="btn btn-outline-warning" href="itemorder?customerEmail=<%=order.getCustomer().getEmailId() %>" role="button"><i class="fas fa-edit"></i> Update Order</a>
+		      	<a class="btn btn-outline-warning" href="itemorder?customerEmail=<%=order.getCustomerEmailId()%>" role="button"><i class="fas fa-edit"></i> Update Order</a>
 		      		&nbsp;&nbsp;
-		      	<a class="btn btn-outline-success" href="stafforderpayment.jsp?customerEmail=<%=order.getCustomer().getEmailId() %>" role="button"><i class="fas fa-paper-plane"></i> Complete Order</a>
+		      	<a class="btn btn-outline-success" href="stafforderpayment.jsp?customerEmail=<%=order.getCustomerEmailId() %>" role="button"><i class="fas fa-paper-plane"></i> Complete Order</a>
 		      </td>
 		    </tr>
 	    <%

@@ -43,12 +43,12 @@ public class ItemOrderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Staff staff = (Staff)request.getSession().getAttribute("staff");
-		
+		Staff staff = (Staff) request.getSession().getAttribute("staff");
+
 		String emailId = request.getParameter("customerEmail");
 		CafeOrder order = DbUtil.getOngoingOrdersByStaffIdAndCustomerEmail(staff.getStaffId(), emailId);
 		request.setAttribute("CartCount", order.getItems().size());
-		request.getRequestDispatcher("staffneworder3.jsp?email="+emailId).forward(request, response);
+		request.getRequestDispatcher("staffneworder3.jsp?orderid=" + order.getId()+"&email="+emailId).forward(request, response);
 	}
 
 	/**
@@ -61,12 +61,16 @@ public class ItemOrderServlet extends HttpServlet {
 			response.sendRedirect("index.jsp?exp=true");
 		}
 		String completed = request.getParameter("status");
-		if(completed != null && "complete".equals(completed)) {
+		if (completed != null && "complete".equals(completed)) {
 			int orderId = Integer.parseInt(request.getParameter("orderId"));
 			CafeOrder order = DbUtil.getCafeOrderById(orderId);
 			order.setStatus(1);
 			try {
-				DbUtil.updateCafeOrder(order);
+				DbUtil.udateCafeOrderSimple(order);
+				HashMap<String, Integer> cusEmailToOrder = (HashMap<String, Integer>) request.getSession().getAttribute("cusEmailToOrder");
+
+				cusEmailToOrder.put(order.getCustomerEmailId(), null);
+				request.getSession().setAttribute("cusEmailToOrder", cusEmailToOrder);
 				request.getRequestDispatcher("staffallorders.jsp?msg=success").forward(request, response);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -87,9 +91,9 @@ public class ItemOrderServlet extends HttpServlet {
 			if (cusToOrderMap.get(customerEmail) != null)
 				orderId = cusToOrderMap.get(customerEmail);
 		} else {
-			
+
 			cusToOrderMap = new HashMap<String, Integer>();
-			
+
 		}
 		if (orderId < 0) {
 			CafeOrder ongoingOrder = DbUtil.getOngoingOrdersByCustomerEmail(customerEmail);
@@ -104,9 +108,10 @@ public class ItemOrderServlet extends HttpServlet {
 			cafeOrder = DbUtil.getCafeOrderById(orderId);
 		} else {
 			cafeOrder = new CafeOrder();
+			cafeOrder.setCustomerEmailId(customerEmail);
+			cafeOrder.setStaffId(staff.getStaffId());
 		}
-		cafeOrder.setCustomer(DbUtil.getCustomerByEmailId(customerEmail));
-		cafeOrder.setStaff(staff);
+
 		cafeOrder.setStatus(2);
 
 		DateFormat df = new SimpleDateFormat("dd-MMM-yy HH:mm:ss");
@@ -139,28 +144,37 @@ public class ItemOrderServlet extends HttpServlet {
 		List<OrderItem> items = cafeOrder.getItems();
 
 		Item item = DbUtil.getItemById(itemId);
-		int totalAmount = cafeOrder.getTotalAmount();
-		totalAmount = totalAmount + (item.getPrice() * quantity);
-		cafeOrder.setTotalAmount(totalAmount);
 
-		boolean existingItem = false;
+		int totalAmount = cafeOrder.getTotalAmount();
+		boolean isExisting = false;
 		for (OrderItem existingOrderItem : items) {
 			if (existingOrderItem.getItemId() == itemId) {
-				int existingQuantity = existingOrderItem.getQuantity() + quantity;
-				existingOrderItem.setQuantity(existingQuantity);
-				existingItem = true;
+				// if there is a decrease in quantity by user. then handle it
+				if (existingOrderItem.getQuantity() > quantity) {
+					totalAmount = totalAmount - (existingOrderItem.getQuantity() - quantity) * item.getPrice();
+				} else {
+					int diffQuantity = Math.abs(existingOrderItem.getQuantity() - quantity);
+					totalAmount = totalAmount + diffQuantity * item.getPrice();
+				}
+				existingOrderItem.setQuantity(quantity);
+				isExisting = true;
 				break;
 			}
 		}
-		if (!existingItem) {
-			OrderItem newOrderItem = new OrderItem();
-			newOrderItem.setItemId(itemId);
-			newOrderItem.setQuantity(quantity);
-			DbUtil<OrderItem> util = new DbUtil<>();
-//			util.createEntry(newOrderItem);
-			newOrderItem.setCafeOrder(cafeOrder);
-			items.add(newOrderItem);
-		}
+			if(!isExisting) {
+				OrderItem newOrderItem = new OrderItem();
+				newOrderItem.setItemId(itemId);
+				newOrderItem.setQuantity(quantity);
+				DbUtil<OrderItem> util = new DbUtil<>();
+//				util.createEntry(newOrderItem);
+				newOrderItem.setCafeOrder(cafeOrder);
+
+				items.add(newOrderItem);
+				totalAmount = totalAmount + item.getPrice() * quantity;
+			}
+			cafeOrder.setTotalAmount(totalAmount);
+		
+
 		cafeOrder.setItems(items);
 	}
 

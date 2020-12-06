@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,15 +23,17 @@ public class CafeOrder {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "customer_id", unique= true)
-	private Customer customer;
+//	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
+//	@JoinColumn(name = "customer_id", unique= true)
+	@Column(name="customer_email_id")
+	private String customerEmailId;
 
-	@OneToOne(fetch = FetchType.EAGER, targetEntity = Staff.class)
-	@JoinColumn(name = "staff_id", unique = true)
-	private Staff staff;
+//	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Staff.class, cascade=CascadeType.MERGE)
+//	@JoinColumn(name = "staff_id", unique = true)
+	@Column(name="staff_id")
+	private int staffId;
 
-	@OneToMany(targetEntity=OrderItem.class, mappedBy="cafeOrder", cascade=CascadeType.PERSIST)
+	@OneToMany(targetEntity=OrderItem.class, mappedBy="cafeOrder", cascade= {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
 	private List<OrderItem> items = new ArrayList<OrderItem>();
 
 
@@ -78,23 +81,6 @@ public class CafeOrder {
 		this.items = items;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public Staff getStaff() {
-		return staff;
-	}
-
-	public void setStaff(Staff staff) {
-		this.staff = staff;
-	}
-
-
 	public int getStatus() {
 		return status;
 	}
@@ -102,6 +88,25 @@ public class CafeOrder {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public int getStaffId() {
+		return staffId;
+	}
+
+
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
+
+
+	public String getCustomerEmailId() {
+		return customerEmailId;
+	}
+
+
+	public void setCustomerEmailId(String customerEmailId) {
+		this.customerEmailId = customerEmailId;
 	}
 
 }
