@@ -120,7 +120,7 @@ public class ItemOrderServlet extends HttpServlet {
 
 		cafeOrder.setDateOfOrder(loggedInDateTime);
 		try {
-			updateCafeOrderItems(cafeOrder, itemId, quantity);
+			
 
 			DbUtil<CafeOrder> utilObj = new DbUtil<CafeOrder>();
 			if (orderId > 0) {
@@ -128,6 +128,8 @@ public class ItemOrderServlet extends HttpServlet {
 			} else {
 				utilObj.createEntry(cafeOrder);
 			}
+			updateCafeOrderItems(cafeOrder, itemId, quantity);
+			
 			CafeOrder updatedOrder = DbUtil.getOngoingOrdersByStaffIdAndCustomerEmail(staff.getStaffId(),
 					customerEmail);
 			cusToOrderMap.put(customerEmail, updatedOrder.getId());
@@ -147,6 +149,7 @@ public class ItemOrderServlet extends HttpServlet {
 
 		int totalAmount = cafeOrder.getTotalAmount();
 		boolean isExisting = false;
+		DbUtil<OrderItem> util = new DbUtil<>();
 		for (OrderItem existingOrderItem : items) {
 			if (existingOrderItem.getItemId() == itemId) {
 				// if there is a decrease in quantity by user. then handle it
@@ -165,17 +168,19 @@ public class ItemOrderServlet extends HttpServlet {
 				OrderItem newOrderItem = new OrderItem();
 				newOrderItem.setItemId(itemId);
 				newOrderItem.setQuantity(quantity);
-				DbUtil<OrderItem> util = new DbUtil<>();
-//				util.createEntry(newOrderItem);
-				newOrderItem.setCafeOrder(cafeOrder);
 
 				items.add(newOrderItem);
+				util.createEntry(newOrderItem);
+				newOrderItem.setCafeOrder(cafeOrder);
+
 				totalAmount = totalAmount + item.getPrice() * quantity;
 			}
 			cafeOrder.setTotalAmount(totalAmount);
 		
 
 		cafeOrder.setItems(items);
+		util.udateCafeOrderSimple(cafeOrder);
+		
 	}
 
 }
