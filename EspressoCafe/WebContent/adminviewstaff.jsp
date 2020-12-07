@@ -61,13 +61,13 @@
 		      <td><%=staff.getAddress() %></td>
 		      <td><%= staff.isActive()? "Active" : "Blocked" %>
 		      <td>
-		      <input hidden="true" name="status" value=<%=isActive%>>
+		      	<input hidden="true" name="status" value=<%=isActive%>>
 				<input hidden="true" name="id" value=<%=staff.getStaffId()%>>
 		      	<% if(!isActive){ %>
-		      		<input type="submit" class="btn btn-success btn-block"
+		      		<input type="submit" class="btn btn-outline-success"
 							value="Activate Staff" />
 		      	<% }else{ %>
-		      		<input type="submit" class="btn btn-success btn-block"
+		      		<input type="submit" class="btn btn-outline-danger"
 							value="Deactivate Staff" />
 	      		<%} %>
 		      	<span style="padding-right: 20px;">&nbsp;</span>

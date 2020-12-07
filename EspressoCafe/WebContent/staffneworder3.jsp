@@ -63,7 +63,7 @@
         			<div class="col-md-12 text-right">
 	        			<a type="button" class="btn btn-outline-info" href="stafforderpayment.jsp?customerEmail=<%=emailId%>">
 	        				<i class="fa fa-shopping-cart"></i>
-						  Cart &nbsp; <span class="badge badge-pill badge-warning"><%=cartItemsCount %></span>
+						  Cart &nbsp; <span id="cartItemCountSpan" class="badge badge-pill badge-warning"><%=cartItemsCount %></span>
 						  <span class="sr-only">unread messages</span>
 						</a>
 					</div>
@@ -120,7 +120,19 @@
 											      <input hidden="true" name="itemId" value=<%=item.getItemId() %>>
 											      <input hidden="true" name="email" value=<%=emailId%>>
 											      
-											      <td><input type="submit" value=" ADD " class="btn btn-sm btn-success" > </td>
+											      <td>
+											      	<%
+											      		if(item.isAvailable()){
+											      	%>
+											      		<input type="submit" value=" ADD " class="btn btn-sm btn-success" >
+											      	<%
+											      		}else{
+											      	%>
+											      		<input type="button" value=" NOT AVAILABLE " class="btn btn-sm btn-outline-secondary" disabled >
+											      	<%
+											      		}
+											      	%>
+											      </td>
 											      </form>
 											    </tr>
 										    <%} %>
@@ -158,19 +170,6 @@
         		  e.preventDefault()
         		  $(this).tab('show')
         		})
-        	
-        	$("form").on("submit", function(e) {
-        		
-			    $.ajax({
-			      type: $(this).attr('method'),
-			      url: $(this).attr('action'),
-			      data: $(this).serialize(),
-			      success: function (dataFromServlet) {
-			    	  $('#content').html(dataFromServlet);
-			      }
-			    });
-    return false;
-  });
        	</script>
     </body>
 </html>

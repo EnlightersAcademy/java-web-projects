@@ -47,7 +47,7 @@ public class ItemOrderServlet extends HttpServlet {
 
 		String emailId = request.getParameter("customerEmail");
 		CafeOrder order = DbUtil.getOngoingOrdersByStaffIdAndCustomerEmail(staff.getStaffId(), emailId);
-		request.setAttribute("CartCount", order.getItems().size());
+		request.setAttribute("CartCount", order.getItems().stream().mapToInt(item-> item.getQuantity()).sum());
 		request.getRequestDispatcher("staffneworder3.jsp?orderid=" + order.getId()+"&email="+emailId).forward(request, response);
 	}
 
@@ -134,11 +134,11 @@ public class ItemOrderServlet extends HttpServlet {
 					customerEmail);
 			cusToOrderMap.put(customerEmail, updatedOrder.getId());
 			request.getSession().setAttribute("cusEmailToOrder", cusToOrderMap);
-			request.setAttribute("CartCount", cafeOrder.getItems().size());
-			request.getRequestDispatcher("adminadditem.jsp?msg=success").forward(request, response);
+			request.setAttribute("CartCount", cafeOrder.getItems().stream().mapToInt(item-> item.getQuantity()).sum());
+			request.getRequestDispatcher("staffneworder3.jsp?orderid="+cafeOrder.getId()).forward(request, response);
 		} catch (Exception exe) {
 			exe.printStackTrace();
-			request.getRequestDispatcher("adminadditem.jsp?msg=fail").forward(request, response);
+			request.getRequestDispatcher("staffneworder3.jsp").forward(request, response);
 		}
 	}
 

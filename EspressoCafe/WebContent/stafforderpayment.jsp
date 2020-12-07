@@ -11,6 +11,7 @@
 <%
 	Staff paymentStaff = (Staff)request.getSession().getAttribute("staff");
 	String customerEmail = request.getParameter("customerEmail");
+	System.out.println("Customer : " + customerEmail);
 	List<CafeOrder> orders = DbUtil.getOngoingOrdersByStaffId(paymentStaff.getStaffId());
 	CafeOrder order1 = orders.stream().filter(b -> b.getCustomerEmailId().equals(customerEmail)).findFirst().get();
 	Customer cus1 = DbUtil.getCustomerByEmailId(customerEmail);

@@ -75,8 +75,8 @@
 				<input hidden="true" name="id" value=<%=item.getItemId()%>>
 					<% if(isAvailable){ 
 		      	
-		      	%> <input type="submit" class="btn btn-success btn-block"
-							value="Mark Unavailable" />  <% }else{ %> <input type="submit" class="btn btn-success btn-block"
+		      	%> <input type="submit" class="btn btn-outline-danger btn-block"
+							value="Mark Unavailable" />  <% }else{ %> <input type="submit" class="btn btn-outline-success btn-block"
 							value="Mark Available" /> <%} %>
 				</td>
 				

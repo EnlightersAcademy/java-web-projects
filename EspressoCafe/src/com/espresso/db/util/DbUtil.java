@@ -50,6 +50,14 @@ public class DbUtil<T> {
 		return query.getResultList();
 	}
 	
+	public static List<CafeOrder> getAllCompletedOrders() {
+		EntityManager manager = JPAUtil.getEMF().createEntityManager();
+
+		TypedQuery<CafeOrder> query = manager.createQuery("select ord from CafeOrder ord where ord.status = 1",
+				CafeOrder.class);
+		return query.getResultList();
+	}
+	
 	public static List<PurchaseItem> getAllPurchases() {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
 		TypedQuery<PurchaseItem> query = manager.createQuery("select pur from PurchaseItem pur", PurchaseItem.class);
@@ -160,7 +168,7 @@ public class DbUtil<T> {
 	
 	public static List<Item> getAllItemsByCategory(Category cat) {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();
-		TypedQuery<Item> query = manager.createQuery("select item from Item item where item.category = :cat and item.isAvailable = TRUE", Item.class);
+		TypedQuery<Item> query = manager.createQuery("select item from Item item where item.category = :cat", Item.class);
 		query.setParameter("cat", cat);
 		return query.getResultList();
 	}

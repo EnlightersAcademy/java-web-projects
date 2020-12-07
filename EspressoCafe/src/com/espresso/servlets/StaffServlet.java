@@ -89,13 +89,16 @@ public class StaffServlet extends HttpServlet {
 			String pass1 = request.getParameter("password1");
 			String pass2 = request.getParameter("password2");
 			if(!(pass1.equals(pass2))) {
-				request.getRequestDispatcher("staffchangepass.jsp?msg=mismatch").forward(request, response);
+				request.getRequestDispatcher("staffchangepassword.jsp?msg=mismatch").forward(request, response);
+				return;
+			}
+			else {
 				try {
 					DbUtil.updateStaffPassword(staff, pass1);
-					request.getRequestDispatcher("staffchangepass.jsp?msg=success").forward(request, response);
+					request.getRequestDispatcher("staffchangepassword.jsp?msg=success").forward(request, response);
 					return;
 				} catch (Exception e) {
-					request.getRequestDispatcher("staffchangepass.jsp?msg=fail").forward(request, response);
+					request.getRequestDispatcher("staffchangepassword.jsp?msg=fail").forward(request, response);
 					return;
 				}
 			}

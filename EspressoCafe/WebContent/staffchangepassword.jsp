@@ -8,20 +8,27 @@
 		int status = EspressoUtil.isResponseSuccess(request);
 		if( status == 0) {
 			%>
-			alert("Successfully changed password")
+			<script>
+				alert("Successfully changed password")
+			</script>
 			<%
 		} else if (status == 1){
 			%>
-			alert("Password update failed. Please retry again")
+			<script>
+				alert("Password update failed. Please retry again")
+			</script>
 			<%
 		} else if(status == 3) {
 			%>
-			alert("New password and Confirm password does not match. Please verify the provided details")
+			<script>
+				alert("New password and Confirm password does not match. Please verify the provided details")
+			</script>
 			<%
 		}
 	}
 
 %>
+
 
 <div class="row" style="margin-top: 50px;">
 	<div class="col col-md-4"></div>
