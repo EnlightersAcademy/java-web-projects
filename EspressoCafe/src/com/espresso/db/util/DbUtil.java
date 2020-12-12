@@ -69,6 +69,12 @@ public class DbUtil<T> {
 		TypedQuery<Staff> query = manager.createQuery("select staff from Staff staff", Staff.class);
 		return query.getResultList();
 	}
+	
+	public static List<Staff> getAllActiveStaffs() {
+		EntityManager manager = JPAUtil.getEMF().createEntityManager();
+		TypedQuery<Staff> query = manager.createQuery("select staff from Staff staff where staff.isActive = true", Staff.class);
+		return query.getResultList();
+	}
 
 	public void createEntry(T item) throws Exception {
 		EntityManager manager = JPAUtil.getEMF().createEntityManager();

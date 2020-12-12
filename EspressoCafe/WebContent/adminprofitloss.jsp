@@ -97,9 +97,9 @@
 		if(!isSearchDone){
 	%>
 	
-	<div class="col col-md-4" style="text-align: center;">
+<!-- 	<div class="col col-md-4" style="text-align: center;">
 		<h4>No Data Found!</h4>
-	</div>
+	</div> -->
 	<%
 		}
 		else{
@@ -111,8 +111,8 @@
 				<table class="table table-bordered" style="margin-top: 20px;">
 				  <thead class="thead-dark">
 				    <tr>
-				      <th scope="col">Total Sales</th>
-				      <th scope="col">Total Purchases</th>
+				      <th scope="col">Total Sales Amount</th>
+				      <th scope="col">Total Purchases Amount</th>
 				      <th scope="col">Profit/Loss</th>
 				    </tr>
 				  </thead>

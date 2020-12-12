@@ -14,7 +14,9 @@ alert("Successfully updated the staff details")
 <%
 	} else if (status == 1) {
 %>
+<script>
 alert("Failed to update staff details. Please retry again")
+</script>
 <%
 	}
 	}

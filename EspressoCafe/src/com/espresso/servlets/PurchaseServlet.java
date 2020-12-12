@@ -56,6 +56,7 @@ public class PurchaseServlet extends HttpServlet {
 			DbUtil<PurchaseItem> util = new DbUtil<>();
 			util.createEntry(purchase);
 			request.getRequestDispatcher("adminaddpurchase.jsp?msg=success").forward(request, response);
+			return;
 		} catch (Exception exe) {
 			exe.printStackTrace();
 			request.getRequestDispatcher("adminaddpurchase.jsp?msg=fail").forward(request, response);

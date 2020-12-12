@@ -13,11 +13,15 @@
 			<%
 		} else if (status == 1){
 			%>
+			<script>
 			alert("Failed to add the new Staff details. Please retry again")
+			</script>
 			<%
 		} else if(status == 2) {
 			%>
+			<script>
 			alert("Staff with the provided Email Id already exist. Please verify the provided details")
+			</script>
 			<%
 		}
 	}

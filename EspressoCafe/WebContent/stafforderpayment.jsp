@@ -1,3 +1,4 @@
+<%@page import="java.util.Optional"%>
 <%@page import="com.espresso.dto.Customer"%>
 <%@page import="java.io.Console"%>
 <%@page import="com.espresso.dto.CafeOrder"%>
@@ -13,7 +14,13 @@
 	String customerEmail = request.getParameter("customerEmail");
 	System.out.println("Customer : " + customerEmail);
 	List<CafeOrder> orders = DbUtil.getOngoingOrdersByStaffId(paymentStaff.getStaffId());
-	CafeOrder order1 = orders.stream().filter(b -> b.getCustomerEmailId().equals(customerEmail)).findFirst().get();
+	Optional<CafeOrder> optionalOrder1 = orders.stream().filter(b -> b.getCustomerEmailId().equals(customerEmail)).findFirst();
+	CafeOrder order1 = new CafeOrder();
+	if(optionalOrder1 != null && optionalOrder1.isPresent()) {
+		order1 = optionalOrder1.get();
+	} else {
+		
+	}
 	Customer cus1 = DbUtil.getCustomerByEmailId(customerEmail);
 
 %>

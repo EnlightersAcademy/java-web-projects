@@ -126,6 +126,13 @@ public class StaffServlet extends HttpServlet {
 		try {
 			if(isUpdateReq) {
 				util.updateStaffDetails(staff);
+				Staff updatedStaff = DbUtil.getStaffByStaffId(staff.getStaffId());
+				request.getSession().setAttribute("staff", updatedStaff);
+				String isStaff = request.getParameter("staff");
+				if(isStaff != null) {
+					request.getRequestDispatcher("staffupdatedetails.jsp?emailId="+emailId+"&msg=success").forward(request, response);
+					return;
+				}
 				request.getRequestDispatcher("admineditstaff.jsp?emailId="+emailId+"&msg=success").forward(request, response);
 				return;
 			}else {
