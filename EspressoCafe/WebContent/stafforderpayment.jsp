@@ -4,7 +4,7 @@
 <%@page import="com.espresso.dto.CafeOrder"%>
 <%@page import="com.espresso.dto.OrderItem"%>
 <%@page import="com.espresso.dto.Item"%>
-<%@page import="com.espresso.db.util.DbUtil"%>
+<%@page import="com.espresso.common.DbUtil"%>
 
 <%@page import="java.util.List"%>
 <%@ include file="staffheader.jsp"%>

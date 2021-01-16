@@ -3,7 +3,7 @@
 <%@page import="java.text.DateFormatSymbols"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="com.espresso.dto.PurchaseItem"%>
-<%@page import="com.espresso.db.util.DbUtil"%>
+<%@page import="com.espresso.common.DbUtil"%>
 <%@page import="java.util.List"%>
 
 <%@ include file="adminheader.jsp"%>

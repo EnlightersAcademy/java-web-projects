@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.espresso.db.util.DbUtil;
+import com.espresso.common.DbUtil;
 import com.espresso.dto.Item;
 import com.espresso.util.EspressoUtil;
 

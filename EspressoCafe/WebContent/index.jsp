@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@page import="com.espresso.util.EspressoUtil"%>
 <%@page import="com.espresso.dto.Staff"%>
-<%@page import="com.espresso.db.util.DbUtil"%>
+<%@page import="com.espresso.common.DbUtil"%>
 <%
 	if (EspressoUtil.isResponseSuccess(request) != -1) {
 		int status = EspressoUtil.isResponseSuccess(request);

@@ -1,7 +1,7 @@
 
 <%@ include file="adminheader.jsp"%>
 <%@page import="com.espresso.dto.Staff"%>
-<%@page import="com.espresso.db.util.DbUtil"%>
+<%@page import="com.espresso.common.DbUtil"%>
 <%@page import="com.espresso.util.EspressoUtil"%>
 <%
 	if (EspressoUtil.isResponseSuccess(request) != -1) {

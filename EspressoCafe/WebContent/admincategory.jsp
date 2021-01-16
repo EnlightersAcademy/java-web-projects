@@ -1,4 +1,4 @@
-<%@page import="com.espresso.db.util.DbUtil"%>
+<%@page import="com.espresso.common.DbUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="com.espresso.dto.Category"%>
 <%@ include file="adminheader.jsp"%>

@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="com.espresso.dto.PurchaseItem"%>
-<%@page import="com.espresso.db.util.DbUtil"%>
+<%@page import="com.espresso.common.DbUtil"%>
 <%@ include file="adminheader.jsp"%>
 <%
 	List<PurchaseItem> purchases = DbUtil.getAllPurchases();

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.espresso.db.util.DbUtil;
+import com.espresso.common.DbUtil;
 import com.espresso.dto.Category;
 import com.espresso.util.EspressoUtil;
 

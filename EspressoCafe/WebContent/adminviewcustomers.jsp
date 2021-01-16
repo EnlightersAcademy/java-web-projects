@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="com.espresso.dto.Customer"%>
-<%@page import="com.espresso.db.util.DbUtil"%>
+<%@page import="com.espresso.common.DbUtil"%>
 <%@page import="java.util.Date"%>
 
 <%@ include file="adminheader.jsp"%>

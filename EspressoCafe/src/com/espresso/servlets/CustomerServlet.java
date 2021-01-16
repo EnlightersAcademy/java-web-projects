@@ -9,11 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.espresso.db.util.DbUtil;
+import com.espresso.common.DbUtil;
 import com.espresso.dto.Customer;
-import com.espresso.dto.Staff;
 import com.espresso.util.EspressoUtil;
 
 /**

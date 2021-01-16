@@ -1,5 +1,5 @@
 <%@page import="com.espresso.dto.Item"%>
-<%@page import="com.espresso.db.util.DbUtil"%>
+<%@page import="com.espresso.common.DbUtil"%>
 <%@page import="java.util.Base64"%>
 <%@page import="java.util.List"%>
 <%@ include file="staffheader.jsp"%>

@@ -3,7 +3,7 @@
 <%@page import="com.espresso.dto.CafeOrder"%>
 <%@page import="java.util.Date"%>
 <%@ include file="staffheader.jsp"%>
-<%@page import="com.espresso.db.util.*" %>
+<%@page import="com.espresso.common.*" %>
 <%@page import="com.espresso.util.*" %>
 <%
 	if (!EspressoUtil.isValidSession(request)) {

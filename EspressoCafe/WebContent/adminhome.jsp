@@ -2,11 +2,11 @@
 <%@page import="com.espresso.dto.Item"%>
 <%@page import="com.espresso.dto.Customer"%>
 <%@ include file="adminheader.jsp"%>
-<%@page import="com.espresso.db.util.*" %>
+<%@page import="com.espresso.common.*" %>
 <%@page import="com.espresso.dto.Staff"%>
 <%@page import="java.util.List"%>
 <%@page import="com.espresso.dto.CafeOrder"%>
-<%@page import="com.espresso.db.util.*" %>
+<%@page import="com.espresso.common.*" %>
 <%@page import="com.espresso.util.*" %>
 <style>
 	@font-face {

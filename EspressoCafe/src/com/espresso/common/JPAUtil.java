@@ -1,4 +1,4 @@
-package com.espresso.hibernate;
+package com.espresso.common;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
