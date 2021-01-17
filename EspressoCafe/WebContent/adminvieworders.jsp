@@ -25,6 +25,7 @@
                 <thead class="thead-dark">
                     <tr>
 						<th scope="col">Order ID</th>
+						<th scope="col">Date & Time</th>
 						<th scope="col">Customer Email</th>
 						<th scope="col">Date of Order</th>
 						<th scope="col">Total Amount</th>
@@ -40,7 +41,8 @@
                     		
                     %>
 					    <tr>
-					      <th><%= order.getId() %></th>
+					      <td><%= order.getId() %></td>
+					      <td><%= order.getDateOfOrder() %></td>
 					      <td><%= order.getCustomerEmailId() %></td>
 					      <td><%= order.getDateOfOrder() %></td>
 					      <td>&#x20B9; <%=order.getTotalAmount() %></td>

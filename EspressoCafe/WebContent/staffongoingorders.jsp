@@ -18,6 +18,7 @@ List<CafeOrder> orders = DbUtil.getOngoingOrdersByStaffId(staff.getStaffId());
 	  <thead class="thead-dark">
 	    <tr>
 	      <th scope="col">Order ID</th>
+	      <th scope="col">Date & Time</th>
 	      <th scope="col">Customer Email</th>
 	      <th scope="col">Total Amount</th>
 	      <th scope="col"></th>
@@ -31,6 +32,7 @@ List<CafeOrder> orders = DbUtil.getOngoingOrdersByStaffId(staff.getStaffId());
 	    %>
 		    <tr>
 		      <th><%=order.getId() %></th>
+		      <th><%=order.getDateOfOrder() %></th>
 		      <td><%=order.getCustomerEmailId() %></td>
 		      <td>&#x20B9; <%=order.getTotalAmount() %></td>
 		      <td class="text-center">
